@@ -29,14 +29,8 @@ pip3 install cython
 # Install cartopy matplotlib and scipy.
 pip3 install matplotlib scipy
 
-if [ `lsb_release -cs` == "focal" ] || [ `lsb_release -cs` == "Eoan" ]
-then
-    pip3 install git+https://github.com/SciTools/cartopy.git --no-binary cartopy
-else
-    pip3 install git+https://github.com/SciTools/cartopy.git --no-binary cartopy
-fi
-
-
+# Install Cartopy
+pip3 install git+https://github.com/SciTools/cartopy.git --no-binary cartopy
 
 
 echo "-------------->>>> Installing Tkinter GUI TOOL <<<<--------------"
