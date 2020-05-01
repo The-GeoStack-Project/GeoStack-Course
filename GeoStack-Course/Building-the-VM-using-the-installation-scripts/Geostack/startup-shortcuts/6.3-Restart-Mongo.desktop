@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=sh -c "service mongodb restart"
+Name=Start-Mongo
+Icon=gnome-panel-launcher
+Name[en_US]=6.3-Restart-Mongo

@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=sh -c "service nginx start"
+Name=Start-NGINX
+Icon=gnome-panel-launcher
+Name[en_US]=2.2-Start-NGINX

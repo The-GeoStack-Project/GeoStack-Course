@@ -1,0 +1,13 @@
+flask
+gunicorn
+
+flask_pymongo
+psycopg2
+
+bson 
+datetime
+
+pandas
+pandas_profiling
+
+bs4

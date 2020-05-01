@@ -1,0 +1,133 @@
+#Define the docker compose version
+version: '3.7' 
+
+#Defining the services
+services:
+  
+  postgresql-datastore:
+    container_name: postgresql-datastore
+    # Set the directory in which the dockerfile is located
+    build: ./postgresql-datastore
+    # Add the data volume of the docker container
+    volumes:
+      - ./postgresql-datastore/data:/var/lib/postgresql/data
+     # Set the port on which the docker container is available to port 5432 
+     # Since we set it to port 5432:5432, the docker container will also  be accessible on      
+     # our host system via localhost:5432   
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+
+  # Here we define the name of the MongoDB datastore Docker service
+  mongodb-datastore:
+    # Here we define the name which the MongoDB container is going to have
+    container_name: mongodb-datastore
+    # Here we define the image that is used for this container
+    image: mongo:latest
+    # Add the data volume of the docker container
+    volumes:
+      - ./mongodb-datastore/data:/data/db
+     # Set the port on which the docker container is available to port 27017 
+     # Since we set it to port 27017:27017, the docker container will also  be
+     # accessible on our host system via localhost:27017
+    ports:
+      - '27017:27017'
+
+
+ # Below we define the service for the Middleware components in Geostack
+  nginx-webserver:
+    container_name: nginx-webserver
+    # Set the directory in which the dockerfile is located
+    build: ./nginx-modsecurity
+    # The line below makes sure the NGINX container restarts when stopping         
+    # accidentally 
+    restart: always
+     # Set the port on which the docker container is available to port 80 
+     # Since we set it to port 80:80  the docker container will also be accessible        
+     # on our host system via localhost:80 or just localhost
+    ports:
+      - "80:80"
+    # Below we define the services on which the NGINX webserver depends. 
+    # These services will be started before the NGINX webserver starts. 
+    depends_on:
+      - flask-api
+      - tilestache-server
+      - cesium-terrain-server
+      
+
+  flask-api:
+    # Here we set the name of the Flask-API / App container
+    container_name: flask-api
+    # The line below makes sure the Flask container restarts when stopping         
+    # accidentally 
+    restart: always
+    # Set the directory in which the dockerfile is located
+    build: ./flask-gunicorn
+    # Here we set the port on which the Tileserver will be running
+    ports:
+      - "5000"
+    # Here we set the command that will be executed when the Flask-API 
+    # service starts. 
+    command: gunicorn -b :5000 app:app
+    # Here we add the Downloads volume of the docker container
+    volumes:
+      - .:/downloads
+    # Below we define the services on which the Flask-API depends. 
+    # These services will be started before the Flask-API starts. 
+    depends_on:
+      - mongodb-datastore
+      - postgresql-datastore
+      - tilestache-server
+
+ # Here we define the name of the tilestache-server
+  tilestache-server:
+     # Here we define the name of the tilestache-server container
+    container_name: tilestache-server
+    # The line below makes sure the Tileserver container restarts when stopping         
+    # accidentally 
+    restart: always
+     # Here we set the directory in which the Dockerfile is located
+    build: ./tilestache-server
+    # Here we add the cache as volume so the local cache is shared with the docker cache
+    volumes:
+      - ./tilestache-server/cache:/tilestache/cache
+    # Here we set the port on which the Tileserver will be running
+    ports:
+      - '8081:8081'
+    # Here we define the command that will run when the docker container is started
+    command: gunicorn --workers 4 --timeout 100 -b :8081  "TileStache:WSGITileServer('/tilestache/tilestache-configuration.cfg')"
+
+  memcached-cache:
+    # Here we set the name of the memcached container
+    container_name: memcached-cache
+    # Here we define the image that is used for this container
+    image: memcached:latest
+    # The line below makes sure the container restarts when stopping accidentally 
+    restart: always
+    # Here we define the ports on which the container is available
+    ports:
+      - "11211:11211"
+
+  cesium-terrain-server:
+    # Here we set the name of the container
+    container_name: cesium-terrain-server
+    # Here we define the image that is used for this container
+    image: geodata/cesium-terrain-server
+    # The line below makes sure the container restarts when stopping accidentally 
+    restart: always
+    # Here we define the ports on which the container is available
+    ports:
+      - "8080:8000"
+      #- "8080"     
+    volumes:
+    # Here we add the terrain folder as volume used in the container.
+      - ./cesium-server/data/tilesets/terrain:/data/tilesets/terrain
+    # Here we create a container link to the memcached container
+    links:
+      - memcached-cache:memcached
+    # Below we define the services on which the Cesium Server depends. 
+    # These services will be started before the Cesium Server starts. 
+    depends_on:
+      - memcached-cache
+
