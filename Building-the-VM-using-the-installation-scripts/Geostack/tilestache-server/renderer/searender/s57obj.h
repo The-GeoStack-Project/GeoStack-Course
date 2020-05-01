@@ -1,0 +1,40 @@
+/* Copyright 2012 Malcolm Herring
+ *
+ * This is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * For a copy of the GNU General Public License, see <http://www.gnu.org/licenses/>.
+ */
+
+/* Conversion of S57 OBJL values to OSeaM object type tag names */
+
+#ifndef S57OBJ_H
+#define S57OBJ_H
+
+typedef int Objl_t;
+
+typedef enum {
+  UNKOBJ, ADMARE, AIRARE, ACHBRT, ACHARE, BCNCAR, BCNISD, BCNLAT, BCNSAW, BCNSPP, BERTHS, BRIDGE, BUISGL, BUAARE, BOYCAR, BOYINB, BOYISD, BOYLAT, BOYSAW, BOYSPP,
+  CBLARE, CBLOHD, CBLSUB, CANALS, CANBNK, CTSARE, CAUSWY, CTNARE, CHKPNT, CGUSTA, COALNE, CONZNE, COSARE, CTRPNT, CONVYR, CRANES, CURENT, CUSZNE, DAMCON, DAYMAR,
+  DWRTCL, DWRTPT, DEPARE, DEPCNT, DISMAR, DOCARE, DRGARE, DRYDOC, DMPGRD, DYKCON, EXEZNE, FAIRWY, FNCLNE, FERYRT, FSHZNE, FSHFAC, FSHGRD, FLODOC, FOGSIG, FORSTC,
+  FRPARE, GATCON, GRIDRN, HRBARE, HRBFAC, HULKES, ICEARE, ICNARE, ISTZNE, LAKARE, LAKSHR, LNDARE, LNDELV, LNDRGN, LNDMRK, LIGHTS, LITFLT, LITVES, LOCMAG, LOKBSN,
+  LOGPON, MAGVAR, MARCUL, MIPARE, MORFAC, NAVLNE, OBSTRN, OFSPLF, OSPARE, OILBAR, PILPNT, PILBOP, PIPARE, PIPOHD, PIPSOL, PONTON, PRCARE, PRDARE, PYLONS, RADLNE,
+  RADRNG, RADRFL, RADSTA, RTPBCN, RDOCAL, RDOSTA, RAILWY, RAPIDS, RCRTCL, RECTRC, RCTLPT, RSCSTA, RESARE, RETRFL, RIVERS, RIVBNK, ROADWY, RUNWAY, SNDWAV, SEAARE,
+  SPLARE, SBDARE, SLCONS, SISTAT, SISTAW, SILTNK, SLOTOP, SLOGRD, SMCFAC, SOUNDG, SPRING, SQUARE, STSLNE, SUBTLN, SWPARE, TESARE, TS_PRH, TS_PNH, TS_PAD, TS_TIS,
+  T_HMON, T_NHMN, T_TIMS, TIDEWY, TOPMAR, TSELNE, TSSBND, TSSCRS, TSSLPT, TSSRON, TSEZNE, TUNNEL, TWRTPT, UWTROC, UNSARE, VEGATN, WATTUR, WATFAL, WEDKLP, WRECKS,
+  TS_FEB, M_ACCY, M_CSCL, M_COVR, M_HDAT, M_HOPA, M_NPUB, M_NSYS, M_PROD, M_QUAL, M_SDAT, M_SREL, M_UNIT, M_VDAT, C_AGGR, C_ASSO, C_STAC, $AREAS, $LINES, $CSYMB,
+  $COMPS, $TEXTS, NOTMRK, WTWAXS, WTWPRF, BRGARE, BUNSTA, COMARE, HRBBSN, LOKARE, LKBSPT, PRTARE, BCNWTW, BOYWTW, REFDMP, RTPLPT, TERMNL, TRNBSN, WTWARE, WTWGAG,
+  TISDGE, VEHTRF, EXCNST, LG_SDM, LG_VSP, LITMIN, LITMAJ,
+  OBJSIZ
+} Obja_t;
+
+extern char *decodeType(Objl_t);  // Convert S57 feature code to OSeaM object string
+extern Objl_t encodeType(char*);  // Convert OSM object string to S57 code
+
+extern Obja_t lookupType(Objl_t); // Convert S57 feature code to OSeaM enumeration
+
+extern char *stringType(Obja_t);  // Convert OSeaM enumeration to OSeaM object string
+extern Obja_t enumType(char*);    // Convert OSeaM object string to OSeaM enumeration
+
+#endif

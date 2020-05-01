@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>3D Map Viewer</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--Here we add the reference to the Cesium javascript code-->
+<script src="/assets/geospatial-frameworks/Cesium/Cesium.js"></script>
+  <!--Here we add the reference to the Cesium style sheet-->
+<link href="/assets/geospatial-frameworks/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+  <!-- Below we add the code to fix the Chartist error.
+       This is because a breaking update was commited in version 0.11.3.-->
+  <script>
+    window.global = window;
+  </script>
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+</html>

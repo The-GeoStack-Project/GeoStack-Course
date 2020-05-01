@@ -1,0 +1,4 @@
+gunicorn 
+TileStache
+Pillow
+

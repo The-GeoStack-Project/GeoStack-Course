@@ -1,0 +1,25 @@
+#!/bin/bash
+	echo "Started rendering of OSM file please be patient..."
+  # This greps the differences between the OpenSeaMap data which already has
+	# been rendered and the new OpenSeaMap data. This makes sure no data is
+	# rendered twice.
+
+	# If the world.osm file is empty the scripts will render al the tiles
+	diff world.osm next.osm | grep id= | grep -v "<tag" > diffs
+	# This starts the jsearch java application. This application cuts the next.osm
+	# file in smaller osm files that each represent a tile.
+	java -jar jsearch.jar ./
+	# This renames the next.osm file to world.osm so that when you render a new
+	# osm file no data will be rendered twice.
+	mv next.osm world.osm
+
+  # if the content of the diffs text file is not empty (this means that new data
+	# will be rendered),
+  # the script will then print:"found files to render". If the text file is
+	# empty there is no new data to be added, the script will then print:
+	# "Found no tiles to render".
+  if [ -s diffs ]; then
+    echo "Found files to render"
+  else
+    echo "Found no files to render"
+  fi

@@ -1,0 +1,1420 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version="0.6" generator="osmconvert 0.8.4" timestamp="2020-04-06T00:00:00Z">
+	<bounds minlat="51.65" minlon="3.724" maxlat="51.661" maxlon="3.7400002"/>
+	<node id="43373730" lat="51.6504746" lon="3.72661" version="1"/>
+	<node id="534760442" lat="51.6503289" lon="3.72542" version="1"/>
+	<node id="788507898" lat="51.6546469" lon="3.7283468" version="1">
+		<tag k="power" v="generator"/>
+		<tag k="generator:type" v="horizontal_axis"/>
+		<tag k="generator:method" v="wind_turbine"/>
+		<tag k="generator:source" v="wind"/>
+		<tag k="generator:output:electricity" v="2.3 MW"/>
+	</node>
+	<node id="788507959" lat="51.6515895" lon="3.7273115" version="1">
+		<tag k="power" v="generator"/>
+		<tag k="generator:type" v="horizontal_axis"/>
+		<tag k="generator:method" v="wind_turbine"/>
+		<tag k="generator:source" v="wind"/>
+		<tag k="generator:output:electricity" v="2.3 MW"/>
+	</node>
+	<node id="1333824940" lat="51.658783" lon="3.73115" version="1">
+		<tag k="seamark:name" v="H 2AV"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:source" v="https://geoservices.rijkswaterstaat.nl/apps/geoserver/vaarweg_markeringen/ows?service=WFS&#38;version=1.1.0&#38;request=GetFeature&#38;typeName=vaarweg_markering_drijvend&#38;outputFormat=csv Date:2020-03-27"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="1333827288" lat="51.656383" lon="3.731017" version="1">
+		<tag k="seamark:name" v="H 2V"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:source" v="https://geoservices.rijkswaterstaat.nl/apps/geoserver/vaarweg_markeringen/ows?service=WFS&#38;version=1.1.0&#38;request=GetFeature&#38;typeName=vaarweg_markering_drijvend&#38;outputFormat=csv Date:2020-03-27"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="1333828078" lat="51.6552" lon="3.735228" version="1">
+		<tag k="source" v="Rijkswaterstaat.nl"/>
+		<tag k="seamark:name" v="DAM O 14"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:topmark:shape" v="cylinder"/>
+		<tag k="seamark:topmark:colour" v="red;white;red"/>
+		<tag k="seamark:topmark:colour_pattern" v="horizontal"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="spar"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+		<tag k="seamark:buoy_special_purpose:category" v="no_entry"/>
+	</node>
+	<node id="1333830324" lat="51.656639" lon="3.738856" version="1">
+		<tag k="seamark:name" v="DAM O 15"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:source" v="https://geoservices.rijkswaterstaat.nl/apps/geoserver/vaarweg_markeringen/ows?service=WFS&#38;version=1.1.0&#38;request=GetFeature&#38;typeName=vaarweg_markering_drijvend&#38;outputFormat=csv Date:2020-03-27"/>
+		<tag k="seamark:topmark:shape" v="cylinder"/>
+		<tag k="seamark:topmark:colour" v="red;white;red"/>
+		<tag k="seamark:topmark:colour_pattern" v="horizontal"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="spar"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+		<tag k="seamark:buoy_special_purpose:category" v="no_entry"/>
+	</node>
+	<node id="1333836455" lat="51.656689" lon="3.732575" version="1">
+		<tag k="source" v="Rijkswaterstaat.nl"/>
+		<tag k="seamark:name" v="R P"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="spar"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="1333850374" lat="51.652606" lon="3.737453" version="1">
+		<tag k="source" v="Rijkswaterstaat.nl"/>
+		<tag k="seamark:name" v="DAM O 12"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:topmark:shape" v="cylinder"/>
+		<tag k="seamark:topmark:colour" v="red;white;red"/>
+		<tag k="seamark:topmark:colour_pattern" v="horizontal"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="spar"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+		<tag k="seamark:buoy_special_purpose:category" v="no_entry"/>
+	</node>
+	<node id="1383526883" lat="51.6503188" lon="3.7270968" version="1"/>
+	<node id="1383526884" lat="51.6503328" lon="3.7281733" version="1"/>
+	<node id="1383526885" lat="51.6502884" lon="3.7264159" version="1"/>
+	<node id="1383526887" lat="51.6503745" lon="3.7291302" version="1"/>
+	<node id="1383526889" lat="51.6504348" lon="3.7272912" version="1"/>
+	<node id="1383526891" lat="51.6504487" lon="3.7298254" version="1"/>
+	<node id="1383526892" lat="51.6504534" lon="3.7283527" version="1"/>
+	<node id="1383526894" lat="51.6504719" lon="3.729033" version="1"/>
+	<node id="1383526899" lat="51.6504951" lon="3.730259" version="1"/>
+	<node id="1383526900" lat="51.6505647" lon="3.7299674" version="1"/>
+	<node id="1383526901" lat="51.6506111" lon="3.7308122" version="1"/>
+	<node id="1383526902" lat="51.6506992" lon="3.7307225" version="1"/>
+	<node id="1383526904" lat="51.6507363" lon="3.7312906" version="1"/>
+	<node id="1383526906" lat="51.6509218" lon="3.7318289" version="1"/>
+	<node id="1383526908" lat="51.6509357" lon="3.7316046" version="1"/>
+	<node id="1383526910" lat="51.6511769" lon="3.7321802" version="1"/>
+	<node id="1383526913" lat="51.6511955" lon="3.7320457" version="1"/>
+	<node id="1383526916" lat="51.6514459" lon="3.7324344" version="1"/>
+	<node id="1383526917" lat="51.6514645" lon="3.7323447" version="1"/>
+	<node id="1383526919" lat="51.6516732" lon="3.7325166" version="1"/>
+	<node id="1383526920" lat="51.6517335" lon="3.7326661" version="1"/>
+	<node id="1383526922" lat="51.6519932" lon="3.7326437" version="1"/>
+	<node id="1383526925" lat="51.6520953" lon="3.7327932" version="1"/>
+	<node id="1383526927" lat="51.6522993" lon="3.7326587" version="1"/>
+	<node id="1383526930" lat="51.652471" lon="3.7327633" version="1"/>
+	<node id="1383526932" lat="51.6525915" lon="3.7325839" version="1"/>
+	<node id="1383526935" lat="51.6528466" lon="3.7326587" version="1"/>
+	<node id="1383526937" lat="51.6529626" lon="3.732412" version="1"/>
+	<node id="1383526939" lat="51.6531852" lon="3.7324493" version="1"/>
+	<node id="1383526941" lat="51.6533012" lon="3.7321653" version="1"/>
+	<node id="1383526942" lat="51.6535284" lon="3.7319709" version="1"/>
+	<node id="1383526944" lat="51.653598" lon="3.732083" version="1"/>
+	<node id="1383526946" lat="51.6538113" lon="3.731642" version="1"/>
+	<node id="1383526948" lat="51.6539087" lon="3.73147" version="1"/>
+	<node id="1383526949" lat="51.6539226" lon="3.7317691" version="1"/>
+	<node id="1383526953" lat="51.65402" lon="3.7312682" version="1"/>
+	<node id="1383526956" lat="51.6540989" lon="3.731171" version="1"/>
+	<node id="1383526958" lat="51.6541035" lon="3.7314999" version="1"/>
+	<node id="1383526960" lat="51.6541545" lon="3.7312009" version="1"/>
+	<node id="1383526962" lat="51.6541777" lon="3.731328" version="1"/>
+	<node id="1444587327" lat="51.6556084" lon="3.7240489" version="1"/>
+	<node id="1444587328" lat="51.6554819" lon="3.7241606" version="1"/>
+	<node id="1444587329" lat="51.6554127" lon="3.7242138" version="1"/>
+	<node id="1444587330" lat="51.6553578" lon="3.7243088" version="1"/>
+	<node id="1444587332" lat="51.6553222" lon="3.7243918" version="1"/>
+	<node id="1444587336" lat="51.6553078" lon="3.7244852" version="1"/>
+	<node id="1444587337" lat="51.6553177" lon="3.725239" version="1"/>
+	<node id="1444587338" lat="51.655315" lon="3.7259201" version="1"/>
+	<node id="1444587339" lat="51.6553127" lon="3.7265734" version="1"/>
+	<node id="1444587340" lat="51.6553072" lon="3.7271734" version="1"/>
+	<node id="1444587341" lat="51.6552834" lon="3.7277156" version="1"/>
+	<node id="1444587342" lat="51.6552706" lon="3.7279202" version="1"/>
+	<node id="1444587343" lat="51.6552542" lon="3.7281487" version="1"/>
+	<node id="1444587345" lat="51.6552166" lon="3.7284128" version="1"/>
+	<node id="1444587347" lat="51.6551713" lon="3.7286867" version="1"/>
+	<node id="1444587348" lat="51.6551304" lon="3.7288717" version="1"/>
+	<node id="1444587349" lat="51.6550853" lon="3.729019" version="1"/>
+	<node id="1444587350" lat="51.6550452" lon="3.7291028" version="1"/>
+	<node id="1444587351" lat="51.6549932" lon="3.7291838" version="1"/>
+	<node id="1444587352" lat="51.6549093" lon="3.729247" version="1"/>
+	<node id="1444587353" lat="51.654833" lon="3.7292767" version="1"/>
+	<node id="1444587354" lat="51.6547916" lon="3.7292719" version="1"/>
+	<node id="1444587355" lat="51.6546308" lon="3.7291796" version="1"/>
+	<node id="1444587356" lat="51.6546946" lon="3.7292438" version="1"/>
+	<node id="1444587357" lat="51.6545583" lon="3.729062" version="1"/>
+	<node id="1444587358" lat="51.6545112" lon="3.7289467" version="1"/>
+	<node id="1444587360" lat="51.6544918" lon="3.7288302" version="1"/>
+	<node id="1444587361" lat="51.6544951" lon="3.7286466" version="1"/>
+	<node id="1444587363" lat="51.6544851" lon="3.7284982" version="1"/>
+	<node id="1444587364" lat="51.6544624" lon="3.7284198" version="1"/>
+	<node id="1444587365" lat="51.6544116" lon="3.7283046" version="1"/>
+	<node id="1444587366" lat="51.6543337" lon="3.7282188" version="1"/>
+	<node id="1444587367" lat="51.6542251" lon="3.7281536" version="1"/>
+	<node id="1444587368" lat="51.6541393" lon="3.7281199" version="1"/>
+	<node id="1444587369" lat="51.6534586" lon="3.7278265" version="1"/>
+	<node id="1444587371" lat="51.6530959" lon="3.7276812" version="1"/>
+	<node id="1444587372" lat="51.6529031" lon="3.7276018" version="1"/>
+	<node id="1444587373" lat="51.6522887" lon="3.7273474" version="1"/>
+	<node id="1444587374" lat="51.6518362" lon="3.7271681" version="1"/>
+	<node id="1444587375" lat="51.6517508" lon="3.7275661" version="1"/>
+	<node id="1444587376" lat="51.6510863" lon="3.7268344" version="1"/>
+	<node id="1444587377" lat="51.6505336" lon="3.726611" version="1"/>
+	<node id="1444587381" lat="51.6503015" lon="3.7254231" version="1"/>
+	<node id="1444587382" lat="51.6502898" lon="3.7248551" version="1"/>
+	<node id="1444587421" lat="51.6503702" lon="3.7242273" version="1"/>
+	<node id="1444587464" lat="51.6503708" lon="3.7246989" version="1"/>
+	<node id="1444587468" lat="51.6503847" lon="3.7254201" version="1"/>
+	<node id="1444587472" lat="51.6504294" lon="3.7263348" version="1"/>
+	<node id="1444587475" lat="51.6504342" lon="3.7263979" version="1"/>
+	<node id="1444587478" lat="51.6504565" lon="3.7264445" version="1"/>
+	<node id="1444587480" lat="51.6505004" lon="3.7264904" version="1"/>
+	<node id="1444587482" lat="51.6508019" lon="3.7266114" version="1"/>
+	<node id="1444587484" lat="51.6514195" lon="3.7268744" version="1"/>
+	<node id="1444587486" lat="51.6531295" lon="3.7275815" version="1"/>
+	<node id="1444587512" lat="51.6514803" lon="3.7253798" version="1"/>
+	<node id="1444587513" lat="51.6514934" lon="3.7253134" version="1"/>
+	<node id="1444587515" lat="51.6515633" lon="3.7248921" version="1"/>
+	<node id="1444587517" lat="51.6515773" lon="3.7248282" version="1"/>
+	<node id="1444587526" lat="51.6516435" lon="3.7248643" version="1"/>
+	<node id="1444587527" lat="51.6515915" lon="3.7247633" version="1"/>
+	<node id="1444587528" lat="51.6516459" lon="3.7247929" version="1"/>
+	<node id="1444587530" lat="51.6516989" lon="3.7248445" version="1"/>
+	<node id="1444587532" lat="51.6516845" lon="3.7247791" version="1"/>
+	<node id="1444587535" lat="51.6517572" lon="3.7247985" version="1"/>
+	<node id="1444587537" lat="51.6517342" lon="3.7247399" version="1"/>
+	<node id="1444587542" lat="51.6516158" lon="3.7246524" version="1"/>
+	<node id="1444587544" lat="51.651634" lon="3.7245685" version="1"/>
+	<node id="1444587547" lat="51.6518712" lon="3.7246528" version="1"/>
+	<node id="1444587551" lat="51.6518443" lon="3.7245991" version="1"/>
+	<node id="1444587554" lat="51.6516856" lon="3.7243836" version="1"/>
+	<node id="1444587555" lat="51.6517664" lon="3.7241385" version="1"/>
+	<node id="1444587565" lat="51.6523185" lon="3.724064" version="1"/>
+	<node id="1444587566" lat="51.652296" lon="3.7240045" version="1"/>
+	<node id="1444587567" lat="51.6523686" lon="3.7240297" version="1"/>
+	<node id="1444587570" lat="51.6524232" lon="3.7240016" version="1"/>
+	<node id="1444587572" lat="51.6524697" lon="3.7240099" version="1"/>
+	<node id="1444587587" lat="51.6525559" lon="3.7240426" version="1"/>
+	<node id="1444587667" lat="51.6547853" lon="3.7249822" version="1"/>
+	<node id="1444587669" lat="51.6547733" lon="3.7250484" version="1"/>
+	<node id="1444587672" lat="51.654856" lon="3.7252559" version="1"/>
+	<node id="1444587679" lat="51.654324" lon="3.7247691" version="1"/>
+	<node id="1444587682" lat="51.6543123" lon="3.7248354" version="1"/>
+	<node id="1444587685" lat="51.6548634" lon="3.7256162" version="1"/>
+	<node id="1444587688" lat="51.6544969" lon="3.7274258" version="1"/>
+	<node id="1444587690" lat="51.6544185" lon="3.7278216" version="1"/>
+	<node id="1444587692" lat="51.6543997" lon="3.7278825" version="1"/>
+	<node id="1444587693" lat="51.6543591" lon="3.7279346" version="1"/>
+	<node id="1444587694" lat="51.6543142" lon="3.7279584" version="1"/>
+	<node id="1444587703" lat="51.6542708" lon="3.7279663" version="1"/>
+	<node id="1444587705" lat="51.6540113" lon="3.7278508" version="1"/>
+	<node id="1444587706" lat="51.6520321" lon="3.727026" version="1"/>
+	<node id="1444587707" lat="51.6513488" lon="3.7267457" version="1"/>
+	<node id="1444587708" lat="51.6512929" lon="3.7266844" version="1"/>
+	<node id="1444587709" lat="51.6512522" lon="3.7265878" version="1"/>
+	<node id="1444587711" lat="51.6512532" lon="3.7265213" version="1"/>
+	<node id="1444587741" lat="51.6534704" lon="3.7277243" version="1"/>
+	<node id="1444587747" lat="51.6540008" lon="3.7279477" version="1"/>
+	<node id="1444587748" lat="51.6542899" lon="3.7280606" version="1"/>
+	<node id="1444587751" lat="51.6543354" lon="3.7280824" version="1"/>
+	<node id="1444587753" lat="51.6543693" lon="3.7280988" version="1"/>
+	<node id="1444587755" lat="51.6544593" lon="3.7282" version="1"/>
+	<node id="1444587758" lat="51.6545058" lon="3.7282948" version="1"/>
+	<node id="1444587760" lat="51.6545474" lon="3.7284294" version="1"/>
+	<node id="1444587761" lat="51.6545728" lon="3.7285614" version="1"/>
+	<node id="1444587766" lat="51.6545731" lon="3.7287165" version="1"/>
+	<node id="1444587769" lat="51.654577" lon="3.7288525" version="1"/>
+	<node id="1444587772" lat="51.6546018" lon="3.7289433" version="1"/>
+	<node id="1444587775" lat="51.6546422" lon="3.729016" version="1"/>
+	<node id="1444587776" lat="51.6546604" lon="3.7290488" version="1"/>
+	<node id="1444587777" lat="51.6547182" lon="3.7291068" version="1"/>
+	<node id="1444587778" lat="51.6547858" lon="3.729136" version="1"/>
+	<node id="1444587786" lat="51.6548721" lon="3.7291233" version="1"/>
+	<node id="1444587787" lat="51.65496" lon="3.7290568" version="1"/>
+	<node id="1444587789" lat="51.6550367" lon="3.7289179" version="1"/>
+	<node id="1444587790" lat="51.6550853" lon="3.7287389" version="1"/>
+	<node id="1444587792" lat="51.6551249" lon="3.7284811" version="1"/>
+	<node id="1444587795" lat="51.6551584" lon="3.7281918" version="1"/>
+	<node id="1444587798" lat="51.6551814" lon="3.7278728" version="1"/>
+	<node id="1444587801" lat="51.6551929" lon="3.7275717" version="1"/>
+	<node id="1444587805" lat="51.6552015" lon="3.7272105" version="1"/>
+	<node id="1444587808" lat="51.6552058" lon="3.7268178" version="1"/>
+	<node id="1444587810" lat="51.6552016" lon="3.7263844" version="1"/>
+	<node id="1444587813" lat="51.6551837" lon="3.7252439" version="1"/>
+	<node id="1444587815" lat="51.6551818" lon="3.7243778" version="1"/>
+	<node id="1444587817" lat="51.6551942" lon="3.724259" version="1"/>
+	<node id="1444587819" lat="51.6552224" lon="3.7241482" version="1"/>
+	<node id="1444587820" lat="51.6552682" lon="3.7240338" version="1"/>
+	<node id="1444587862" lat="51.6556293" lon="3.7244548" version="1"/>
+	<node id="1444587870" lat="51.6555764" lon="3.7246223" version="1"/>
+	<node id="1444587871" lat="51.655565" lon="3.7247142" version="1"/>
+	<node id="1444587872" lat="51.6556985" lon="3.7242996" version="1"/>
+	<node id="1444587874" lat="51.6558146" lon="3.7241298" version="1"/>
+	<node id="1444587887" lat="51.6555369" lon="3.7251671" version="1"/>
+	<node id="1444587888" lat="51.655533" lon="3.7252311" version="1"/>
+	<node id="1444587890" lat="51.6555294" lon="3.7252918" version="1"/>
+	<node id="1444587893" lat="51.6555182" lon="3.725452" version="1"/>
+	<node id="1444587895" lat="51.6554971" lon="3.7257077" version="1"/>
+	<node id="1444587897" lat="51.655469" lon="3.7258282" version="1"/>
+	<node id="1444587900" lat="51.65543" lon="3.7258694" version="1"/>
+	<node id="1444587916" lat="51.654922" lon="3.7258233" version="1"/>
+	<node id="1444587918" lat="51.6548742" lon="3.7259232" version="1"/>
+	<node id="1444587921" lat="51.6549255" lon="3.7266272" version="1"/>
+	<node id="1444587923" lat="51.65492" lon="3.7269313" version="1"/>
+	<node id="1444587924" lat="51.6549102" lon="3.7273462" version="1"/>
+	<node id="1444587926" lat="51.6549017" lon="3.727584" version="1"/>
+	<node id="1444587933" lat="51.6545408" lon="3.7275513" version="1"/>
+	<node id="1444587935" lat="51.6548301" lon="3.7279616" version="1"/>
+	<node id="1444587936" lat="51.6548027" lon="3.727969" version="1"/>
+	<node id="1444587937" lat="51.6547962" lon="3.7279863" version="1"/>
+	<node id="1444587938" lat="51.6548774" lon="3.7279662" version="1"/>
+	<node id="1444587940" lat="51.6547572" lon="3.7281489" version="1"/>
+	<node id="1444587943" lat="51.6544766" lon="3.7278765" version="1"/>
+	<node id="1444587950" lat="51.6544559" lon="3.7279627" version="1"/>
+	<node id="1444587952" lat="51.6544117" lon="3.7280371" version="1"/>
+	<node id="1444587964" lat="51.6540203" lon="3.7313861" version="1"/>
+	<node id="1444587968" lat="51.6540415" lon="3.7314102" version="1"/>
+	<node id="1444587971" lat="51.6540524" lon="3.7314513" version="1"/>
+	<node id="1444587972" lat="51.6539908" lon="3.7314061" version="1"/>
+	<node id="1444587973" lat="51.6540239" lon="3.731655" version="1"/>
+	<node id="1444587981" lat="51.6539644" lon="3.7316191" version="1"/>
+	<node id="1444587984" lat="51.653879" lon="3.7315811" version="1"/>
+	<node id="1444587985" lat="51.6539733" lon="3.7317153" version="1"/>
+	<node id="1444587986" lat="51.6539318" lon="3.731701" version="1"/>
+	<node id="1444587987" lat="51.6538734" lon="3.7317411" version="1"/>
+	<node id="1444587988" lat="51.6538057" lon="3.7317009" version="1"/>
+	<node id="1444587989" lat="51.6537169" lon="3.7318181" version="1"/>
+	<node id="1444587998" lat="51.653738" lon="3.7319201" version="1"/>
+	<node id="1444587999" lat="51.6537225" lon="3.731937" version="1"/>
+	<node id="1444588001" lat="51.6536177" lon="3.7319198" version="1"/>
+	<node id="1444588002" lat="51.6535498" lon="3.7321249" version="1"/>
+	<node id="1444588038" lat="51.6534426" lon="3.7320544" version="1"/>
+	<node id="1444588041" lat="51.6534311" lon="3.7322336" version="1"/>
+	<node id="1444588044" lat="51.6533296" lon="3.7321503" version="1"/>
+	<node id="1444588047" lat="51.6532342" lon="3.732214" version="1"/>
+	<node id="1444588050" lat="51.6532717" lon="3.7323661" version="1"/>
+	<node id="1444588057" lat="51.6531429" lon="3.7323154" version="1"/>
+	<node id="1444588058" lat="51.6530553" lon="3.7323819" version="1"/>
+	<node id="1444588060" lat="51.6530591" lon="3.73251" version="1"/>
+	<node id="1444588063" lat="51.6529285" lon="3.7324689" version="1"/>
+	<node id="1444588066" lat="51.6528773" lon="3.7326068" version="1"/>
+	<node id="1444588070" lat="51.6527012" lon="3.7326892" version="1"/>
+	<node id="1444588074" lat="51.6525457" lon="3.7326563" version="1"/>
+	<node id="1444588077" lat="51.6524863" lon="3.7326733" version="1"/>
+	<node id="1444588082" lat="51.6525523" lon="3.7327453" version="1"/>
+	<node id="1444588086" lat="51.6525094" lon="3.7327525" version="1"/>
+	<node id="1444588089" lat="51.6524088" lon="3.7327695" version="1"/>
+	<node id="1444588092" lat="51.6522029" lon="3.7326773" version="1"/>
+	<node id="1444588096" lat="51.6522157" lon="3.7327687" version="1"/>
+	<node id="1444588099" lat="51.6520523" lon="3.7327557" version="1"/>
+	<node id="1444588102" lat="51.6520451" lon="3.7326626" version="1"/>
+	<node id="1444588108" lat="51.6518783" lon="3.7327082" version="1"/>
+	<node id="1444588112" lat="51.6519146" lon="3.7326325" version="1"/>
+	<node id="1444588117" lat="51.6518237" lon="3.7326041" version="1"/>
+	<node id="1444588120" lat="51.651708" lon="3.7326448" version="1"/>
+	<node id="1444588124" lat="51.6515312" lon="3.7325389" version="1"/>
+	<node id="1444588126" lat="51.6515457" lon="3.7324497" version="1"/>
+	<node id="1444588127" lat="51.6513836" lon="3.7324113" version="1"/>
+	<node id="1444588128" lat="51.6514282" lon="3.7323448" version="1"/>
+	<node id="1444588139" lat="51.6512768" lon="3.732293" version="1"/>
+	<node id="1444588143" lat="51.6513061" lon="3.7322195" version="1"/>
+	<node id="1444588145" lat="51.6511893" lon="3.7321842" version="1"/>
+	<node id="1444588148" lat="51.6512078" lon="3.7320807" version="1"/>
+	<node id="1444588149" lat="51.6510849" lon="3.7320298" version="1"/>
+	<node id="1444588150" lat="51.651127" lon="3.7319507" version="1"/>
+	<node id="1444588152" lat="51.65099" lon="3.7318782" version="1"/>
+	<node id="1444588153" lat="51.6510183" lon="3.731768" version="1"/>
+	<node id="1444588166" lat="51.6508911" lon="3.7316967" version="1"/>
+	<node id="1444588168" lat="51.6509148" lon="3.7315629" version="1"/>
+	<node id="1444588170" lat="51.6508337" lon="3.7315278" version="1"/>
+	<node id="1444588172" lat="51.6508694" lon="3.7314158" version="1"/>
+	<node id="1444588174" lat="51.6507488" lon="3.7312493" version="1"/>
+	<node id="1444588175" lat="51.6507732" lon="3.7311487" version="1"/>
+	<node id="1444588177" lat="51.6507491" lon="3.7309723" version="1"/>
+	<node id="1444588188" lat="51.6506758" lon="3.7309576" version="1"/>
+	<node id="1444588190" lat="51.6507213" lon="3.7308372" version="1"/>
+	<node id="1444588192" lat="51.650615" lon="3.7306908" version="1"/>
+	<node id="1444588195" lat="51.6506203" lon="3.7303694" version="1"/>
+	<node id="1444588197" lat="51.6505872" lon="3.7301111" version="1"/>
+	<node id="1444588199" lat="51.6505201" lon="3.7301198" version="1"/>
+	<node id="1444588202" lat="51.6504711" lon="3.7297134" version="1"/>
+	<node id="1444588204" lat="51.6504969" lon="3.7293121" version="1"/>
+	<node id="1444588214" lat="51.6504851" lon="3.729034" version="1"/>
+	<node id="1444588216" lat="51.6503968" lon="3.7290498" version="1"/>
+	<node id="1444588218" lat="51.6504637" lon="3.7287752" version="1"/>
+	<node id="1444588220" lat="51.6503591" lon="3.7286303" version="1"/>
+	<node id="1444588223" lat="51.6504384" lon="3.7285119" version="1"/>
+	<node id="1444588226" lat="51.6504406" lon="3.7282555" version="1"/>
+	<node id="1444588228" lat="51.6503356" lon="3.7282166" version="1"/>
+	<node id="1444588235" lat="51.650433" lon="3.7277208" version="1"/>
+	<node id="1444588237" lat="51.6504173" lon="3.7274429" version="1"/>
+	<node id="1444588241" lat="51.6503094" lon="3.7273456" version="1"/>
+	<node id="1444588245" lat="51.6504182" lon="3.7269507" version="1"/>
+	<node id="1444588249" lat="51.6503053" lon="3.726776" version="1"/>
+	<node id="1444588251" lat="51.6504417" lon="3.7266682" version="1"/>
+	<node id="1444588254" lat="51.6541181" lon="3.7317797" version="1"/>
+	<node id="1444588256" lat="51.6541804" lon="3.7317362" version="1"/>
+	<node id="1444588260" lat="51.6544219" lon="3.7318485" version="1"/>
+	<node id="1444588263" lat="51.6544336" lon="3.7318847" version="1"/>
+	<node id="1444588266" lat="51.6544182" lon="3.7319239" version="1"/>
+	<node id="1444588341" lat="51.6512472" lon="3.7323426" version="1"/>
+	<node id="1444588342" lat="51.6512274" lon="3.732354" version="1"/>
+	<node id="1444588345" lat="51.6511873" lon="3.7323211" version="1"/>
+	<node id="1444588368" lat="51.6509976" lon="3.7322336" version="1"/>
+	<node id="1444588523" lat="51.6525881" lon="3.7399671" version="1"/>
+	<node id="1444588688" lat="51.6510978" lon="3.7257624" version="1"/>
+	<node id="1444588689" lat="51.6510531" lon="3.7257839" version="1"/>
+	<node id="1444588694" lat="51.6511176" lon="3.7257155" version="1"/>
+	<node id="1444588696" lat="51.651012" lon="3.7257986" version="1"/>
+	<node id="1444588699" lat="51.6509582" lon="3.7257675" version="1"/>
+	<node id="1444588701" lat="51.6509203" lon="3.7256897" version="1"/>
+	<node id="1444588703" lat="51.6509149" lon="3.725604" version="1"/>
+	<node id="1444588704" lat="51.650953" lon="3.7253992" version="1"/>
+	<node id="1444588706" lat="51.6509661" lon="3.7253164" version="1"/>
+	<node id="1444588713" lat="51.6511684" lon="3.725436" version="1"/>
+	<node id="1444588715" lat="51.6511706" lon="3.7253912" version="1"/>
+	<node id="1444588716" lat="51.6511716" lon="3.7253606" version="1"/>
+	<node id="1444588717" lat="51.6511722" lon="3.7253225" version="1"/>
+	<node id="1444588718" lat="51.6509811" lon="3.7252234" version="1"/>
+	<node id="1444588719" lat="51.6511771" lon="3.7251007" version="1"/>
+	<node id="1444588721" lat="51.650984" lon="3.7250684" version="1"/>
+	<node id="1444588731" lat="51.6507255" lon="3.7253274" version="1"/>
+	<node id="1444588732" lat="51.6507312" lon="3.7254073" version="1"/>
+	<node id="1444588734" lat="51.6507375" lon="3.7255197" version="1"/>
+	<node id="1444588741" lat="51.6507005" lon="3.7249684" version="1"/>
+	<node id="1444588742" lat="51.6514468" lon="3.725294" version="1"/>
+	<node id="1444588743" lat="51.6514289" lon="3.7253817" version="1"/>
+	<node id="1444588745" lat="51.651467" lon="3.7251576" version="1"/>
+	<node id="1444588747" lat="51.6514685" lon="3.7248243" version="1"/>
+	<node id="1444588749" lat="51.6515283" lon="3.7248413" version="1"/>
+	<node id="1444588751" lat="51.6514946" lon="3.7246638" version="1"/>
+	<node id="1444588758" lat="51.651555" lon="3.7247072" version="1"/>
+	<node id="1444588759" lat="51.6515477" lon="3.7246846" version="1"/>
+	<node id="1444588760" lat="51.6515897" lon="3.7245363" version="1"/>
+	<node id="1444588761" lat="51.6516641" lon="3.7242788" version="1"/>
+	<node id="1444588763" lat="51.6517248" lon="3.724116" version="1"/>
+	<node id="1444588922" lat="51.6506958" lon="3.7245237" version="1"/>
+	<node id="1444588923" lat="51.6511901" lon="3.7265252" version="1"/>
+	<node id="1444588924" lat="51.6511676" lon="3.726602" version="1"/>
+	<node id="1444588926" lat="51.6511424" lon="3.7266314" version="1"/>
+	<node id="1444588933" lat="51.6511054" lon="3.7266549" version="1"/>
+	<node id="1444588934" lat="51.6507626" lon="3.7263543" version="1"/>
+	<node id="1444588935" lat="51.6508198" lon="3.7265293" version="1"/>
+	<node id="1444588936" lat="51.650761" lon="3.7264794" version="1"/>
+	<node id="2145381663" lat="51.6501664" lon="3.7254155" version="1"/>
+	<node id="2145381664" lat="51.6501844" lon="3.7243884" version="1"/>
+	<node id="2145381665" lat="51.6501927" lon="3.7250538" version="1"/>
+	<node id="2145381666" lat="51.6502103" lon="3.726211" version="1"/>
+	<node id="2145381669" lat="51.6502893" lon="3.7269133" version="1"/>
+	<node id="2145381672" lat="51.6503286" lon="3.7272676" version="1"/>
+	<node id="2145381675" lat="51.6503697" lon="3.7282672" version="1"/>
+	<node id="2145381677" lat="51.6503797" lon="3.7283925" version="1"/>
+	<node id="2145381682" lat="51.6504637" lon="3.7294494" version="1"/>
+	<node id="2145381685" lat="51.6506223" lon="3.730553" version="1"/>
+	<node id="2145381692" lat="51.6509065" lon="3.7315766" version="1"/>
+	<node id="2145381699" lat="51.651234" lon="3.7322388" version="1"/>
+	<node id="2145381717" lat="51.6517811" lon="3.7326975" version="1"/>
+	<node id="2145381744" lat="51.6523066" lon="3.7328034" version="1"/>
+	<node id="2145381792" lat="51.6529719" lon="3.7325973" version="1"/>
+	<node id="2145381796" lat="51.6534616" lon="3.7322552" version="1"/>
+	<node id="2145381800" lat="51.6538781" lon="3.731845" version="1"/>
+	<node id="2145381802" lat="51.6539408" lon="3.7316817" version="1"/>
+	<node id="2145381809" lat="51.6541125" lon="3.7314277" version="1"/>
+	<node id="2145381810" lat="51.654197" lon="3.7313596" version="1"/>
+	<node id="2145381842" lat="51.6549166" lon="3.7295483" version="1"/>
+	<node id="2145381851" lat="51.655256" lon="3.7292501" version="1"/>
+	<node id="2145381863" lat="51.6554387" lon="3.7280982" version="1"/>
+	<node id="2145381865" lat="51.6554933" lon="3.7242178" version="1"/>
+	<node id="2145381866" lat="51.6555022" lon="3.7252202" version="1"/>
+	<node id="2145381868" lat="51.6555116" lon="3.726581" version="1"/>
+	<node id="2554106903" lat="51.6518268" lon="3.7272869" version="1"/>
+	<node id="2554106906" lat="51.6514113" lon="3.7269775" version="1"/>
+	<node id="2577028200" lat="51.6515385" lon="3.7289002" version="1"/>
+	<node id="2577028201" lat="51.6521516" lon="3.7394458" version="1"/>
+	<node id="2577028203" lat="51.655201" lon="3.7369768" version="1"/>
+	<node id="2577028204" lat="51.6553055" lon="3.7304132" version="1"/>
+	<node id="2577028205" lat="51.6554181" lon="3.7304793" version="1"/>
+	<node id="2577028207" lat="51.6559162" lon="3.7361952" version="1"/>
+	<node id="2577028208" lat="51.6559681" lon="3.7308022" version="1"/>
+	<node id="2577028209" lat="51.6559926" lon="3.736068" version="1"/>
+	<node id="2577028210" lat="51.6563919" lon="3.7354034" version="1"/>
+	<node id="2577028211" lat="51.6565775" lon="3.731604" version="1"/>
+	<node id="2577028212" lat="51.6566439" lon="3.7347951" version="1"/>
+	<node id="2577028213" lat="51.6568031" lon="3.7339652" version="1"/>
+	<node id="2577028214" lat="51.6568093" lon="3.7333333" version="1"/>
+	<node id="2577028215" lat="51.6568118" lon="3.733072" version="1"/>
+	<node id="2806333364" lat="51.6515238" lon="3.724651" version="1"/>
+	<node id="2806333366" lat="51.6515433" lon="3.7248157" version="1"/>
+	<node id="2806333369" lat="51.6516149" lon="3.7240071" version="1"/>
+	<node id="2806333370" lat="51.6516338" lon="3.7248615" version="1"/>
+	<node id="2806333371" lat="51.6516429" lon="3.7244006" version="1"/>
+	<node id="2806333372" lat="51.6517532" lon="3.7248116" version="1"/>
+	<node id="2806333373" lat="51.6517676" lon="3.724017" version="1"/>
+	<node id="2806333375" lat="51.6518477" lon="3.7247202" version="1"/>
+	<node id="2806333380" lat="51.6523039" lon="3.7241082" version="1"/>
+	<node id="2806333385" lat="51.6524362" lon="3.7240237" version="1"/>
+	<node id="2806333387" lat="51.6525513" lon="3.7240223" version="1"/>
+	<node id="2806333392" lat="51.6547212" lon="3.7241466" version="1">
+		<tag k="power" v="generator"/>
+		<tag k="generator:type" v="horizontal_axis"/>
+		<tag k="generator:method" v="wind_turbine"/>
+		<tag k="generator:source" v="wind"/>
+		<tag k="generator:output:electricity" v="2.3 MW"/>
+	</node>
+	<node id="2806333396" lat="51.6543553" lon="3.7280077" version="1"/>
+	<node id="2806333397" lat="51.6544005" lon="3.7279356" version="1"/>
+	<node id="2806333398" lat="51.6544428" lon="3.7277903" version="1"/>
+	<node id="2806333400" lat="51.654506" lon="3.728133" version="1"/>
+	<node id="2806333726" lat="51.6506017" lon="3.724706" version="1"/>
+	<node id="2806333728" lat="51.6506333" lon="3.7262531" version="1"/>
+	<node id="2806333729" lat="51.6506612" lon="3.7263706" version="1"/>
+	<node id="2806333731" lat="51.6507159" lon="3.7264254" version="1"/>
+	<node id="2806333742" lat="51.6512214" lon="3.7266705" version="1"/>
+	<node id="2806334101" lat="51.6546044" lon="3.7283073" version="1"/>
+	<node id="2806334103" lat="51.6546384" lon="3.7288419" version="1"/>
+	<node id="2806334104" lat="51.6546396" lon="3.7285834" version="1"/>
+	<node id="2806334105" lat="51.6546858" lon="3.7289927" version="1"/>
+	<node id="2806334107" lat="51.6547411" lon="3.724993" version="1"/>
+	<node id="2806334108" lat="51.6547635" lon="3.7290573" version="1"/>
+	<node id="2806334109" lat="51.6548012" lon="3.728789" version="1"/>
+	<node id="2806334111" lat="51.6548534" lon="3.7290592" version="1"/>
+	<node id="2806334113" lat="51.6549275" lon="3.7278667" version="1"/>
+	<node id="2806334114" lat="51.6549287" lon="3.7254952" version="1"/>
+	<node id="2806334115" lat="51.6549348" lon="3.7289652" version="1"/>
+	<node id="2806334119" lat="51.6549725" lon="3.7273556" version="1"/>
+	<node id="2806334120" lat="51.6549737" lon="3.7254776" version="1"/>
+	<node id="2806334121" lat="51.6549846" lon="3.7268092" version="1"/>
+	<node id="2806334122" lat="51.6549931" lon="3.7287753" version="1"/>
+	<node id="2806334124" lat="51.6550721" lon="3.7282622" version="1"/>
+	<node id="2806334125" lat="51.6551243" lon="3.7244084" version="1"/>
+	<node id="2806334126" lat="51.6551559" lon="3.7274437" version="1"/>
+	<node id="2806334127" lat="51.6551754" lon="3.7241205" version="1"/>
+	<node id="2806334128" lat="51.655179" lon="3.7266858" version="1"/>
+	<node id="3214090024" lat="51.6509417" lon="3.726348" version="1">
+		<tag k="man_made" v="mast"/>
+	</node>
+	<node id="3214091487" lat="51.6547112" lon="3.7280521" version="1">
+		<tag k="power" v="substation"/>
+	</node>
+	<node id="3749822345" lat="51.6513856" lon="3.7274774" version="1"/>
+	<node id="3749822346" lat="51.651368" lon="3.7273095" version="1"/>
+	<node id="3749822347" lat="51.6513879" lon="3.7271058" version="1"/>
+	<node id="3749822348" lat="51.6514277" lon="3.7275718" version="1"/>
+	<node id="3749822349" lat="51.6515202" lon="3.7276623" version="1"/>
+	<node id="3749822350" lat="51.6516021" lon="3.7276661" version="1"/>
+	<node id="3749822351" lat="51.6516829" lon="3.7276378" version="1"/>
+	<node id="3749822352" lat="51.6517976" lon="3.7274548" version="1"/>
+	<node id="3824930042" lat="51.653038" lon="3.7280076" version="1"/>
+	<node id="3824930043" lat="51.6534003" lon="3.7281787" version="1"/>
+	<node id="3931034181" lat="51.654181" lon="3.731178" version="1">
+		<tag k="seamark:name" v="RODE HL ROGGENPLAATHAVEN"/>
+		<tag k="seamark:type" v="beacon_lateral"/>
+		<tag k="seamark:source" v="https://geoservices.rijkswaterstaat.nl/apps/geoserver/vaarweg_markeringen/ows?service=WFS&#38;version=1.1.0&#38;request=GetFeature&#38;typeName=vaarweg_markering_vast&#38;outputFormat=csv Date: 2019-08-10"/>
+		<tag k="seamark:light:colour" v="red"/>
+		<tag k="seamark:light:height" v="10"/>
+		<tag k="seamark:topmark:shape" v="cone, point down"/>
+		<tag k="seamark:topmark:colour" v="red"/>
+		<tag k="seamark:light:character" v="F"/>
+		<tag k="seamark:beacon_lateral:colour" v="red;white;red;white"/>
+		<tag k="seamark:beacon_lateral:system" v="iala-a"/>
+		<tag k="seamark:beacon_lateral:category" v="harbour_right"/>
+		<tag k="seamark:beacon_lateral:colour_pattern" v="horizontal"/>
+	</node>
+	<node id="3931034182" lat="51.654872" lon="3.728653" version="1">
+		<tag k="seamark:name" v="GROENE HL ROGGENPLAATHAVEN"/>
+		<tag k="seamark:type" v="beacon_special_purpose"/>
+		<tag k="seamark:source" v="https://geoservices.rijkswaterstaat.nl/apps/geoserver/vaarweg_markeringen/ows?service=WFS&#38;version=1.1.0&#38;request=GetFeature&#38;typeName=vaarweg_markering_vast&#38;outputFormat=csv Date: 2019-08-10"/>
+		<tag k="seamark:light:colour" v="green"/>
+		<tag k="seamark:light:height" v="12"/>
+		<tag k="seamark:topmark:shape" v="cone, point up"/>
+		<tag k="seamark:topmark:colour" v="green"/>
+		<tag k="seamark:light:character" v="F"/>
+		<tag k="seamark:beacon_special_purpose:colour" v="green;white;green;white"/>
+		<tag k="seamark:beacon_special_purpose:colour_pattern" v="horizontal"/>
+	</node>
+	<node id="3932308972" lat="51.650528" lon="3.733128" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="S 10NN"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="3932308979" lat="51.658133" lon="3.73705" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="H 4N"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="3932308980" lat="51.659033" lon="3.736961" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="H 6Z"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="3932308982" lat="51.660769" lon="3.736836" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="H 6N"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="3932377933" lat="51.654689" lon="3.732864" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="H 2ZZ"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="3932377934" lat="51.655153" lon="3.730519" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="RPH-W"/>
+		<tag k="seamark:type" v="buoy_cardinal"/>
+		<tag k="seamark:topmark:shape" v="2 cones point together"/>
+		<tag k="seamark:topmark:colour" v="black"/>
+		<tag k="seamark:buoy_cardinal:shape" v="spar"/>
+		<tag k="seamark:buoy_cardinal:colour" v="yellow;black;yellow"/>
+		<tag k="seamark:buoy_cardinal:category" v="west"/>
+		<tag k="seamark:buoy_cardinal:colour_pattern" v="horizontal"/>
+	</node>
+	<node id="3932377935" lat="51.655231" lon="3.734008" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="H 2Z"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="3932377936" lat="51.656797" lon="3.735067" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="H 2N"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="3932377937" lat="51.657694" lon="3.735133" version="1">
+		<tag k="source" v="Fairway Information Services, 151218_DNZ_002a_markeringen_drijvend"/>
+		<tag k="seamark:name" v="H 2AZ"/>
+		<tag k="seamark:type" v="buoy_special_purpose"/>
+		<tag k="seamark:buoy_special_purpose:shape" v="can"/>
+		<tag k="seamark:buoy_special_purpose:colour" v="yellow"/>
+	</node>
+	<node id="5916965950" lat="51.650448" lon="3.7311202" version="1"/>
+	<node id="5916965951" lat="51.6507477" lon="3.7317654" version="1"/>
+	<node id="5916965952" lat="51.6525127" lon="3.7399149" version="1"/>
+	<way id="42766454" version="1">
+		<nd ref="534760442"/>
+		<tag k="source" v="BAG"/>
+		<tag k="boundary" v="administrative"/>
+		<tag k="start_date" v="2009-07-02 00:00:00.01"/>
+		<tag k="admin_level" v="8"/>
+		<tag k="authoritative" v="yes"/>
+		<tag k="bag:bronwoonplaats" v="2784"/>
+	</way>
+	<way id="124266095" version="1">
+		<nd ref="1383526885"/>
+		<nd ref="1383526883"/>
+		<nd ref="1383526884"/>
+		<nd ref="1383526887"/>
+		<nd ref="1383526891"/>
+		<nd ref="1383526899"/>
+		<nd ref="1383526901"/>
+		<nd ref="1383526904"/>
+		<nd ref="1383526906"/>
+		<nd ref="1383526910"/>
+		<nd ref="1383526916"/>
+		<nd ref="1383526920"/>
+		<nd ref="1383526925"/>
+		<nd ref="1383526930"/>
+		<nd ref="1383526935"/>
+		<nd ref="1383526939"/>
+		<nd ref="1383526944"/>
+		<nd ref="1383526949"/>
+		<nd ref="1383526958"/>
+		<nd ref="1383526962"/>
+		<nd ref="1383526960"/>
+		<nd ref="1383526956"/>
+		<nd ref="1383526953"/>
+		<nd ref="1383526948"/>
+		<nd ref="1383526946"/>
+		<nd ref="1383526942"/>
+		<nd ref="1383526941"/>
+		<nd ref="1383526937"/>
+		<nd ref="1383526932"/>
+		<nd ref="1383526927"/>
+		<nd ref="1383526922"/>
+		<nd ref="1383526919"/>
+		<nd ref="1383526917"/>
+		<nd ref="1383526913"/>
+		<nd ref="1383526908"/>
+		<nd ref="1383526902"/>
+		<nd ref="1383526900"/>
+		<nd ref="1383526894"/>
+		<nd ref="1383526892"/>
+		<nd ref="1383526889"/>
+		<nd ref="43373730"/>
+		<nd ref="1383526885"/>
+		<tag k="man_made" v="breakwater"/>
+	</way>
+	<way id="131207825" version="1">
+		<nd ref="1444587382"/>
+		<nd ref="1444587381"/>
+		<nd ref="1383526885"/>
+		<nd ref="1383526883"/>
+		<nd ref="1383526884"/>
+		<nd ref="1383526887"/>
+		<nd ref="1383526891"/>
+		<nd ref="1383526899"/>
+		<nd ref="1383526901"/>
+		<nd ref="1383526904"/>
+		<nd ref="1383526906"/>
+		<nd ref="1383526910"/>
+		<nd ref="1383526916"/>
+		<nd ref="1383526920"/>
+		<nd ref="1383526925"/>
+		<nd ref="1383526930"/>
+		<nd ref="1383526935"/>
+		<nd ref="1383526939"/>
+		<nd ref="1383526944"/>
+		<nd ref="1383526949"/>
+		<nd ref="1383526958"/>
+		<nd ref="1383526962"/>
+		<nd ref="1383526960"/>
+		<nd ref="1383526956"/>
+		<nd ref="1383526953"/>
+		<nd ref="1383526948"/>
+		<nd ref="1383526946"/>
+		<nd ref="1383526942"/>
+		<nd ref="1383526941"/>
+		<nd ref="1383526937"/>
+		<nd ref="1383526932"/>
+		<nd ref="1383526927"/>
+		<nd ref="1383526922"/>
+		<nd ref="1383526919"/>
+		<nd ref="1383526917"/>
+		<nd ref="1383526913"/>
+		<nd ref="1383526908"/>
+		<nd ref="1383526902"/>
+		<nd ref="1383526900"/>
+		<nd ref="1383526894"/>
+		<nd ref="1383526892"/>
+		<nd ref="1383526889"/>
+		<nd ref="43373730"/>
+		<nd ref="1444587377"/>
+		<nd ref="1444587376"/>
+		<nd ref="2554106906"/>
+		<nd ref="3749822347"/>
+		<nd ref="3749822346"/>
+		<nd ref="3749822345"/>
+		<nd ref="3749822348"/>
+		<nd ref="3749822349"/>
+		<nd ref="3749822350"/>
+		<nd ref="3749822351"/>
+		<nd ref="1444587375"/>
+		<nd ref="3749822352"/>
+		<nd ref="2554106903"/>
+		<nd ref="1444587374"/>
+		<nd ref="1444587373"/>
+		<nd ref="1444587372"/>
+		<nd ref="1444587371"/>
+		<nd ref="3824930042"/>
+		<nd ref="3824930043"/>
+		<nd ref="1444587369"/>
+		<nd ref="1444587368"/>
+		<nd ref="1444587367"/>
+		<nd ref="1444587366"/>
+		<nd ref="1444587365"/>
+		<nd ref="1444587364"/>
+		<nd ref="1444587363"/>
+		<nd ref="1444587361"/>
+		<nd ref="1444587360"/>
+		<nd ref="1444587358"/>
+		<nd ref="1444587357"/>
+		<nd ref="1444587355"/>
+		<nd ref="1444587356"/>
+		<nd ref="1444587354"/>
+		<nd ref="1444587353"/>
+		<nd ref="1444587352"/>
+		<nd ref="1444587351"/>
+		<nd ref="1444587350"/>
+		<nd ref="1444587349"/>
+		<nd ref="1444587348"/>
+		<nd ref="1444587347"/>
+		<nd ref="1444587345"/>
+		<nd ref="1444587343"/>
+		<nd ref="1444587342"/>
+		<nd ref="1444587341"/>
+		<nd ref="1444587340"/>
+		<nd ref="1444587339"/>
+		<nd ref="1444587338"/>
+		<nd ref="1444587337"/>
+		<nd ref="1444587336"/>
+		<nd ref="1444587332"/>
+		<nd ref="1444587330"/>
+		<nd ref="1444587329"/>
+		<nd ref="1444587328"/>
+		<nd ref="1444587327"/>
+	</way>
+	<way id="131207829" version="1">
+		<nd ref="43373730"/>
+		<nd ref="1383526885"/>
+		<nd ref="1444587381"/>
+		<nd ref="1444587382"/>
+		<nd ref="1444587421"/>
+		<nd ref="1444587464"/>
+		<nd ref="1444587468"/>
+		<nd ref="1444587472"/>
+		<nd ref="1444587475"/>
+		<nd ref="1444587478"/>
+		<nd ref="1444587480"/>
+		<nd ref="1444587482"/>
+		<nd ref="1444587484"/>
+		<nd ref="1444587486"/>
+		<nd ref="1444587371"/>
+		<nd ref="1444587372"/>
+		<nd ref="1444587373"/>
+		<nd ref="1444587374"/>
+		<nd ref="2554106903"/>
+		<nd ref="3749822352"/>
+		<nd ref="1444587375"/>
+		<nd ref="3749822351"/>
+		<nd ref="3749822350"/>
+		<nd ref="3749822349"/>
+		<nd ref="3749822348"/>
+		<nd ref="3749822345"/>
+		<nd ref="3749822346"/>
+		<nd ref="3749822347"/>
+		<nd ref="2554106906"/>
+		<nd ref="1444587376"/>
+		<nd ref="1444587377"/>
+		<nd ref="43373730"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="man_made" v="reinforced_slope"/>
+	</way>
+	<way id="131207852" version="1">
+		<nd ref="1444587512"/>
+		<nd ref="1444587513"/>
+		<nd ref="1444587515"/>
+		<nd ref="1444587517"/>
+		<nd ref="1444587526"/>
+		<nd ref="1444587530"/>
+		<nd ref="1444587535"/>
+		<nd ref="1444587547"/>
+		<nd ref="1444587565"/>
+		<nd ref="1444587567"/>
+		<nd ref="1444587570"/>
+		<nd ref="1444587572"/>
+		<nd ref="1444587587"/>
+		<nd ref="1444587682"/>
+		<nd ref="1444587669"/>
+		<nd ref="1444587667"/>
+		<nd ref="1444587679"/>
+		<nd ref="1444587566"/>
+		<nd ref="1444587551"/>
+		<nd ref="1444587537"/>
+		<nd ref="1444587532"/>
+		<nd ref="1444587528"/>
+		<nd ref="1444587527"/>
+		<nd ref="1444587542"/>
+		<nd ref="1444587544"/>
+		<nd ref="1444587554"/>
+		<nd ref="1444587555"/>
+		<nd ref="1444587672"/>
+		<nd ref="1444587685"/>
+		<nd ref="1444587688"/>
+		<nd ref="1444587690"/>
+		<nd ref="1444587692"/>
+		<nd ref="1444587693"/>
+		<nd ref="1444587694"/>
+		<nd ref="1444587703"/>
+		<nd ref="1444587705"/>
+		<nd ref="1444587706"/>
+		<nd ref="1444587707"/>
+		<nd ref="1444587708"/>
+		<nd ref="1444587709"/>
+		<nd ref="1444587711"/>
+		<nd ref="1444587512"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="landuse" v="grass"/>
+	</way>
+	<way id="131207870" version="1">
+		<nd ref="1444587337"/>
+		<nd ref="1444587338"/>
+		<nd ref="1444587339"/>
+		<nd ref="1444587340"/>
+		<nd ref="1444587341"/>
+		<nd ref="1444587342"/>
+		<nd ref="1444587343"/>
+		<nd ref="1444587345"/>
+		<nd ref="1444587347"/>
+		<nd ref="1444587348"/>
+		<nd ref="1444587349"/>
+		<nd ref="1444587350"/>
+		<nd ref="1444587351"/>
+		<nd ref="1444587352"/>
+		<nd ref="1444587353"/>
+		<nd ref="1444587354"/>
+		<nd ref="1444587356"/>
+		<nd ref="1444587355"/>
+		<nd ref="1444587357"/>
+		<nd ref="1444587358"/>
+		<nd ref="1444587360"/>
+		<nd ref="1444587361"/>
+		<nd ref="1444587363"/>
+		<nd ref="1444587364"/>
+		<nd ref="1444587365"/>
+		<nd ref="1444587366"/>
+		<nd ref="1444587367"/>
+		<nd ref="1444587368"/>
+		<nd ref="1444587369"/>
+		<nd ref="1444587741"/>
+		<nd ref="1444587747"/>
+		<nd ref="1444587748"/>
+		<nd ref="1444587751"/>
+		<nd ref="1444587753"/>
+		<nd ref="1444587755"/>
+		<nd ref="1444587758"/>
+		<nd ref="1444587760"/>
+		<nd ref="1444587761"/>
+		<nd ref="1444587766"/>
+		<nd ref="1444587769"/>
+		<nd ref="1444587772"/>
+		<nd ref="1444587775"/>
+		<nd ref="1444587776"/>
+		<nd ref="1444587777"/>
+		<nd ref="1444587778"/>
+		<nd ref="1444587786"/>
+		<nd ref="1444587787"/>
+		<nd ref="1444587789"/>
+		<nd ref="1444587790"/>
+		<nd ref="1444587792"/>
+		<nd ref="1444587795"/>
+		<nd ref="1444587798"/>
+		<nd ref="1444587801"/>
+		<nd ref="1444587805"/>
+		<nd ref="1444587808"/>
+		<nd ref="1444587810"/>
+		<nd ref="1444587813"/>
+		<nd ref="1444587815"/>
+		<nd ref="1444587817"/>
+		<nd ref="1444587819"/>
+		<nd ref="1444587820"/>
+		<nd ref="1444587327"/>
+		<nd ref="1444587328"/>
+		<nd ref="1444587329"/>
+		<nd ref="1444587330"/>
+		<nd ref="1444587332"/>
+		<nd ref="1444587336"/>
+		<nd ref="1444587337"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="man_made" v="reinforced_slope"/>
+	</way>
+	<way id="131207875" version="1">
+		<nd ref="1444587338"/>
+		<nd ref="1444587337"/>
+		<nd ref="1444587336"/>
+		<nd ref="1444587332"/>
+		<nd ref="1444587330"/>
+		<nd ref="1444587329"/>
+		<nd ref="1444587328"/>
+		<nd ref="1444587327"/>
+		<nd ref="1444587874"/>
+		<nd ref="1444587872"/>
+		<nd ref="1444587862"/>
+		<nd ref="1444587870"/>
+		<nd ref="1444587871"/>
+		<nd ref="1444587887"/>
+		<nd ref="1444587888"/>
+		<nd ref="1444587890"/>
+		<nd ref="1444587893"/>
+		<nd ref="1444587895"/>
+		<nd ref="1444587897"/>
+		<nd ref="1444587900"/>
+		<nd ref="1444587338"/>
+		<tag k="tidal" v="yes"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="natural" v="wetland"/>
+		<tag k="wetland" v="tidalflat"/>
+	</way>
+	<way id="131207880" version="1">
+		<nd ref="1444587775"/>
+		<nd ref="1444587772"/>
+		<nd ref="1444587769"/>
+		<nd ref="1444587766"/>
+		<nd ref="1444587761"/>
+		<nd ref="1444587760"/>
+		<nd ref="1444587758"/>
+		<nd ref="1444587755"/>
+		<nd ref="1444587753"/>
+		<nd ref="1444587751"/>
+		<nd ref="1444587952"/>
+		<nd ref="1444587950"/>
+		<nd ref="1444587943"/>
+		<nd ref="1444587933"/>
+		<nd ref="1444587918"/>
+		<nd ref="1444587916"/>
+		<nd ref="1444587921"/>
+		<nd ref="1444587923"/>
+		<nd ref="1444587924"/>
+		<nd ref="1444587926"/>
+		<nd ref="1444587938"/>
+		<nd ref="1444587935"/>
+		<nd ref="1444587936"/>
+		<nd ref="1444587937"/>
+		<nd ref="1444587940"/>
+		<nd ref="1444587775"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="landuse" v="grass"/>
+	</way>
+	<way id="131207887" version="1">
+		<nd ref="1383526885"/>
+		<nd ref="43373730"/>
+		<nd ref="1444588251"/>
+		<nd ref="1444588245"/>
+		<nd ref="1444588237"/>
+		<nd ref="1444588235"/>
+		<nd ref="1444588226"/>
+		<nd ref="1444588223"/>
+		<nd ref="1444588218"/>
+		<nd ref="1444588214"/>
+		<nd ref="1444588204"/>
+		<nd ref="1444588197"/>
+		<nd ref="1444588195"/>
+		<nd ref="1444588190"/>
+		<nd ref="1444588177"/>
+		<nd ref="1444588175"/>
+		<nd ref="1444588172"/>
+		<nd ref="1444588168"/>
+		<nd ref="1444588153"/>
+		<nd ref="1444588150"/>
+		<nd ref="1444588148"/>
+		<nd ref="1444588143"/>
+		<nd ref="1444588128"/>
+		<nd ref="1444588126"/>
+		<nd ref="1444588117"/>
+		<nd ref="1444588112"/>
+		<nd ref="1444588102"/>
+		<nd ref="1444588092"/>
+		<nd ref="1444588077"/>
+		<nd ref="1444588074"/>
+		<nd ref="1444588063"/>
+		<nd ref="1444588058"/>
+		<nd ref="1444588057"/>
+		<nd ref="1444588047"/>
+		<nd ref="1444588044"/>
+		<nd ref="1444588038"/>
+		<nd ref="1444588001"/>
+		<nd ref="1444587989"/>
+		<nd ref="1444587988"/>
+		<nd ref="1444587984"/>
+		<nd ref="1444587972"/>
+		<nd ref="1444587964"/>
+		<nd ref="1444587968"/>
+		<nd ref="1444587971"/>
+		<nd ref="1444587981"/>
+		<nd ref="1444587973"/>
+		<nd ref="1444588256"/>
+		<nd ref="1444588260"/>
+		<nd ref="1444588263"/>
+		<nd ref="1444588266"/>
+		<nd ref="1444588254"/>
+		<nd ref="1444587985"/>
+		<nd ref="1444587986"/>
+		<nd ref="1444587987"/>
+		<nd ref="1444587998"/>
+		<nd ref="1444587999"/>
+		<nd ref="1444588002"/>
+		<nd ref="1444588041"/>
+		<nd ref="1444588050"/>
+		<nd ref="1444588060"/>
+		<nd ref="1444588066"/>
+		<nd ref="1444588070"/>
+		<nd ref="1444588082"/>
+		<nd ref="1444588086"/>
+		<nd ref="1444588089"/>
+		<nd ref="1444588096"/>
+		<nd ref="1444588099"/>
+		<nd ref="1444588108"/>
+		<nd ref="1444588120"/>
+		<nd ref="1444588124"/>
+		<nd ref="1444588127"/>
+		<nd ref="1444588139"/>
+		<nd ref="1444588145"/>
+		<nd ref="1444588149"/>
+		<nd ref="1444588152"/>
+		<nd ref="1444588166"/>
+		<nd ref="1444588170"/>
+		<nd ref="1444588174"/>
+		<nd ref="1444588188"/>
+		<nd ref="1444588192"/>
+		<nd ref="1444588199"/>
+		<nd ref="1444588202"/>
+		<nd ref="1444588216"/>
+		<nd ref="1444588220"/>
+		<nd ref="1444588228"/>
+		<nd ref="1444588241"/>
+		<nd ref="1444588249"/>
+		<nd ref="1383526885"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="man_made" v="breakwater"/>
+	</way>
+	<way id="131207911" version="1">
+		<nd ref="1444587382"/>
+		<nd ref="1444587381"/>
+		<nd ref="1383526885"/>
+		<nd ref="1444588249"/>
+		<nd ref="1444588241"/>
+		<nd ref="1444588228"/>
+		<nd ref="1444588220"/>
+		<nd ref="1444588216"/>
+		<nd ref="1444588202"/>
+		<nd ref="1444588199"/>
+		<nd ref="1444588192"/>
+		<nd ref="1444588188"/>
+		<nd ref="1444588174"/>
+		<nd ref="1444588170"/>
+		<nd ref="1444588166"/>
+		<nd ref="1444588152"/>
+		<nd ref="1444588149"/>
+		<nd ref="1444588145"/>
+		<nd ref="1444588139"/>
+		<nd ref="1444588341"/>
+		<nd ref="1444588342"/>
+		<nd ref="1444588345"/>
+		<nd ref="1444588368"/>
+		<nd ref="5916965951"/>
+		<nd ref="5916965950"/>
+		<tag k="tidal" v="yes"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="natural" v="wetland"/>
+		<tag k="wetland" v="tidalflat"/>
+	</way>
+	<way id="131207918" version="1">
+		<nd ref="1444588523"/>
+		<nd ref="5916965952"/>
+		<nd ref="1444588523"/>
+		<tag k="tidal" v="yes"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="natural" v="wetland"/>
+		<tag k="wetland" v="tidalflat"/>
+	</way>
+	<way id="131207919" version="1">
+		<nd ref="1444588704"/>
+		<nd ref="1444588703"/>
+		<nd ref="1444588701"/>
+		<nd ref="1444588699"/>
+		<nd ref="1444588696"/>
+		<nd ref="1444588689"/>
+		<nd ref="1444588688"/>
+		<nd ref="1444588694"/>
+		<nd ref="1444588713"/>
+		<nd ref="1444588715"/>
+		<nd ref="1444588716"/>
+		<nd ref="1444588717"/>
+		<nd ref="1444588719"/>
+		<nd ref="1444588721"/>
+		<nd ref="1444588718"/>
+		<nd ref="1444588706"/>
+		<nd ref="1444588704"/>
+	</way>
+	<way id="131207930" version="1">
+		<nd ref="1444588743"/>
+		<nd ref="1444588923"/>
+		<nd ref="1444588924"/>
+		<nd ref="1444588926"/>
+		<nd ref="1444588933"/>
+		<nd ref="1444588935"/>
+		<nd ref="1444588936"/>
+		<nd ref="1444588934"/>
+		<nd ref="1444588734"/>
+		<nd ref="1444588732"/>
+		<nd ref="1444588731"/>
+		<nd ref="1444588741"/>
+		<nd ref="1444588922"/>
+		<nd ref="2806333373"/>
+		<nd ref="1444588763"/>
+		<nd ref="1444588761"/>
+		<nd ref="1444588760"/>
+		<nd ref="1444588758"/>
+		<nd ref="1444588759"/>
+		<nd ref="1444588751"/>
+		<nd ref="1444588747"/>
+		<nd ref="1444588749"/>
+		<nd ref="1444588745"/>
+		<nd ref="1444588742"/>
+		<nd ref="1444588743"/>
+	</way>
+	<way id="204540422" version="1">
+		<nd ref="2145381664"/>
+		<nd ref="2145381665"/>
+		<nd ref="2145381663"/>
+		<nd ref="2145381666"/>
+		<nd ref="2145381669"/>
+		<nd ref="2145381672"/>
+		<nd ref="2145381675"/>
+		<nd ref="2145381677"/>
+		<nd ref="2145381682"/>
+		<nd ref="2145381685"/>
+		<nd ref="2145381692"/>
+		<nd ref="2145381699"/>
+		<nd ref="2145381717"/>
+		<nd ref="2145381744"/>
+		<nd ref="2145381792"/>
+		<nd ref="2145381796"/>
+		<nd ref="2145381800"/>
+		<nd ref="2145381802"/>
+		<nd ref="2145381809"/>
+		<nd ref="2145381810"/>
+		<nd ref="2145381842"/>
+		<nd ref="2145381851"/>
+		<nd ref="2145381863"/>
+		<nd ref="2145381868"/>
+		<nd ref="2145381866"/>
+		<nd ref="2145381865"/>
+		<tag k="boundary" v="national_park"/>
+	</way>
+	<way id="251488260" version="1">
+		<nd ref="2577028201"/>
+		<nd ref="2577028203"/>
+		<nd ref="2577028207"/>
+		<nd ref="2577028209"/>
+		<nd ref="2577028210"/>
+		<nd ref="2577028212"/>
+		<nd ref="2577028213"/>
+		<nd ref="2577028214"/>
+		<nd ref="2577028215"/>
+		<nd ref="2577028211"/>
+		<nd ref="2577028208"/>
+		<nd ref="2577028205"/>
+		<nd ref="2577028204"/>
+		<nd ref="2577028200"/>
+		<tag k="CEMT" v="Va"/>
+		<tag k="name" v="Geul van de Roggenplaat"/>
+		<tag k="waterway" v="fairway"/>
+	</way>
+	<way id="276016354" version="1">
+		<nd ref="2806334107"/>
+		<nd ref="2806333387"/>
+		<nd ref="2806333385"/>
+		<nd ref="2806333380"/>
+		<nd ref="2806333375"/>
+		<nd ref="2806333372"/>
+		<nd ref="2806333370"/>
+		<nd ref="2806333366"/>
+		<nd ref="2806333364"/>
+		<nd ref="2806333369"/>
+		<tag k="highway" v="track"/>
+	</way>
+	<way id="276016362" version="1">
+		<nd ref="2806333373"/>
+		<nd ref="2806333371"/>
+		<nd ref="2806333366"/>
+		<nd ref="2806333742"/>
+		<nd ref="2806333731"/>
+		<nd ref="2806333729"/>
+		<nd ref="2806333728"/>
+		<nd ref="2806333726"/>
+		<tag k="highway" v="service"/>
+		<tag k="motor_vehicle" v="private"/>
+	</way>
+	<way id="276016365" version="1">
+		<nd ref="2806334127"/>
+		<nd ref="2806334125"/>
+		<nd ref="2806334128"/>
+		<nd ref="2806334126"/>
+		<nd ref="2806334124"/>
+		<nd ref="2806334122"/>
+		<nd ref="2806334115"/>
+		<nd ref="2806334111"/>
+		<nd ref="2806334108"/>
+		<nd ref="2806334105"/>
+		<nd ref="2806334103"/>
+		<nd ref="2806334104"/>
+		<nd ref="2806334101"/>
+		<nd ref="2806333400"/>
+		<nd ref="2806333396"/>
+		<tag k="highway" v="service"/>
+		<tag k="motor_vehicle" v="private"/>
+	</way>
+	<way id="276016375" version="1">
+		<nd ref="2806333742"/>
+		<nd ref="2806333396"/>
+		<nd ref="2806333397"/>
+		<nd ref="2806333398"/>
+		<nd ref="2806334114"/>
+		<nd ref="2806334120"/>
+		<tag k="highway" v="service"/>
+		<tag k="motor_vehicle" v="private"/>
+	</way>
+	<way id="276016377" version="1">
+		<nd ref="2806334120"/>
+		<nd ref="2806334121"/>
+		<nd ref="2806334119"/>
+		<nd ref="2806334113"/>
+		<nd ref="2806334109"/>
+		<tag k="highway" v="service"/>
+		<tag k="motor_vehicle" v="private"/>
+	</way>
+	<way id="389944533" version="1">
+		<nd ref="1383526956"/>
+		<nd ref="1383526953"/>
+		<nd ref="1383526948"/>
+		<nd ref="1383526946"/>
+		<nd ref="1383526942"/>
+		<nd ref="1383526941"/>
+		<nd ref="1444588047"/>
+		<nd ref="1383526937"/>
+		<nd ref="1383526932"/>
+		<nd ref="1383526927"/>
+		<nd ref="1383526922"/>
+		<nd ref="1383526919"/>
+		<nd ref="1383526917"/>
+		<nd ref="1383526913"/>
+		<nd ref="1383526908"/>
+		<nd ref="1383526902"/>
+		<nd ref="1383526900"/>
+		<nd ref="1444588204"/>
+		<nd ref="1444588214"/>
+		<nd ref="1444588223"/>
+		<nd ref="1444588226"/>
+		<nd ref="1444588235"/>
+		<nd ref="1444588237"/>
+		<nd ref="1444588245"/>
+		<nd ref="1444588251"/>
+		<nd ref="43373730"/>
+		<nd ref="1444587377"/>
+		<nd ref="2554106906"/>
+		<nd ref="3749822347"/>
+		<nd ref="3749822346"/>
+		<nd ref="3749822345"/>
+		<nd ref="3749822348"/>
+		<nd ref="3749822349"/>
+		<nd ref="3749822350"/>
+		<nd ref="3749822351"/>
+		<nd ref="1444587375"/>
+		<nd ref="3749822352"/>
+		<nd ref="2554106903"/>
+		<nd ref="1444587374"/>
+		<nd ref="1444587373"/>
+		<nd ref="1444587372"/>
+		<nd ref="1444587371"/>
+		<nd ref="3824930042"/>
+		<nd ref="3824930043"/>
+		<nd ref="1444587369"/>
+		<nd ref="1444587368"/>
+		<nd ref="1444587367"/>
+		<nd ref="1444587366"/>
+		<nd ref="1444587365"/>
+		<nd ref="1444587364"/>
+		<nd ref="1444587363"/>
+		<nd ref="1444587361"/>
+		<nd ref="1444587360"/>
+		<nd ref="1444587358"/>
+		<nd ref="1444587357"/>
+		<nd ref="1444587355"/>
+		<nd ref="1444587356"/>
+		<nd ref="1444587354"/>
+		<nd ref="1383526960"/>
+		<nd ref="1383526956"/>
+		<tag k="name" v="Roggenplaathaven"/>
+		<tag k="natural" v="water"/>
+		<tag k="seamark:type" v="harbour"/>
+	</way>
+	<way id="415119869" version="1">
+		<nd ref="1333850374"/>
+		<nd ref="1333828078"/>
+		<nd ref="1333830324"/>
+		<tag k="seamark:type" v="restricted_area"/>
+		<tag k="seamark:information" v="Very dangerous tidal streams"/>
+		<tag k="seamark:restricted_area:category" v="safety"/>
+		<tag k="seamark:restricted_area:restriction" v="no_entry"/>
+	</way>
+	<relation id="296241" version="1">
+		<member type="way" ref="42766454" role="outer"/>
+		<tag k="name" v="Veere"/>
+		<tag k="type" v="boundary"/>
+		<tag k="name:nl" v="Veere"/>
+		<tag k="boundary" v="administrative"/>
+		<tag k="wikidata" v="Q10083"/>
+		<tag k="wikipedia" v="nl:Veere (gemeente)"/>
+		<tag k="population" v="21904"/>
+		<tag k="admin_level" v="8"/>
+		<tag k="authoritative" v="yes"/>
+		<tag k="population:date" v="2017-01-01"/>
+		<tag k="ref:gemeentecode" v="717"/>
+		<tag k="source:population" v="https://www.veere.nl/bestuur/feiten-en-cijfers_47605"/>
+	</relation>
+	<relation id="296493" version="1">
+		<member type="way" ref="42766454" role="outer"/>
+		<tag k="name" v="Schouwen-Duiveland"/>
+		<tag k="type" v="boundary"/>
+		<tag k="name:nl" v="Schouwen-Duiveland"/>
+		<tag k="boundary" v="administrative"/>
+		<tag k="wikidata" v="Q10079"/>
+		<tag k="wikipedia" v="nl:Schouwen-Duiveland"/>
+		<tag k="population" v="33765"/>
+		<tag k="admin_level" v="8"/>
+		<tag k="authoritative" v="yes"/>
+		<tag k="population:date" v="2017-01-01"/>
+		<tag k="ref:gemeentecode" v="1676"/>
+		<tag k="source:population" v="CBS"/>
+	</relation>
+	<relation id="1733971" version="1">
+		<member type="way" ref="42766454" role="outer"/>
+		<tag k="name" v="Vrouwenpolder"/>
+		<tag k="type" v="boundary"/>
+		<tag k="source" v="BAG"/>
+		<tag k="boundary" v="administrative"/>
+		<tag k="wikidata" v="Q1367576"/>
+		<tag k="wikipedia" v="nl:Vrouwenpolder"/>
+		<tag k="start_date" v="2009-07-02 00:00:00.01"/>
+		<tag k="admin_level" v="10"/>
+		<tag k="authoritative" v="yes"/>
+		<tag k="ref:woonplaatscode" v="2784"/>
+	</relation>
+	<relation id="1763745" version="1">
+		<member type="way" ref="131207919" role="inner"/>
+		<member type="way" ref="131207930" role="outer"/>
+		<tag k="type" v="multipolygon"/>
+		<tag k="source" v="3dShapes"/>
+		<tag k="landuse" v="grass"/>
+	</relation>
+	<relation id="2713014" version="1">
+		<member type="way" ref="42766454" role="outer"/>
+		<tag k="name" v="Burgh-Haamstede"/>
+		<tag k="type" v="boundary"/>
+		<tag k="source" v="BAG"/>
+		<tag k="boundary" v="administrative"/>
+		<tag k="wikidata" v="Q1014986"/>
+		<tag k="wikipedia" v="nl:Burgh-Haamstede"/>
+		<tag k="start_date" v="2011-12-13 00:00:00"/>
+		<tag k="admin_level" v="10"/>
+		<tag k="authoritative" v="yes"/>
+		<tag k="ref:woonplaatscode" v="2676"/>
+	</relation>
+	<relation id="2745473" version="1">
+		<member type="way" ref="204540422" role="outer"/>
+		<tag k="name" v="Nationaal Park Oosterschelde"/>
+		<tag k="type" v="multipolygon"/>
+		<tag k="source" v="nationaalgeoregister.nl"/>
+		<tag k="name:en" v="Eastern Scheldt National Park"/>
+		<tag k="name:nl" v="Nationaal Park Oosterschelde"/>
+		<tag k="website" v="https://www.np-oosterschelde.nl/"/>
+		<tag k="boundary" v="national_park"/>
+		<tag k="wikidata" v="Q1703017"/>
+		<tag k="wikipedia" v="nl:Nationaal Park Oosterschelde"/>
+	</relation>
+	<relation id="5465469" version="1">
+		<member type="node" ref="2806333392" role=""/>
+		<member type="node" ref="788507898" role=""/>
+		<member type="node" ref="788507959" role=""/>
+		<tag k="type" v="site"/>
+		<tag k="operator" v="Windpark Roggenplaat BV"/>
+	</relation>
+	<relation id="6846427" version="1">
+		<member type="way" ref="131207825" role="outer"/>
+		<tag k="name" v="Oosterschelde"/>
+		<tag k="type" v="multipolygon"/>
+		<tag k="tidal" v="yes"/>
+		<tag k="natural" v="water"/>
+	</relation>
+	<relation id="9642308" version="1">
+		<member type="way" ref="131207825" role="outer"/>
+		<tag k="name" v="Roggenplaat"/>
+		<tag k="type" v="multipolygon"/>
+		<tag k="place" v="islet"/>
+	</relation>
+</osm>

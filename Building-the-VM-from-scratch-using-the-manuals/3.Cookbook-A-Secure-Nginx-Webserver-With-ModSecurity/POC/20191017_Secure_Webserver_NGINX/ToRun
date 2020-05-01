@@ -1,0 +1,10 @@
+1) Type in terminal:
+docker-compose up
+
+2) Navigate to localhost:
+http://localhost/
+
+3) To test if crs is working:
+http://localhost/?abc=../../
+
+Should return 403 error

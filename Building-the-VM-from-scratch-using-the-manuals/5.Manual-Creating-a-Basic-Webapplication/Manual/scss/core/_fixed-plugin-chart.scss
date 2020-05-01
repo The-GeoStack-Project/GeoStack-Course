@@ -1,0 +1,188 @@
+.fixed-plugin-chart{
+    transform: translate(0px, 0px) !important;
+    .dropdown{
+        .dropdown-menu{
+            transform: translate(0px, 0px) !important;
+            border-radius: 10px;
+            li.adjustments-line{
+                border-bottom: 1px solid #ddd;
+            }
+            li{
+                padding: 5px 2px !important;
+            }
+            .adjustments-line{
+                .bootstrap-switch{
+                    position: absolute;
+                    right: 10px !important;
+                }
+                label{
+                    margin-bottom: .1rem !important;
+                }
+            }
+        }
+    }
+}
+
+.fixed-plugin-chart li > a,
+.fixed-plugin-chart .badge{
+    transition: all .34s;
+    -webkit-transition: all .34s;
+    -moz-transition: all .34s;
+}
+
+.fixed-plugin-chart{
+    position: fixed;
+    left: 0px;
+    width: 64px;
+    background: rgba(0,0,0,.3);
+    z-index: 1031;
+    border-radius: 8px 0 0 8px;
+    text-align: center;
+    bottom: 250px;
+}
+.fixed-plugin-chart .fa-cog{
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 0 0 6px 6px;
+    width: auto;
+}
+.fixed-plugin-chart .dropdown-menu{
+    width: 1400px;
+    left: 75px !important;
+    border-radius: 0.1875rem;
+    padding: 0 10px;
+}
+.fixed-plugin-chart .dropdown-menu:after, .fixed-plugin-chart .dropdown-menu:before{
+    right: 10px;
+    margin-left: auto;
+    left: auto;
+}
+.fixed-plugin-chart .fa-circle-thin{
+    color: #FFFFFF;
+}
+.fixed-plugin-chart .active .fa-circle-thin{
+    color: #00bbff;
+}
+
+.fixed-plugin-chart .dropdown-menu > .active > a,
+.fixed-plugin-chart .dropdown-menu > .active > a:hover,
+.fixed-plugin-chart .dropdown-menu > .active > a:focus{
+    color: #777777;
+    text-align: center;
+}
+
+.fixed-plugin-chart img{
+    border-radius: 0;
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.fixed-plugin-chart .dropdown-menu li > a:hover,
+.fixed-plugin-chart .dropdown-menu li > a:focus{
+    box-shadow: none;
+}
+
+
+
+.fixed-plugin-chart h5{
+    font-size: 14px;
+    margin: 10px;
+}
+.fixed-plugin-chart .dropdown-menu li{
+    display: block;
+    padding: 18px 2px;
+    width: 25%;
+    float: left;
+}
+
+.fixed-plugin-chart li.adjustments-line,
+.fixed-plugin-chart li.header-title,
+.fixed-plugin-chart li.button-container{
+    width: 100%;
+    height: 50px;
+    min-height: inherit;
+}
+
+.fixed-plugin-chart li.button-container{
+    height: auto;
+}
+.fixed-plugin-chart li.button-container div{
+    margin-bottom: 5px;
+}
+
+.fixed-plugin-chart #sharrreTitle{
+    text-align: center;
+    padding: 10px 0;
+    height: 50px;
+}
+
+.fixed-plugin-chart li.header-title{
+    height: 30px;
+    line-height: 25px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.fixed-plugin-chart .adjustments-line p{
+    float: left;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 1em;
+    color: #3C4858;
+    padding-top: 0px;
+}
+
+.fixed-plugin-chart .adjustments-line a .badge-colors{
+    position: relative;
+    top: -2px;
+}
+
+.fixed-plugin-chart .adjustments-line .togglebutton{
+    padding-right: 7px;
+}
+
+.fixed-plugin-chart .adjustments-line .togglebutton .toggle{
+    margin-right: 0;
+}
+
+.fixed-plugin-chart .dropdown-menu > li.adjustments-line > a{
+      padding-right: 0;
+      padding-left: 0;
+      /*border-bottom: 1px solid #ddd;*/
+      border-radius: 0;
+      margin: 0;
+}
+
+
+
+.fixed-plugin-chart .dropdown .dropdown-menu{
+    top: -20px !important;
+    opacity: 0;
+    visibility: hidden;
+    left: 100px;
+    transform-origin: 100% 0;
+}
+.fixed-plugin-chart .dropdown.show .dropdown-menu{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.wrapper-full-page ~ .fixed-plugin-chart .dropdown.open .dropdown-menu{
+    -webkit-transform: translateY(-17%);
+    -moz-transform: translateY(-17%);
+    -o-transform: translateY(-17%);
+    -ms-transform: translateY(-17%);
+    transform: translateY(-17%);
+}
+
+.wrapper-full-page ~ .fixed-plugin-chart .dropdown .dropdown-menu{
+    -webkit-transform: translateY(-19%);
+    -moz-transform: translateY(-19%);
+    -o-transform: translateY(-19%);
+    -ms-transform: translateY(-19%);
+    transform: translateY(-19%);
+}

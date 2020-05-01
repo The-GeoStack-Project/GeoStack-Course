@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=true
+Exec=sh -c "cd ~/Geostack && docker-compose down && service mongodb start && service postgresql start && service nginx start"
+Name=Stop-Geostack-Docker
+Icon=gnome-panel-launcher
+Name[en_US]=Stop-Geostack-Docker
