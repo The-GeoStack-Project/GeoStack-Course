@@ -1,8 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Terminal=false
-Exec=sh -c "fuser -k 8888/tcp; cd ~/Geostack/jupyter-notebooks ; jupyter lab"
-Name=jupyter-notebook
-Icon=gnome-panel-launcher
-Name[en_US]=7.Jupyter-lab

@@ -1,8 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Terminal=true
-Exec=sh -c "sudo cp ~/Geostack/nginx-modsecurity/nginx-local.conf /etc/nginx/nginx.conf ; service nginx restart"
-Name=Stop-NGINX
-Icon=gnome-panel-launcher
-Name[en_US]=2.3-Restart-NGINX
