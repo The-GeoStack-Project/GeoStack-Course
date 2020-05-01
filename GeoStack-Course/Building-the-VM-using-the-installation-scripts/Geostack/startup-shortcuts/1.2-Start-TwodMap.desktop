@@ -1,8 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Terminal=true
-Exec=sh -c "fuser -k 4200/tcp& clear;  sudo npm start --prefix /home/geostack/Geostack/angular-apps/2d-map-viewer"
-Name=Start-TwodMap
-Icon=gnome-panel-launcher
-Name[en_US]=1.2-Start-TwodMap

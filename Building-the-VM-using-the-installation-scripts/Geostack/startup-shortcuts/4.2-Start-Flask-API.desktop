@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=true
+Exec=sh -c "gunicorn3 -b :5000 app:app  --chdir ~/Geostack/flask-gunicorn/"
+Name=Start-Flask-API
+Icon=gnome-panel-launcher
+Name[en_US]=4.2-Start-Flask-API

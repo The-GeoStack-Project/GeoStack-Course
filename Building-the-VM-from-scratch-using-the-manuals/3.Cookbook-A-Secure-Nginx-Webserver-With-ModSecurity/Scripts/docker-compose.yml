@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+
+  # Set the name of the service 
+  flask_app:
+
+    # Set the container name 
+    container_name: flask_app
+
+    # Restart when container goes down
+    restart: always
+
+    # Set build location. This is 
+    # where the dockerfile is located
+    build: ./flask-gunicorn
+
+    # Set the ports of the container
+    # If one is set it's the container port
+    # If two are set it's:
+    # {HOST}:{CONTAINER} 
+    ports:
+    - "8000"
+
+    # Set the command wich runs on startup
+    command: gunicorn -b :8000 app:app
+
+    # Set volume of the container.
+    # This volume is the downloads folder in our
+    # flask-gunicrion folder.
+    volumes:
+    - .:/downloads
+
+  nginx_modsec:
+
+    # Set the container name 
+    container_name: nginx_modsec
+
+    # Restart when container goes down
+    restart: always
+
+    # Set build location. This is 
+    # where the dockerfile is located
+    build: ./nginx-modsecurity
+
+    # Set the ports of the container
+    # {HOST}:{CONTAINER} 
+    ports:
+      - "80:8000"
+
+    # This container depends on flask_app
+    # This means that flask_app is started first
+    # This means that flask_app is stopped last
+    depends_on:
+      - flask_app
