@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "-------------->>>> Moving workshop shortcuts <<<<--------------"
+echo "-------------->>>> Moving GeoStack shortcuts <<<<--------------"
 sleep 2
 # A for loop which loops through the content of the Shortcuts folder. and then
 # copies each file to the Desktop.

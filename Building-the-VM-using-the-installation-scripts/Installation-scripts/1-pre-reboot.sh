@@ -48,7 +48,7 @@ curl -O -L https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 
 # Remove the pip installer script
-rm ~/Installation-scripts/get-pip.py
+rm get-pip.py
 
 
 # Install Python3 and Python3-Pip
