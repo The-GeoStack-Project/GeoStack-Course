@@ -1,8 +1,4 @@
 #!/bin/sh
-echo "-------------->>>> Installing Gunicorn <<<<--------------"
-sleep 2
-# Install gunicorn 
-sudo apt install gunicorn
 
 echo "-------------->>>> Installing tilestache & pillow <<<<--------------"
 sleep 2
