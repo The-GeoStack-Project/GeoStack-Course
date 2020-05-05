@@ -6,6 +6,14 @@ sleep 2
 # Install Tilestache Pillow and Gunicorn2 python-packages.
 pip3 install tilestache pillow gunicorn
 
+if [ `lsb_release -cs` == "focal" ] || [ `lsb_release -cs` == "Eoan" ]
+then
+    echo "Fixing Tilestache on Ubuntu 20.04"
+    sudo cp ~/Geostack/tilestache-server/py3_compat.py /home/geostack/.local/lib/python3.8/site-packages/TileStache/
+else
+    return;
+fi
+
 echo "-------------->>>> Installing Mapnik <<<<--------------"
 sleep 2
 # Install Mapnik
@@ -15,7 +23,6 @@ echo "-------------->>>> Installing missing fonts <<<<--------------"
 sleep 2
 # Install the required fonts for OpenStreetMap-Carto
 sudo apt install fonts-noto-cjk fonts-noto-hinted fonts-noto-unhinted ttf-unifont
-
 
 echo "-------------->>>> Downloading OpenStreetMap-carto <<<<--------------"
 sleep 2
