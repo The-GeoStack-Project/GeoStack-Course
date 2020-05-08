@@ -1,5 +1,11 @@
 #!/bin/sh
 
+
+echo "-------------->>>> Transforming datasets and placing them in the correct place<<<<--------------"
+sleep 2
+
+python3 ~/Installation-scripts/root-scripts/dataset-convert.py
+
 echo "-------------->>>> Importing and indexing Crane datasets <<<<--------------"
 sleep 2
 
