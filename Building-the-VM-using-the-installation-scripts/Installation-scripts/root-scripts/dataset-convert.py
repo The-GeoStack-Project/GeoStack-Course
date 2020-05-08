@@ -8,7 +8,8 @@ input_location_gpx = '/home/geostack/Geostack/datasets/GPX/'
 output_location_gpx = '/home/geostack/Geostack/datasets/JSON/Trail_JSON/'
 
 input_location_csv = '/home/geostack/Geostack/datasets/CSV/'
-output_location_csv = '/home/geostack/Course-Datasets/JSON/Crane_JSON/'
+output_location_csv = '/home/geostack/Geostack/datasets/JSON/Crane_JSON/'
+
 
 
 def create_df(data):
