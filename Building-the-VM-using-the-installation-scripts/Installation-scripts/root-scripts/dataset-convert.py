@@ -4,10 +4,10 @@ import datetime
 import pandas as pd
 import os
 
-input_location_gpx = '/home/geostack/GeoStack-Course/Course-Datasets/GPX/'
+input_location_gpx = '/home/geostack/Geostack/datasets/GPX/'
 output_location_gpx = '/home/geostack/Geostack/datasets/JSON/Trail_JSON/'
 
-input_location_csv = '/home/geostack/GeoStack-Course/Course-Datasets/CSV/'
+input_location_csv = '/home/geostack/Geostack/datasets/CSV/'
 output_location_csv = '/home/geostack/Course-Datasets/JSON/Crane_JSON/'
 
 
@@ -85,10 +85,14 @@ def filter_transform_CSV(input_file,output_file,country):
     print("transformed: "+input_file+" to: " + output_file)
 
 
+# Create the GeoStack datasets folder
 os.system('mkdir /home/geostack/Geostack/datasets')
 
-
+# Copy the Downloaded GPX and CSV files to the correct location 
 os.system('cp -r /home/geostack/GeoStack-Course/Course-Datasets/GPX /home/geostack/Geostack/datasets/')
+os.system('cp -r /home/geostack/GeoStack-Course/Course-Datasets/CSV /home/geostack/Geostack/datasets/')
+
+
 os.system('mkdir -p /home/geostack/Geostack/datasets/JSON/Trail_JSON')
 parse_transform_GPX("JAN-16-11 172053 Zeeland MNV.gpx",'Trail_ZeelandMNV.json')
 parse_transform_GPX("SEP-26-09 64311 Biesbosch.gpx",'Trail_Biesbosch.json')
@@ -97,7 +101,6 @@ parse_transform_GPX("SEP-25-09 182235 Hamert.gpx",'Trail-Hamert-Hike.json')
 parse_transform_GPX("OKT-25-09 164243 Hamert Fiets.gpx",'Trail-Hamert-Bike.json')
 
 
-os.system('cp -r /home/geostack/GeoStack-Course/Course-Datasets/CSV /home/geostack/Geostack/datasets/')
 os.system('mkdir -p /home/geostack/Geostack/datasets/JSON/Crane_JSON')
 filter_transform_CSV('20200103_Movebank_Common_Crane_Lithuania_GPS_2016_Dataset.csv','Lita-LT.json',"lt")
 filter_transform_CSV('20181003_Dataset_SV_GPS_Crane_9381_STAW_Crane_RRW-BuGBk_Frida.csv','Frida-SW.json',"sw")
@@ -106,6 +109,16 @@ filter_transform_CSV('20181003_Dataset_SV_GPS_Crane_9472_STAW_Crane_RRW-BuGR_Caj
 filter_transform_CSV('20191103_Dataset_DE_GPS_Crane_181528_iCora_Crane_15_BuBuBr-WYW_Lotta.csv','Lotta-GE.json',"ge")
 filter_transform_CSV('20180928_Dataset_DE_GPS_Crane_181527_iCora_Crane_13_BuBuBr-YBuBk.csv','Nena-GE.json',"ge")
 
-os.system('cp -r /home/geostack/GeoStack-Course/Course-Datasets/SHP /home/geostack/Geostack/datasets/')
+# Create the Shapefile directory
+os.system('mkdir -p /home/geostack/Geostack/datasets/SHP')
+
+# Unzip the Downloaded World_Port_Index shapefile in the correct location
+os.system('unzip ~/GeoStack-Course/Course-Datasets/SHP/WPI_Shapefile.zip -d ~/Geostack/datasets/SHP/World-Port-Index')
+
+
+# Create the OSM Data directory
+os.system('mkdir -p /home/geostack/Geostack/datasets/OSM')
+
+# Copy The OSM Data directory to the correct folder
 os.system('cp -r /home/geostack/GeoStack-Course/Course-Datasets/OSM /home/geostack/Geostack/datasets/')
 
