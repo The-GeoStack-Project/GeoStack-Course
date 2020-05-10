@@ -14,14 +14,14 @@ mkdir -p ~/Geostack/cesium-server/data/tilesets/terrain/M_52EZ2
 # Downloading the Hamert DTM dataset from pdok.nl using a wget command.
 # The output directory specified is the directory in which the commands below
 # expect the dataset to be. This is done using the -P flag.
-echo "Downloading the Hamert DTM File"
-sleep 2
-wget "https://download.pdok.nl/rws/ahn3/v1_0/05m_dtm/M_52EZ2.ZIP" -P ~/Geostack/cesium-server/data/
+#echo "Downloading the Hamert DTM File"
+#sleep 2
+#wget "https://download.pdok.nl/rws/ahn3/v1_0/05m_dtm/M_52EZ2.ZIP" -P ~/Geostack/cesium-server/data/
 
 # Unzipping the downloaded DTM file in the output directory specified uing the -d flag.
 echo "Unzipping the Hamert DTM File"
 sleep 2
-unzip ~/Geostack/cesium-server/data/M_52EZ2.ZIP -d ~/Geostack/cesium-server/data/
+unzip ~/GeoStack-Course/Course-Datasets/DEM/M_52EZ2.ZIP -d ~/Geostack/cesium-server/data/
 
 # Cleanup by removing the downloaded zip file.
 echo "Removing downloaded .zip file"
@@ -56,4 +56,3 @@ docker run -it -v ~/Geostack/cesium-server/data:/data tumgis/ctb-quantized-mesh 
 # docker run -it -v ~/Geostack/cesium-server/data:/data tumgis/ctb-quantized-mesh ctb-tile -l -f Mesh -C -o /data/tilesets/terrain/R_52EZ2 /data/R_52EZ23857.TIF
 
 echo "--------->>DONE<<----------"
-
