@@ -6,4 +6,4 @@ Icon[en_US]=gnome-panel-launcher
 Name[en_US]=3.2-Start-Tileserver
 Exec=gunicorn3 --workers 4 -b :8081 --timeout 100  "TileStache:WSGITileServer('/home/geostack/Geostack/tilestache-server/tilestache-configuration.cfg')"
 Name=Start-Tileserver
-Icon=gnome-panel-launcherx
+Icon=gnome-panel-launcher
