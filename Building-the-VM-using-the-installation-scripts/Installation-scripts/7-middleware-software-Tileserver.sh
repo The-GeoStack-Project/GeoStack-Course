@@ -38,7 +38,7 @@ cd ~/Geostack/tilestache-server/openstreetmap-carto && sudo npm install -g carto
 echo "-------------->>>> Getting shapefile for OSM base map <<<<--------------"
 sleep 2
 # Downloading the openstreetmap base map shapefiles.
-python3 ~/Geostack/tilestache-server/openstreetmap-carto/scripts/get-shapefiles.py
+python3 ~/Geostack/tilestache-server/openstreetmap-carto/scripts/get-external-data.py -U geostack -c ~/Geostack/tilestache-server/openstreetmap-carto/external-data.yml
 
 echo "-------------->>>> Creating the style.xml file <<<<--------------"
 sleep 2
