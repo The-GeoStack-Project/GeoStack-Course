@@ -1,4 +1,6 @@
 gunicorn 
 TileStache
 Pillow
-
+pyyaml
+requests 
+psycopg2-binary
