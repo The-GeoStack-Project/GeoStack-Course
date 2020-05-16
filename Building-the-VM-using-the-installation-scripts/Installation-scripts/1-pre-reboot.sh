@@ -39,6 +39,11 @@ sleep 2
 # Install net-tools
 sudo apt install net-tools
 
+echo "-------------->>>> Installing GDAL <<<<--------------"
+sleep 2
+# Install gdal-bin for Geograpical toolset
+sudo apt install gdal-bin
+
 echo "-------------->>>> Installing Python and PIP <<<<--------------"
 sleep 2
 
