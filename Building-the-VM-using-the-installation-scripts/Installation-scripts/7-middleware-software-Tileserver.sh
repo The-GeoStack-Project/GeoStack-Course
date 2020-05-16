@@ -35,10 +35,6 @@ sleep 2
 # Enter the OpenStreetMap Carto folder and install the node-modules.
 cd ~/Geostack/tilestache-server/openstreetmap-carto && sudo npm install -g carto
 
-echo "-------------->>>> Getting shapefile for OSM base map <<<<--------------"
-sleep 2
-# Downloading the openstreetmap base map shapefiles.
-python3 ~/Geostack/tilestache-server/openstreetmap-carto/scripts/get-external-data.py -U geostack -c ~/Geostack/tilestache-server/openstreetmap-carto/external-data.yml
 
 echo "-------------->>>> Creating the style.xml file <<<<--------------"
 sleep 2
@@ -96,6 +92,11 @@ psql -c "CREATE EXTENSION IF NOT EXISTS postgis_topology;" gis
 psql -c "CREATE EXTENSION hstore;" gis
 EOF
 sleep 2
+
+echo "-------------->>>> Downloading and importing shapefiles for OSM base map <<<<--------------"
+sleep 2
+# Downloading the openstreetmap base map shapefiles.
+python3 ~/Geostack/tilestache-server/openstreetmap-carto/scripts/get-external-data.py -U geostack -c ~/Geostack/tilestache-server/openstreetmap-carto/external-data.yml
 
 echo "-------------->>>> Importing OSM Data from Limburg <<<<--------------"
 echo "-------------->>>> Enter password geostack when prompted <<<<--------------"
