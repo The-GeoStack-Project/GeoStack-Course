@@ -21,3 +21,4 @@ sleep 2
 # "UnboundLocalError: local variable '_' referenced before assignment" 
 bleachbit --list | grep -E "[a-z0-9_\-]+\.[a-z0-9_\-]+" | grep -v system.free_disk_space | xargs sudo bleachbit --clean
 
+echo "-------------->>>> DONE <<<<--------------"

@@ -6,7 +6,7 @@ echo "-------------->>>> Creating the docker containers<<<<--------------"
 echo "-------------->>>> Running docker-compose build <<<<--------------"
 sleep 2
 # Enter the Geostack directory and run docker-compose build.
-cd ~/Geostack && docker-compose build 
+cd ~/Geostack && docker-compose build && docker pull mongo
 
 echo "-------------->>>> Running compose up to start and init containers <<<<--------------"
 echo "-------------->>>> When prompted enter the password: geostack <<<<--------------"

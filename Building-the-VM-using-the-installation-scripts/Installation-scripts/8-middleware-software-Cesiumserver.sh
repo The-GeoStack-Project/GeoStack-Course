@@ -23,10 +23,6 @@ echo "Unzipping the Hamert DTM File"
 sleep 2
 unzip ~/GeoStack-Course/Course-Datasets/DEM/M_52EZ2.ZIP -d ~/Geostack/cesium-server/data/
 
-# Cleanup by removing the downloaded zip file.
-echo "Removing downloaded .zip file"
-rm ~/Geostack/cesium-server/data/M_52EZ2.ZIP
-
 # Tranform the file to WGS84 projection.
 echo "Transforming Hamert DTM tif file to WGS84"
 docker run -v ~/Geostack/cesium-server/data:/data geodata/gdal gdalwarp -t_srs EPSG:3857 /data/M_52EZ2.TIF /data/M_52EZ23857.TIF

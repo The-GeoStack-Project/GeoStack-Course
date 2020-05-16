@@ -44,7 +44,9 @@ def filter_transform_CSV(input_file,output_file,country):
 
     output_location = output_location_csv+output_file
 
-    df = pd.read_csv(input_location,low_memory=False)
+    df = pd.read_csv(input_location,dtype='unicode')
+
+    print(df)
 
     if country == "sw":
         columns_to_filter = ['event-id', 'study-name',
@@ -65,7 +67,6 @@ def filter_transform_CSV(input_file,output_file,country):
                      'sensor-type','tag-voltage',
                      'individual-local-identifier']
 
-        return "ge"
     elif country == "lt":
         columns_to_filter = ['event-id', 'study-name',
                      'timestamp','visible',
@@ -75,9 +76,8 @@ def filter_transform_CSV(input_file,output_file,country):
                      'individual-taxon-canonical-name',
                      'sensor-type','tag-voltage',
                      'individual-local-identifier']
-        return "lt"
     else:
-        return "invalid country"
+        print("invalid country")
 
     filtered_df = df[columns_to_filter]
 
@@ -89,7 +89,7 @@ def filter_transform_CSV(input_file,output_file,country):
 # Create the GeoStack datasets folder
 os.system('mkdir /home/geostack/Geostack/datasets')
 
-# Copy the Downloaded GPX and CSV files to the correct location 
+# Copy the Downloaded GPX and CSV files to the correct location
 os.system('cp -r /home/geostack/GeoStack-Course/Course-Datasets/GPX /home/geostack/Geostack/datasets/')
 os.system('cp -r /home/geostack/GeoStack-Course/Course-Datasets/CSV /home/geostack/Geostack/datasets/')
 
@@ -122,4 +122,3 @@ os.system('mkdir -p /home/geostack/Geostack/datasets/OSM')
 
 # Copy The OSM Data directory to the correct folder
 os.system('cp -r /home/geostack/GeoStack-Course/Course-Datasets/OSM /home/geostack/Geostack/datasets/')
-

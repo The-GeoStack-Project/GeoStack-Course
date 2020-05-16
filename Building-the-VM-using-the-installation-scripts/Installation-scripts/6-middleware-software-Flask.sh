@@ -2,15 +2,13 @@
 echo "-------------->>>> Installing Gunicorn 3 <<<<--------------"
 sleep 2
 # # Install gunicorn 3
-# if [ `lsb_release -cs` == "focal" ] || [ `lsb_release -cs` == "Eoan" ]
-# then
-#     sudo apt install gunicorn
-# 
-# else
-#     sudo apt install gunicorn3
-# fi
+if [ `lsb_release -cs` == "focal" ] || [ `lsb_release -cs` == "Eoan" ]
+then
+    sudo apt install gunicorn
 
-sudo apt install gunicorn3
+else
+    sudo apt install gunicorn3
+fi
 
 echo "-------------->>>> Installing Flask <<<<--------------"
 sleep 2

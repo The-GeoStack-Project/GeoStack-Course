@@ -21,3 +21,5 @@ echo "-------------->>>> Installing 3D Map Viewer <<<<--------------"
 sleep 2
 # Enter the 3D Map Viewer directory, install the node_modules and update the node_modules.
 cd ~/Geostack/angular-apps/3d-map-viewer && sudo npm install
+
+echo "-------------->>>> DONE <<<<--------------"
