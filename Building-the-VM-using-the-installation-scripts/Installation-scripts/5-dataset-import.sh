@@ -4,7 +4,8 @@
 echo "-------------->>>> Transforming datasets and placing them in the correct place<<<<--------------"
 sleep 2
 
-python3 ~/Installation-scripts/root-scripts/dataset-convert.py
+# Run the Python Script to automtically perform the ETL-Process on the downloaded datasets
+python3 ~/Geostack/import-utilities/dataset-convert.py
 
 echo "-------------->>>> Importing and indexing Crane datasets <<<<--------------"
 sleep 2
