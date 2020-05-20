@@ -113,8 +113,8 @@ filter_transform_CSV('20180928_Dataset_DE_GPS_Crane_181527_iCora_Crane_13_BuBuBr
 # Create the Shapefile directory
 os.system('mkdir -p /home/geostack/Geostack/datasets/SHP')
 
-# Unzip the Downloaded World_Port_Index shapefile in the correct location
-os.system('unzip ~/GeoStack-Course/Course-Datasets/SHP/WPI_Shapefile.zip -d ~/Geostack/datasets/SHP/World-Port-Index')
+# Copy the World Port Index folder to the correct place in the system.
+os.system('cp -r ~/GeoStack-Course/Course-Datasets/SHP/World-Port-Index ~/Geostack/datasets/SHP/')
 
 
 # Create the OSM Data directory
