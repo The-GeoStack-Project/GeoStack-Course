@@ -39,6 +39,11 @@ sleep 2
 # Run the Python script used to import the World Port Index dataset.
 python3 ~/Geostack/import-utilities/world-port-index-import.py
 
+echo "-------------->>>> Importing the OSM Base map shapefiles <<<<--------------"
+sleep 2
+# Importing the OSM Base map shapefiles from openstreetmap-carto by calling the get-external-data.py script in the Running Docker container
+docker exec -it tilestache-server python3 tilestache/openstreetmap-carto/scripts/get-external-data.py -H postgresql-datastore -U geostack -c /tilestache/openstreetmap-carto/external-data.yml
+
 echo "-------------->>>> Importing OSM Data from the dutch province: Limburg <<<<--------------"
 sleep 2
 
