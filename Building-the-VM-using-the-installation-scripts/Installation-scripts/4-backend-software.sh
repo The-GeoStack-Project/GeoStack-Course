@@ -11,13 +11,24 @@ sudo sh -c 'echo "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt/ `lsb
 # Update the local package database.
 sudo apt update
 
-# Install PostgreSQL.
-sudo apt install postgresql-12
+# Install PostgreSQL depending on the Ubuntu version.
+if [ `lsb_release -cs` == "focal" ] || [ `lsb_release -cs` == "Eoan" ]
+then
+    sudo apt install postgresql-12
+else
+    sudo apt install postgresql-11
+fi
+
 
 echo "-------------->>>> Installing PostGIS <<<<--------------"
 sleep 2
-# Install PostGIS
-sudo apt install postgis postgresql-12-postgis-2.5
+# Install PostGIS depending on Ubuntu version.
+if [ `lsb_release -cs` == "focal" ] || [ `lsb_release -cs` == "Eoan" ]
+then
+    sudo apt install postgis postgresql-12-postgis-2.5
+else
+    sudo apt install postgis postgresql-11-postgis-2.5
+fi
 
 
 echo "-------------->>>> Changing The default PostgreSQL password <<<<--------------"
@@ -31,7 +42,7 @@ echo "-------------->>>> Changed <<<<--------------"
 
 echo "-------------->>>> Installing PGMyAdmin <<<<--------------"
 sleep 2
-# Install PGMyAdmin4
+# Install PGMyAdmin4 depending on the Ubuntu version
 if [ `lsb_release -cs` == "focal" ] || [ `lsb_release -cs` == "Eoan" ]
 then
     echo "Skipping PGAdmin4 install since its not available yet for ubuntu 20.4"
