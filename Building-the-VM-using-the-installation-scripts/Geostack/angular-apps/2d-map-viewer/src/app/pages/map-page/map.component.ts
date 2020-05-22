@@ -1416,31 +1416,107 @@ export class MapComponent implements OnInit {
     //Here we return a list containing the marker instances.
 		return [marker, markerInfo, startMarkerInfo, endMarkerInfo]
 	}
+	/*
+	Here we create a function called: "setDynamicOverlays()".
+
+	This function is used to used to set the values of the GeoMarker information
+	box and update the position of the GeoMaker itself. The function takes an
+	Item as input parameter on the function call. The item passed in the function
+	is also the activeItem.
+
+	The function is triggered in the following functions:
+
+	1) setStaticOverlays(),because everytime the static overlays are set
+	   the dynamic overlays also needs to be set. This is not the other way around.
+	2) animateRoute(), because the information displayed in the GeoMaker info
+		 box needs to be updated constantly when an animation is playing.
+	3) clearAnimation(), because when an animation is cleared the GeoMaker info
+	   box needs to be reset to the original state.
+
+	The function uses the value of the item's currentCoordinateIndex to determine
+ 	what values have to be extracted from the datalist in question (e.g.
+ 	the coordinateList). The value of the currentCoordinateIndex is constantly
+ 	incremented in the animateRoute() function.
+
+	The following steps are executed in this function:
+	1) The div element representing the geomarker is obtained from the HTML page.
+
+	2) The div element representing the GeoMaker info box is obtained from the
+	   HTML page.
+
+	3) The current coordinates from the coordinateList of the activeItem
+	   (the coordinate on the index of the value of the currentCoordinateIndex)
+		 is obtained and transformed in a coordinate format which is human readable.
+
+	4) The longitude coordinate is extracted and transformed to only contain 4
+	   numbers behind the decimal (e.g 1.xxxx).
+
+	5) the latitude coordinate is extracted and transformed to only contain 4
+	   numbers behind the decimal (e.g 1.xxxx).
+
+	6) The current datetime is extracted form the datetimeList (the datetime on
+	   the index of the value of the currentCoordinateIndex).
+
+	7) The current distance traveled is extracted from the routeDistanceList (the
+     distance on the index of the value of the currentCoordinateIndex).
+
+	8) A check is performed to check if the distance is not equal to undefined.
+	   This is done since the first distance value is undefined.
+
+		 In case the distance is EQUAL to undefined, the distance is set to 0
+		 In case the distance is NOT EQUAL to undefined current distance traveled is
+		 extracted and transformed to not contain any numbers behind the decimal.
+
+  9) The position of the GeoMaker is updated using the current coordinates.
+
+	10) The position of the GeoMaker information box is updated using the current
+	    coordinates.
+
+	11) The content of the HTML div element, representing the GeoMaker Info box,
+	    is added using the data extracted in the previous steps.
+
+	*/
 
 	setDynamicOverlays(item: Item): void {
+
+		// Here we obtain the HTML element representing the geomarker.
 		let geomarker = this.map.getOverlayById('geomarker')
 
+		// Here we obtain the HTML element representing the GeoMaker info box.
     let geoMarkerInfo = this.map.getOverlayById('geomarkerInfo')
 
+		// Here we transform the current coordinates to a human readable format.
 		let transformedCoord = ol.proj.transform(
       item.coordinateList[item.currentCoordinateIndex],
       'EPSG:3857', 'EPSG:4326')
 
+		// Here we extract and transform the longitude coordinates to only contain
+		// 4 numbers behind the decimal. We do this by using the syntax: ".toFixed".
     let longitudeCoord = transformedCoord[0].toFixed(4)
 
+		// Here we extract and transform the latitude coordinates to only contain
+		// 4 numbers behind the decimal. We do this by using the syntax: ".toFixed".
     let latitudeCoord = transformedCoord[1].toFixed(4)
 
+		// Here we extract the current DateTimeGroup.
     let datetime = item.datetimeList[item.currentCoordinateIndex]
 
+		// Here we extract the current distance traveled.
 		let distance = item.routeDistanceList[item.currentCoordinateIndex - 1]
 
+		// Here we perform a check to determine whether the value of the distance
+		// is not equal to undefined.
 		distance != undefined ? distance = item.routeDistanceList[item.currentCoordinateIndex].toFixed(0)
                           : distance = 0
 
+		// Here we set the position of the geomarker by passing the current coordinates.
     geomarker.setPosition(item.coordinateList[item.currentCoordinateIndex]);
 
+		// Here we set the position of the GeoMaker Info box, using the current coordinates.
 		geoMarkerInfo.setPosition(item.coordinateList[item.currentCoordinateIndex]);
 
+		// Here we set the content of the GeoMaker Info box HTML element.
+		// We use the syntax: "\u000A" to add a next line to the text.
 		geoMarkerInfo.getElement().setAttribute('data-hint',
 			'Geomarker of: ' + item.type + ': ' + item.name +
 			'\u000A' +'Distance traveled: ' + distance + 'M' +
@@ -1449,14 +1525,74 @@ export class MapComponent implements OnInit {
 			'\u000A\u000ACurrent DTG:' + datetime);
 	}
 
+	/*
+	Here we create a function called: "setStaticOverlays()".
+
+	This function is used to used to set the values of the Start and endMarker
+	information boxes. The function takes an Item as input parameter on the
+	function call. The item passed in the function is also the activeItem.
+
+	The function is triggered in the following functions:
+
+	1) setLayerGroup(),because when a new layerGroup is added it automatically
+	   becomes the activeLayerGroup. So we need to update the overlay content and
+		 positions according to the new activeLayerGroup.
+
+	2) loadItemData(), because when an item is loaded for the first time the item
+	   automatically becomes the activeItem so we need to update the overlay
+		 content and positions according to the new activeItem.
+
+	3) selectItem(), because when an item is select it becomes the activeItem
+	   so we need to update the overlay content and positions according to the new
+		 activeItem.
+
+	3) removeItem(), because when an item is removed the next item in the
+	   selectedItem list will become the activeItem so we need to update the
+		 overlay content and positions according to the new activeItem.
+
+	The following steps are executed in this function:
+
+	1) The function setDynamicOverlays() is triggerd since the dynamic overlays
+	   always need to be updated when the static overlays are updated.
+
+	2) The div element representing the startMarker info box is obtained from
+	   the HTML page.
+
+	3) The startCoordinates of the activeItem is obtained and transformed in a
+	   coordinate format which is human readable.
+
+	4) The content of the HTML div element, representing the startMarker info box,
+		 is added using the data extracted in the previous steps.
+
+  5) The div element representing the endMarker info box is obtained from
+	 	 the HTML page.
+
+	6) The endCoordinates of the activeItem is obtained and transformed in a
+	   coordinate format which is human readable.
+
+	7) The content of the HTML div element, representing the endMarker info box,
+	 	 is added using the data extracted in the previous steps.
+
+	8) The elevationData is loaded by triggering the function: "loadElevationData()"
+
+	*/
+
 	setStaticOverlays(item: Item): void {
 
+		// Here we trigger the function setDynamicOverlays() in which we pass
+		// the item which was passed as input parameter on the function call.
 		this.setDynamicOverlays(item);
 
+		// Here we obtain the HTML div element representing the startMarker info box
+		// from the HTML page.
 		let startMarkerInfo = this.map.getOverlayById('startmarkerInfo');
 
-		let startCoordTransformed = ol.proj.transform(item.startCoordinate, 'EPSG:3857', 'EPSG:4326');
+		// Here we transform the startCoordinate into a human readable format.
+		let startCoordTransformed = ol.proj.transform(
+			item.startCoordinate, 'EPSG:3857', 'EPSG:4326');
 
+		// Here we set the content of the startMarker Info box HTML element.
+		// We use the syntax: "\u000A" to add a next line to the text.
 		startMarkerInfo.getElement().setAttribute('data-hint',
 			'Start marker of: ' + item.type + ': ' + item.name + '\u000A' +
 			'Distance traveled: ' + 0 + 'KM' +
@@ -1465,11 +1601,16 @@ export class MapComponent implements OnInit {
 			startCoordTransformed[1].toFixed(4) +
 			'\u000A\u000ACurrent DTG:' + item.datetimeList[0]);
 
-
+		// Here we obtain the HTML div element representing the endMarker info box
+		// from the HTML page.
 		let endMarkerInfo = this.map.getOverlayById('endmarkerInfo')
 
-		let endCoordTransformed = ol.proj.transform(item.endCoordinate, 'EPSG:3857', 'EPSG:4326')
+		// Here we transform the endCoordinate into a human readable format.
+		let endCoordTransformed = ol.proj.transform(
+			item.endCoordinate, 'EPSG:3857', 'EPSG:4326')
 
+		// Here we set the content of the endMarker Info box HTML element.
+		// We use the syntax: "\u000A" to add a next line to the text.
 		endMarkerInfo.getElement().setAttribute('data-hint',
 			'End marker of: ' + item.type + ': ' + item.name + '\u000A' +
 			'Distance traveled: ' + item.totalRouteDistance + 'KM' +
@@ -1478,6 +1619,7 @@ export class MapComponent implements OnInit {
 			endCoordTransformed[1].toFixed(4) +
 			'\u000A\u000ACurrent DTG:' + item.datetimeList[item.datetimeList.length - 1]);
 
+		// Here we trigger the function which loads the elevationData.
 		this.loadElevationData();
 	}
 
