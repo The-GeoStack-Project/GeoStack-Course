@@ -1416,6 +1416,7 @@ export class MapComponent implements OnInit {
     //Here we return a list containing the marker instances.
 		return [marker, markerInfo, startMarkerInfo, endMarkerInfo]
 	}
+
 	/*
 	Here we create a function called: "setDynamicOverlays()".
 
@@ -1476,7 +1477,6 @@ export class MapComponent implements OnInit {
 	    is added using the data extracted in the previous steps.
 
 	*/
-
 	setDynamicOverlays(item: Item): void {
 
 		// Here we obtain the HTML element representing the geomarker.
@@ -1576,7 +1576,6 @@ export class MapComponent implements OnInit {
 	8) The elevationData is loaded by triggering the function: "loadElevationData()"
 
 	*/
-
 	setStaticOverlays(item: Item): void {
 
 		// Here we trigger the function setDynamicOverlays() in which we pass
@@ -1626,11 +1625,12 @@ export class MapComponent implements OnInit {
 	/*
 	Here we create a function called: "removeItem()"
 
-	This function is assigned to the delete button next to each item in the list
-	of selectedItems. The item on which the delete button is clicked is then
+	This function is assigned to the delete button (icon) next to each item in the
+	list of selectedItems. The item on which the delete button is clicked is then
 	passed as parameter in the function: "removeItem()"
 
 	If the function is triggered the following happens:
+
 	1) A check is performed to see if the item that is being deleted is the
 	   item that is currently active. If this is the case the following happens:
 	   1) If there is an animation running, the animation is cleared.
@@ -1658,21 +1658,23 @@ export class MapComponent implements OnInit {
 	5) A check if performed to find out whether the item that was removed was the
 	   last item in the list.
 
-	   If this is the case all overlays( information popups) will be toggled off.
+	   If this is the case all overlays (information popups) will be toggled off.
+
 	   If this is NOT the case the overlays will be placed in the position of the
 	   new activeItem which was set in step 1.
 	*/
 	removeItem(item: Item): void {
 
-		/**
-		 * If the itemId of the item to remove is the same as the id of the item that is currently
-		 * active. Change the activeItem to the next item in the list.
-		 */
+		/*
+		 If the itemId of the item to remove is the same as the id of the item that
+		 is currently active. Change the activeItem to the next item in the list.
+		*/
 		this.activeItem.id == item.id ? (this.clearAnimation(),
 				this.selectItem(this.selectedItems.values().next().value)) :
 			null;
 
-
+		// Here we loop trough all the layers per layer group and remove them from
+		// the map.
 		item.layerGroups.forEach(layerGroup => {
 			for (let [key, value] of Object.entries(layerGroup)) {
 				this.map.removeLayer(value['layer'])
@@ -1682,18 +1684,21 @@ export class MapComponent implements OnInit {
 		// Here we clear all the layerGroups from the JavaScriptMap: "layerGroups".
 		item.layerGroups.clear();
 
-		/**
-		 * Loop trough all selected items. If the id of the item to remove == to the id
-		 * of the value at the current index: Remove that item using the .splice() function
-		 * on the selectedItems list. As parameter we pass the index on which the loo p is.
+		/*
+		 Filter the list of selectedItems to find the item which needs to be
+		 removed. If the id of the item to remove is equal to the id
+		 of one of the items in the selectItems list, the item is removed using
+		 the .splice() function on the selectedItems list.
+		 As parameter we pass the index on which the item to remove was found in
+		 the selectedItems list.
 		 */
 		this.selectedItems.filter(
 			(value, index) => value.id == item.id ? this.selectedItems.splice(index, 1) : null)
 
-		/**
-		 * If the length of the selectedItems list is 0, after removing the item:
-		 * Toggle the overlays of. Else the overlays are set to the new item.
-		 */
+		/*
+		 If the length of the selectedItems list is 0, after removing the item:
+		 Toggle the overlays of. Else the overlays are set to the new item.
+		*/
 		this.selectedItems.length == 0 ? this.toggleOverlay('all') :
 			this.setStaticOverlays(this.activeItem)
 	}
