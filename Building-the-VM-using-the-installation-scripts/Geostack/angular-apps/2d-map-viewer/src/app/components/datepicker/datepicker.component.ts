@@ -15,8 +15,6 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 
 
-
-
 @Component({
     selector: 'dtgpicker',
     templateUrl: './datepicker.component.html',
@@ -25,19 +23,13 @@ import {
 
 export class DatePickerComponent implements OnInit {
 
-
     @Output() dateEvent = new EventEmitter<NgbDate[]>()
     @Input() dateRange : any;
 
+    public startDate: NgbDate;
+    public endDate: NgbDate;
 
-    private startDate: NgbDate;
-    private endDate: NgbDate;
-
-
-    constructor(
-        private modalService: NgbModal, calendar: NgbCalendar
-    ) {
-    }
+    constructor(private modalService: NgbModal, calendar: NgbCalendar) {}
 
     ngOnInit() {
         this.setDateRange(this.dateRange)
@@ -64,7 +56,6 @@ export class DatePickerComponent implements OnInit {
         }
 
     }
-
 
     isRangeStart(date: NgbDate) {
         return this.startDate && this.endDate && date.equals(this.startDate);
