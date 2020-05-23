@@ -297,7 +297,7 @@ export class MapComponent implements OnInit {
 	The you can copy paste these coordinates in this JavaScriptMap and give a
 	suitable name to the new entry.
 	*/
-	private countryList: Map < string, Number[][] > = new Map([
+	public countryList: Map < string, Number[][] > = new Map([
 		["Spain", [
 			[-10.6347656, 44.3081267],
 			[-11.0961914, 36.3859128],
@@ -1781,8 +1781,8 @@ export class MapComponent implements OnInit {
 	/*
 	Here we create a function called: "getItemDataByAmount()"
 
-	This function is called when a amount is selected from the dropdown list related
-	to the amount selection.
+	This function is triggerd when a amount is selected from the dropdown list
+	related to the amount selection (which is defined in the HTML page).
 
 	This function contains a switch/case. The switch case takes the itemType,
 	which in our case can be a tracker or a trail, as input. Depending on the
@@ -1852,13 +1852,41 @@ export class MapComponent implements OnInit {
 		};
 	};
 
+
+  /*
+	Here we create a function called: "toggleLayer()".
+
+	This function is used to toggle layers such as the MarkerLayer, PointLayer,
+	LineLayer etc. and is assigned to multiple buttons (related to layer toggling)
+	which are defined in the HTML page of the MapComponent.
+
+	The function takes a layerType as input parameter. The layerType could for
+	example be “LineLayer”.
+
+	The following steps are executed when the function is triggered:
+
+	1) The layer which needs to be toggled is obtained from the items
+	   activeLayerGroup. Since a layerGroups contains 3 layers (Point, Marker and
+	   Line layers) we can obtain the desired layer by passing the layerType.
+
+	2) A check is performed to determine whether the layer is visible or not.
+	   If the layer is visible it will be come unvisible.
+		 If the layer is unvisible it will become visible.
+
+		 We do this by using the build in OpenLayers method: ".setVisible()" and
+		 passing True or False as input parameter.
+	*/
 	toggleLayer(layerType: string): void {
 
+		// Here we obtain the layer which needs to be toggled from the
+		// activeLayerGroup by passing the layerType.
 		let layerToToggle = this.activeItem.activeLayerGroup[layerType].layer
 
+		// Here we perform a check to determine whether the layer visibility is
+		// set to True or False.
 		layerToToggle.getVisible() == true ? layerToToggle.setVisible(false) :
 			layerToToggle.setVisible(true)
-	}
+	};
 
 	toggleOverlay(overlayType: string): void {
 

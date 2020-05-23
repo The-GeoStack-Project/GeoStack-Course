@@ -257,54 +257,69 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                           </div>
                       </div>
                   </div>
+
                   <!--
                   In this div element we add the logic related to selecting a N amount of datarows from the datastore
                   -->
                   <div id="amountSelection">
                         <div ngbDropdown>
                           <!--
-                          Below we add a dropdown toggle which has the length of the current coordinateList as text.
+                          Below we add a dropdown toggle which has the length of the coordinateList of the activeItem
+                          as text.
                           -->
                             <button class="btn btn-white btn-block" ngbDropdownToggle>
                               Choose amount: {{ activeItem.coordinateList.length | number: '2.'}}
                             </button>
                                 <!--
                                 Here we add the menu that opens when the dropdown button is clicked.
-                                In this menu we add the amounts: 1000 10000 20000 and the the total amount of
-                                transmissions / signals belonging to the activeItem.
+                                In this menu we add the amounts: 1000, 10000, 20000 and the total amount of
+                                datapoints belonging to the activeItem.
 
-                                We use the syntax : {{1000| number: '2.'}} to add a comma to the number.
+                                We use the syntax : {{1000| number: '2.'}} to make sure a comma is added to the number.
                                 -->
                                 <div ngbDropdownMenu>
+                                    <!-- Here we add the entry for 1000 datapoints -->
                                     <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,1000)'>
                                       {{1000| number: '2.'}}
                                     </button>
+                                    <!-- Here we add the entry for 10000 datapoints -->
                                     <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,10000)'>
                                       {{10000| number: '2.'}}
                                     </button>
+                                    <!-- Here we add the entry for 20000 datapoints -->
                                     <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,20000)'>
                                       {{20000| number: '2.'}}
                                     </button>
+                                    <!-- Here we add the entry for the total amount of datapoints available-->
                                     <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,activeItem.totalDataLength)'>
                                       {{activeItem.totalDataLength| number: '2.'}}
                                     </button>
                                 </div>
                         </div>
                     </div>
-                  <!--
-                  In this div element we add the logic related to selecting all data in a given polygone
-                  -->
-                  <div id="countrySelection">
-                          <div ngbDropdown>
-                              <button class="btn btn-white btn-block" ngbDropdownToggle>Choose from Country:</button>
-                              <div ngbDropdownMenu>
-                                  <ng-container *ngFor="let country of countryList | keyvalue; let i = index;">
-                                      <button ngbDropdownItem (click)='getItemDataByCountry(activeItem,country.value)'>{{i + 1}}: {{country.key}}
-                                      </button>
-                                  </ng-container>
-                              </div>
+                    <!--
+                       In this div element we add the logic related to selecting all data in a given polygone
+                       -->
+                    <div id="countrySelection">
+                       <!-- Here we create a ngbDropdown related to selecting countries -->
+                       <div ngbDropdown>
+                          <!-- Here we add the dropdown button which is used to open the dropdown list -->
+                          <button class="btn btn-white btn-block" ngbDropdownToggle>Choose from Country:</button>
+                          <div ngbDropdownMenu>
+                             <!-- Here we add a forEach loop which loops trough all the entries in the JavaScriptMap:
+                                "countryList".-->
+                             <ng-container *ngFor="let country of countryList | keyvalue; let i = index;">
+                                <!-- For each entry in the countryList a button is created.
+                                   We assign the key of the entry (the country name) as text to the button.
+                                   We also assign the function: "getItemDataByCountry()" to the button in which we pass
+                                   the activeItem and the set of coordinates (the polygon) belonging to the clicked country. -->
+                                <button ngbDropdownItem
+                                   (click)='getItemDataByCountry(activeItem,country.value)'>{{i + 1}}: {{country.key}}
+                                </button>
+                             </ng-container>
                           </div>
-                  </div>
+                       </div>
+                    </div>
                   <!--
                   In this div element we add the logic related to toggling layers and overlay
                   -->
