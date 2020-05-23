@@ -1888,29 +1888,108 @@ export class MapComponent implements OnInit {
 			layerToToggle.setVisible(true)
 	};
 
+
+	/*
+	Here we create a function called: "toggleOverlay()".
+
+	This function is used to toggle overlays such as the GeoMaker, GeoMarker info
+	box and the Start and endMarker information boxes.
+
+	The function assigned to multiple buttons (related to overlay toggling)
+	which are defined in the HTML page of the MapComponent.
+
+	The function takes a overlayType as input parameter. The overlayType could for
+	example be “geoMarkerInfo”.
+
+	The following steps are executed when the function is triggered:
+
+	1) The overlay is obtained from the OpenLayers Map instance using the
+	   overlayType which was passed as input parameter. We do this by using the
+		 build in OpenLayers method: ".getOverlayById".
+
+	2) The activeItem is assigned to a variable called: "item".
+
+	3) A switch/case statement determines which code has to be executed depending
+	   on the overlayType which was passed as Input parameter.
+
+		 The following can happen in the switch/case:
+
+		 If the overlayType is equal to "geomarkerInfo":
+
+		 A check is performed to see if the position of the geomarkerInfo info box
+		 is equal to undefined. If this is the case the position of the geomarkerInfo
+		 overlay will be set to the coordinate on which the geomarker itself currently
+		 is. If the position of the overlay is not equal to undefined it means the
+		 overlay is going to be toggled. This is done by setting the position to
+		 undefined.
+
+		 If the overlayType is equal to "startmarkerInfo":
+
+		 A check is performed to see if the position of the startMarker info box
+		 is equal to undefined. If this is the case the position of the startMarkerInfo
+		 overlay will be set to the start coordinate of the visualized route.
+		 If the position of the overlay is not equal to undefined it means the
+		 overlay is going to be toggled. This is done by setting the position to
+		 undefined.
+
+		 If the overlayType is equal to "endmarkerInfo":
+		 A check is performed to see if the position of the startMarker info box
+		 is equal to undefined. If this is the case the position of the endMarkerInfo
+		 overlay will be set to the end coordinate of the visualized route.
+		 If the position of the overlay is not equal to undefined it means the
+		 overlay is going to be toggled. This is done by setting the position to
+		 undefined.
+
+		 If the overlayType is equal to "all":
+		 The positions of all the overlays will be set to undefined. This happens
+		 when the last selectedItem is removed by the user.
+	*/
 	toggleOverlay(overlayType: string): void {
 
+		// Here we obtain the overlay which needs to be toggled using the
+		// overlayType.
 		let overlay = this.map.getOverlayById(overlayType);
 
+		// Here we assign the activeItem to a variable called item.
 		let item = this.activeItem;
 
+		// Here we create the switch/case to determine which code should be executed.
 		switch (overlayType) {
+
+			// Incase it's geomarkerInfo the following happens:
 			case 'geomarkerInfo':
-				overlay.getPosition() == undefined ? overlay.setPosition(item.coordinateList[item.currentCoordinateIndex]) :
+				// Here we perform the check to see if the geoMarkerInfo position is set
+				// to undefined. If this is the case the position of the overlay is set
+				// to the activeItem's currentCoordinate.
+				overlay.getPosition() == undefined ? overlay.setPosition(
+					item.coordinateList[item.currentCoordinateIndex]) :
 					overlay.setPosition(undefined)
 				break;
+			// Incase it's startmarkerInfo the following happens:
 			case 'startmarkerInfo':
+				// Here we perform the check to see if the startMarkerInfo position is set
+				// to undefined. If this is the case the position of the overlay is set
+				// to the activeItem's startCoordinate.
 				overlay.getPosition() == undefined ? overlay.setPosition(item.startCoordinate) :
 					overlay.setPosition(undefined)
 				break;
+			// Incase it's endmarkerInfo the following happens:
 			case 'endmarkerInfo':
+			  // Here we perform the check to see if the endMarkerInfo position is set
+				// to undefined. If this is the case the position of the overlay is set
+			  // to the activeItem's endCoordinate.
 				overlay.getPosition() == undefined ? overlay.setPosition(item.endCoordinate) :
 					overlay.setPosition(undefined)
 				break;
+			// Incase it's all the following happens:
 			case 'all':
+			  // Here we set the position of the geomarker to undefined.
 				this.map.getOverlayById('geomarker').setPosition(undefined);
+				// Here we set the position of the geoMarkerInfo to undefined.
 				this.map.getOverlayById('geomarkerInfo').setPosition(undefined);
+			  // Here we set the position of the startMarkerInfo to undefined.
 				this.map.getOverlayById('startmarkerInfo').setPosition(undefined);
+			  // Here we set the position of the endMarkerInfo to undefined.
 				this.map.getOverlayById('endmarkerInfo').setPosition(undefined);
 				break;
 		};

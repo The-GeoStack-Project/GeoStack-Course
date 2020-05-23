@@ -324,19 +324,64 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                   In this div element we add the logic related to toggling layers and overlay
                   -->
                   <div id="toggleSelection">
+                     <!--
+                     Here we add the dropdown which is used to display the buttons used for toggling. We set
+                     autoClose to false to make sure the menu does not close when a setting is clicked.
+                     -->
                       <div ngbDropdown id="main-dropdown"  [autoClose]="false">
+                          <!-- Here we create the button which is used to open the layer toggling menu. -->
                           <button class="btn btn-white btn-block" ngbDropdownToggle>Toggle Layers:</button>
                           <div id="main-dropdown-menu" ngbDropdownMenu>
-                              <button class="btn btn-white btn-block" (click)='toggleOverlay("geomarkerInfo")'> Geomarker Info</button>
-                              <button class="btn btn-white btn-block" (click)='toggleOverlay("startmarkerInfo")'>  Startmarker Info</button>
-                              <button class="btn btn-white btn-block" (click)='toggleOverlay("endmarkerInfo")'> Endmarker Info</button>
-                              <button class="btn btn-white btn-block" (click)='toggleLayer("markerLayer")'> Start/End marker</button>
-                              <button class="btn btn-white pull-left" (click)='toggleLayer("lineLayer")'> Lines </button>
-                              <button class="btn btn-white pull-right" (click)='toggleLayer("pointLayer")'>Points </button>
-                              <button class="btn btn-white pull-left" (click)='map.addLayer(seaLayer)'>OSM ON</button>
-                              <button class="btn btn-white pull-right" (click)='map.removeLayer(seaLayer)'>OSM OFF</button>
-                              <button class="btn btn-white pull-left" (click)='map.addLayer(portLayer)'>WPI ON</button>
-                              <button class="btn btn-white pull-right" (click)='map.removeLayer(portLayer)'>WPI OFF</button>
+                              <!-- Here we add the button which is used to toggle the GeoMarker info on or off.
+                              we assign the function: "toggleOverlay()" to the button in which we pass the
+                              overlayType: "geomarkerInfo". -->
+                              <button class="btn btn-white btn-block" (click)='toggleOverlay("geomarkerInfo")'>
+                                Geomarker Info</button>
+                              <!-- Here we add the button which is used to toggle the Startmarker info on or off.
+                              we assign the function: "toggleOverlay()" to the button in which we pass the
+                              overlayType: "startmarkerInfo". -->
+                              <button class="btn btn-white btn-block" (click)='toggleOverlay("startmarkerInfo")'>
+                                Startmarker Info</button>
+                              <!-- Here we add the button which is used to toggle the Startmarker info on or off.
+                              we assign the function: "toggleOverlay()" to the button in which we pass the
+                              overlayType: "endmarkerInfo". -->
+                              <button class="btn btn-white btn-block" (click)='toggleOverlay("endmarkerInfo")'>
+                                Endmarker Info</button>
+                              <!-- Here we add the button which is used to toggle the Start and EndMarkers on or off.
+                              we assign the function: "toggleLayer()" to the button in which we pass the
+                              layerType: "markerLayer". -->
+                              <button class="btn btn-white btn-block" (click)='toggleLayer("markerLayer")'>
+                                Start/End marker</button>
+                              <!-- Here we add the button which is used to toggle the LineLayer on or off.
+                              we assign the function: "toggleLayer()" to the button in which we pass the
+                              layerType: "lineLayer". -->
+                              <button class="btn btn-white pull-left" (click)='toggleLayer("lineLayer")'>
+                                Lines </button>
+                              <!-- Here we add the button which is used to toggle the PointLayer on or off.
+                              we assign the function: "toggleLayer()" to the button in which we pass the
+                              layerType: "pointLayer". -->
+                              <button class="btn btn-white pull-right" (click)='toggleLayer("pointLayer")'>
+                                Points </button>
+                              <!-- Here we add the button which is used to toggle the OpenSeaMap layer on.
+                              we assign the function: "map.addLayer()" to the button in which we pass the
+                              OpenSeaMap Layer instance. -->
+                              <button class="btn btn-white pull-left" (click)='map.addLayer(seaLayer)'>
+                                OSM ON</button>
+                              <!-- Here we add the button which is used to toggle the OpenSeaMap layer off.
+                              we assign the function: "map.removeLayer()" to the button in which we pass the
+                              OpenSeaMap Layer instance. -->
+                              <button class="btn btn-white pull-right" (click)='map.removeLayer(seaLayer)'>
+                                OSM OFF</button>
+                              <!-- Here we add the button which is used to toggle the World Port Index layer on.
+                              we assign the function: "map.addLayer()" to the button in which we pass the
+                              World Port Index Layer instance. -->
+                              <button class="btn btn-white pull-left" (click)='map.addLayer(portLayer)'>
+                                WPI ON</button>
+                              <!-- Here we add the button which is used to toggle the World Port Index layer off.
+                              we assign the function: "map.removeLayer()" to the button in which we pass the
+                              World Port Index Layer instance. -->
+                              <button class="btn btn-white pull-right" (click)='map.removeLayer(portLayer)'>
+                                WPI OFF</button>
                           </div>
                       </div>
                   </div>
