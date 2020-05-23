@@ -1703,9 +1703,39 @@ export class MapComponent implements OnInit {
 			this.setStaticOverlays(this.activeItem)
 	}
 
+	/*
+	Here we create a function called: "getItemDataByDTG()"
+
+	This function is triggerd in the function: "getDTGEvent()" and is used to
+	obtain all the datapoints from a certain item in a given timeframe.
+	This function takes 3 input parameters which are as follows:
+	1) An item from which the data has to be obtained;
+	2) A Start date
+	3) An End date
+
+	This function triggers the function: "getTransmissionsDTG" in the CraneService
+	which will then perform an API call to the Flask-API to obtain all the data
+	between the given timeframe from the MongoDB datastore.
+
+	All the data between the start and end date will be returned and passed in the
+	the function: "loadItemData()".
+
+	This function contains a switch/case. The switch case takes the itemType,
+	which in our case can be a tracker or a trail, as input. Depending on the
+	itemType, the corresponding function is triggered.The switch/case can be
+	extended in case you want to add the functionality for other Dataset types.
+	*/
 	getItemDataByDTG(item: Item, dtg_s, dtg_e): void {
+
+		// Here we define the switch/case
 		switch (item.type) {
+			// In case the item.type is equal to 'tracker', the following code is
+			// executed.
 			case 'tracker':
+			  // Here we trigger the function: "getTransmissionsDTG" in the CraneService
+				// we pass the itemId, Start Date and End Data as parameters and subscribe
+				// the result to a variable called: "transmissions" which is then passed
+				// in the function: "loadItemData()"
 				this._CraneService.getTransmissionsDTG(item.id, dtg_s, dtg_e).subscribe(
 					(transmissions) => {
 						this.loadItemData(transmissions)

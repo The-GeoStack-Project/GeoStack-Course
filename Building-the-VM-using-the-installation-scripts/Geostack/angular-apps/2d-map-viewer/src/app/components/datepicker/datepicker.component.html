@@ -1,27 +1,60 @@
+<!-- Here we define the HTML code for the DTG Picker -->
 <div class="input-daterange datepicker">
+    <!-- Here we define the HTML code for the Start Date calendar -->
     <div class="form-group">
         <div class="input-group">
-            <input #dtg1 class="form-control datepicker" placeholder={{dateRange[0]}} name="dp1" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text" [dayTemplate]="t" (dateSelect)="startDateChanged($event)" autocomplete="off" />
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-            </div>
+
+           <!-- Here we define the input box for the Start Date. We set the
+           placeholder to the first element of the dateRange which is the start
+           date of the current datapoints selected.-->
+            <input #dtg1 class="form-control datepicker" placeholder={{dateRange[0]}}
+            name="dp1" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker"
+            (click)="d1.toggle()" type="text" [dayTemplate]="t"
+            (dateSelect)="startDateChanged($event)" autocomplete="off" />
+
+            <!-- Here we add the Angular template which is used to create the
+            NgbCalendar filled with dates to select. We set the selectable date
+            to the start date of the currently selected datapoints so no dates
+            below that date be selected.-->
             <ng-template #t let-date let-focused="focused">
-                <span class="custom-day" [class.text-white]="isActive(date)" [class.range-end]="isRangeEnd(date)" [class.range-start]="isRangeStart(date)" [class.btn-light]="isActive(date)" [class.bg-primary]="isActive(date)" [class.range]="isInRange(date)" [class.faded]="isInRange(date)">
+                <span class="custom-day" [class.text-white]="isActive(date)"
+                [class.range-end]="isRangeEnd(date)" [class.range-start]="isRangeStart(date)"
+                [class.btn-light]="isActive(date)" [class.bg-primary]="isActive(date)"
+                [class.range]="isInRange(date)" [class.faded]="isInRange(date)">
                {{ date.day }}
              </span>
             </ng-template>
         </div>
     </div>
+    
+    <!-- Here we define the HTML code for the End Date calendar -->
     <div class="form-group">
         <div class="input-group">
 
-            <input #dtg2 class="form-control datepicker" placeholder={{dateRange[1]}} name="dp2" [(ngModel)]="endDate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text" [dayTemplate]="t1" (dateSelect)="endDateChanged($event)" autocomplete="off" />
+            <!-- Here we define the input box for the End Date. We set the
+             placeholder to the second element of the dateRange which is the end
+             date of the current datapoints selected.-->
+            <input #dtg2 class="form-control datepicker" placeholder={{dateRange[1]}}
+            name="dp2" [(ngModel)]="endDate" ngbDatepicker #d2="ngbDatepicker"
+            (click)="d2.toggle()" type="text" [dayTemplate]="t1"
+            (dateSelect)="endDateChanged($event)" autocomplete="off" />
 
-            <button mat-raised-button (click)="sendDTG()" class="btn btn-white btn-round btn-just-icon">
+            <!-- Here we define the search button which when clicked will trigger
+            the function:"sendDTG()"-->
+            <button mat-raised-button (click)="sendDTG()"
+            class="btn btn-white btn-round btn-just-icon">
+                <!--Here we set the icon of the search button to a magnifying glass. -->
                 <i class="material-icons">search</i>
             </button>
+
+            <!-- Here we add the Angular template which is used to create the
+            NgbCalendar filled with dates to select. We set the selectable date
+            to the end date of the currently selected datapoints so no dates above
+            that date be selected.-->
             <ng-template #t1 let-date let-focused="focused">
-                <span class="custom-day" [class.text-white]="isActive(date)" [class.range-end]="isRangeEnd(date)" [class.range-start]="isRangeStart(date)" [class.btn-light]="isActive(date)" [class.bg-primary]="isActive(date)" [class.range]="isInRange(date)" [class.faded]="isInRange(date)">
+                <span class="custom-day" [class.text-white]="isActive(date)" [class.range-end]="isRangeEnd(date)"
+                 [class.range-start]="isRangeStart(date)" [class.btn-light]="isActive(date)"
+                 [class.bg-primary]="isActive(date)" [class.range]="isInRange(date)" [class.faded]="isInRange(date)">
                {{ date.day }}
              </span>
             </ng-template>
