@@ -1262,7 +1262,7 @@ export class MapComponent implements OnInit {
 	}
 
 	/*
-	Here we create a function called: "setLayerGroup()".
+	Here we create a function called: "removeLayerGroup()".
 
 	This function is triggered when the red button next to a selectedLayerGroup
 	is clicked.
@@ -1286,9 +1286,6 @@ export class MapComponent implements OnInit {
 
     // Here we assign the activeItem to a variable called: "item"
 		let item = this.activeItem;
-
-    // Here we clear the animation if any is running.
-		this.clearAnimation()
 
     // Here we obtain the layerGroup which has to be removed from the
     // layerGroups JavaScriptMap using the layerGroupKey passed as parameter
