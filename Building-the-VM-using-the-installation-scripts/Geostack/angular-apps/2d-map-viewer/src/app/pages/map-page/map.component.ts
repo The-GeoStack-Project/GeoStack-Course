@@ -1747,9 +1747,37 @@ export class MapComponent implements OnInit {
 		}
 	};
 
+	/*
+	Here we create a function called: "getDTGEvent()" which
+	takes an itemId and the the emitted event (noted as $event) as input parameters.
+
+	The function will be assigned to the DatePickerComponent which is defined in
+	the HTML page of the MapComponent.
+
+	The following steps are executed in this function:
+
+	1) The start date (send by the DatePickerComponent) is extracted and
+	   transformed in a format which is understandable for the MongoDB query
+		 that will be triggered in our Flask-API.
+
+	2) The end date (send by the DatePickerComponent) is extracted and
+	   transformed in the same manner as the startDate.
+
+	3) The function: "getItemDataByDTG()" is triggerd in which we pass the
+	   activeItem, the transformed startDate and the transformed endDate as
+		 parameters. The function:"getItemDataByDTG()" will then use the Start and
+		 EndDate to obtain the data from the MongoDB datastore.
+
+	*/
 	getDTGEvent(id: string, $event): void {
+
+		// Here we obtain and transform the start date.
 		let dtg_s = $event[0].year + '-' + $event[0].month + '-' + $event[0].day
+
+		// Here we obtain and transform the end date.
 		let dtg_e = $event[1].year + '-' + $event[1].month + '-' + $event[1].day
+
+		// Here we trigger the function: "getItemDataByDTG".
 		this.getItemDataByDTG(this.activeItem, dtg_s, dtg_e)
 	};
 
