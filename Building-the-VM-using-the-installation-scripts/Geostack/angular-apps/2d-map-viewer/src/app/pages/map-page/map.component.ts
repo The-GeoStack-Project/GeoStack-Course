@@ -229,7 +229,7 @@ export class MapComponent implements OnInit {
 	The user of the application only sees the key in the dropdown list for changing
 	the color style. When a color is selected the value of the key will be used.
 	*/
-	private colorList: Map < string, string > = new Map([
+	public colorList: Map < string, string > = new Map([
 		["Blue", "#0000ff"],
 		["Purple", "#FF33F9"],
 		["Red", "#ff0000"],
@@ -248,7 +248,7 @@ export class MapComponent implements OnInit {
 	the width style. When a width is selected the value belonging to the selected
 	width is used.
 	*/
-	private widthList: Map < string, number > = new Map([
+	public widthList: Map < string, number > = new Map([
 		["1 Pixel", 1],
 		["2 Pixel", 2],
 		["3 Pixel", 3],
@@ -266,7 +266,7 @@ export class MapComponent implements OnInit {
 	the width style. When a width is selected the value belonging to the selected
 	width is used.
 	*/
-	private lineTypeList: Map < string, number[] > = new Map([
+	public lineTypeList: Map < string, number[] > = new Map([
 		["Dotted", [.1, 5]],
 		["Striped", [10, 25]],
 		["Fluent", [0, 0]]
@@ -1995,6 +1995,26 @@ export class MapComponent implements OnInit {
 		};
 	};
 
+	/*
+	Here we create a function called:"setLayerStyle".
+
+	This function is used to change te styling (color, width, type) of the
+	MarkerLayers, PointLayers and LineLayers. The function takes in a layerType
+	as input parameter.
+
+	The function is assigned to a button which is defined in the HTML page of
+	the MapComponent.
+
+	The function contains a switch/case which is used to determine what layerStyle
+	should be changed depending on the layerType.
+
+	Then function creates a new OpenLayers Style object using the values which
+	are set in the global variable: 'styleDict'. At first this dictionary is
+	empty but when the user changes the styling of a layer, the selected values
+	will be assigned to the correct entry in the styleDict.
+
+
+	*/
 	setLayerStyle(layerType: string): void {
 		switch (layerType) {
 			case 'lineLayer':
