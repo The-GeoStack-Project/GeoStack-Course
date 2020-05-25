@@ -34,7 +34,8 @@ import {
 /*
 Here we create a global constant called:"ol".
 This constant represents the instance of the geospatial framework OpenLayers.
-To use the build in functions of OpenLayers we first need to call this constant*/
+To use the build in functions of OpenLayers we first need to call this constant
+*/
 declare const ol: any;
 
 /*
@@ -95,7 +96,7 @@ Here we create the component metadata. The following applies to this code:
 @Component({
 	selector: 'app-map',
 	templateUrl: './map.component.html',
-	providers: [MapService, CraneService, TrailService,PortService]
+	providers: [MapService, CraneService, TrailService ,PortService]
 })
 export class MapComponent implements OnInit {
 
@@ -109,7 +110,7 @@ export class MapComponent implements OnInit {
 	/*
 	Here we create a global variable called: "mapProviders". The variable
 	is a javascript map which will contain key|values. The javascript map will be
-	populated with available map providers once the function:"getTilestacheEntries"
+	populated with available map providers once the function:"getMapProviders()"
 	is triggered.
 	*/
 	private mapProviders: Map < any, any > = new Map();
@@ -136,17 +137,14 @@ export class MapComponent implements OnInit {
 	Here we create a global variable called: "seaLayer" to which we assign
 	a Tile layer to which we assign the URL on which the Local OpenSeaMap tiles
 	are available served from the Tilestache Tileserver running behind the
-	NGINX webserver. */
+	NGINX webserver.
+	*/
 	private seaLayer: any = new ol.layer.Tile({
 		source: new ol.source.XYZ({
 			url: "http://localhost/tiles/openseamap-local/{z}/{x}/{y}.png"
 		}),
 		zIndex: 2
 	});
-
-	/*
-	Here we create a global variable called: "portLayer"*/
-	private portLayer: any;
 
 	/*
 	Here we create a global variable called: "items". The type of the variable
@@ -207,17 +205,46 @@ export class MapComponent implements OnInit {
 	};
 
 	/*
-	Here we create a global variable called: "styleDict".
-	The value of this variable is a dictionary that is empty first.
-	When layer styles are changed, the changes are added to the related entry
-	in the styleDict.
+	Here we create a global variable called: "dateRange". The value of this
+	variable is passed to the DateTimePicker Component. The default value is
+	0 but will change when an item is selected.
 	*/
-	private styleDict: any = {
-		'color': '',
-		'width': '',
-		'type': '',
-		'src': ''
-	};
+	public dateRange: any = [0, 0];
+
+	/*
+	Here we create a global variable called: "countryList".
+
+	The type of this variable is a JavaScriptMap which contains the polygon
+	coordinates of countries in which you can select transmissions or signals.
+	The items in this JavaScriptMap will populate the dropdown list related
+	to the country selection.
+
+	If you want to add more countries to this dropdown list you can navigate to
+	the website:
+	https://www.keene.edu/campus/maps/tool/
+
+	On this website you can select a polygon and get the coordinates of the
+	selected polygon.
+
+	The you can copy paste these coordinates in this JavaScriptMap and give a
+	suitable name to the new entry.
+	*/
+	public countryList: Map < string, Number[][] > = new Map([
+		["Spain", [
+			[-10.6347656, 44.3081267],
+			[-11.0961914, 36.3859128],
+			[1.9995117, 36.7740925],
+			[3.4716797, 43.7869584],
+			[-10.6347656, 44.3081267]
+		]],
+		["Netherlands", [
+			[3.1750488, 53.6055441],
+			[2.9992676, 50.8336977],
+			[6.3391113, 50.7086344],
+			[7.3168945, 53.5794615],
+			[3.1750488, 53.6055441]
+		]],
+	]);
 
 	/*
 	Here we create a global variable called: "colorList".
@@ -273,58 +300,37 @@ export class MapComponent implements OnInit {
 	]);
 
 	/*
-	Here we create a global variable called: "dateRange". The value of this
-	variable is passed to the DateTimePicker Component. The default value is
-	0 but will change when an item is selected.
+	Here we create a global variable called: "styleDict".
+	The value of this variable is a dictionary that is empty first.
+	When layer styles are changed, the changes are added to the related entry
+	in the styleDict.
 	*/
-	public dateRange: any = [0, 0];
-
-	/*
-	Here we create a global variable called: "countryList".
-
-	The type of this variable is a JavaScriptMap which contains the polygon
-	coordinates of countries in which you can select transmissions or signals.
-	The items in this JavaScriptMap will populate the dropdown list related
-	to the country selection.
-
-	If you want to add more countries to this dropdown list you can navigate to
-	the website:
-	https://www.keene.edu/campus/maps/tool/
-
-	On this website you can select a polygon and get the coordinates of the
-	selected polygon.
-
-	The you can copy paste these coordinates in this JavaScriptMap and give a
-	suitable name to the new entry.
-	*/
-	public countryList: Map < string, Number[][] > = new Map([
-		["Spain", [
-			[-10.6347656, 44.3081267],
-			[-11.0961914, 36.3859128],
-			[1.9995117, 36.7740925],
-			[3.4716797, 43.7869584],
-			[-10.6347656, 44.3081267]
-		]],
-		["Netherlands", [
-			[3.1750488, 53.6055441],
-			[2.9992676, 50.8336977],
-			[6.3391113, 50.7086344],
-			[7.3168945, 53.5794615],
-			[3.1750488, 53.6055441]
-		]],
-	]);
+	public styleDict: any = {
+		'color': '',
+		'width': '',
+		'type': '',
+		'src': ''
+	};
 
 	/*
 	Here we create a global variable called: "elevationProfile".
 	After creating an instance of the elevation profile, this instance will
-	be assigned to this variable.*/
+	be assigned to this variable.
+	*/
 	public elevationProfile: any;
 
 	/*
 	Here we create a global variable called: "elevationProfileOpen". The value
 	of this variable will either be TRUE or FALSE depending on whether the
-	elevation profile is opened or not.*/
+	elevation profile is opened or not.
+	*/
 	public elevationProfileOpen: boolean;
+
+	/*
+	Here we create a global variable called: "portLayer" to which
+	we are going to assign the portLayer after it has been created.
+	*/
+	public portLayer: any;
 
 	/*
 	Here we create the class constructor of the MapComponent. We pass the map and
@@ -343,14 +349,13 @@ export class MapComponent implements OnInit {
 	be executed when the component is loaded.
 	*/
 	ngOnInit() {
-
 		// Here we trigger the function that created the OpenLayers map.
 		this.createOpenLayersMap();
 
-		// Here we trigger the function which retrieves all the trackers from our
-		// datastore.
+		// Here we trigger the function which retrieves all the trackers and
+		// trials from our datastore.
 		this.getItems();
-	}
+	};
 
 	/*
 	Here we create the function to retrieve all the WMS entries in our Tilestache
@@ -409,88 +414,14 @@ export class MapComponent implements OnInit {
 	Here we create the function that changes the mapProvider. When the function is
 	triggered a providerKey is passed. This providerKey is the key of the entry in
 	the javascript map: "mapProviders". This function is assigned to the WMSSelection
-	settings menu.
+	settings menu.We then call: “getSource” on the mapLayer to obtain the
+	source of the layer. Then we set the URL, on which the map (with the provider
+	key which for example could the landscape-map) is available, using “setURL()”.
 	*/
 	setMapProvider(providerKey): void {
 		this.mapLayer.getSource().setUrl(
 			"http://localhost/tiles/" + providerKey + "/{z}/{x}/{y}.png"
 		)
-	};
-
-
-	/*
-	Here we create a function called: "timeConverter()".
-	This function is used to convert all the timestamps received from the
-	datastores and passed to the function into a human readable date time group.
-	*/
-	timeConverter(timestamp): string {
-
-		// First we create a new Date using the timestamp passed as parameter.
-		// We assing the new date to a variable called: "a".
-		let a = new Date(timestamp);
-
-		// Here we obtain the year of the timestamp passed as parameter in this
-		// function.
-		let year = a.getFullYear();
-		// Here we obtain the month of the timestamp passed as parameter in this
-		// function.
-		let month = ('0' + (a.getMonth()+1).toString()).slice(-2);
-		// Here we obtain the day of the timestamp passed as parameter in this
-		// function.
-		let day = ('0' + a.getDate().toString()).slice(-2);
-
-		// Here we add a fix to make sure that when a day or month is equal to
-		// 0, it will be set to 1.
-		day == '00' ? day = '01' : null;
-		month == '00' ? month = '01' : null;
-
-		// Here we create a string by combining the day, month and year.
-		let time = day + '-' + month + '-' + year;
-
-		// Here we return the string.
-		return time;
-	};
-
-	/*
-	Here we create a function called: "zoomToLocation()"
-
-	This function is assigned to the button: "Zoom to start", defined in the
-	HTML file of the MapComponent.
-
-	The function gets the current view and animates it to move to the start
-	coordinates of the item on which the: "zoom to start" button is clicked.
-
-	There are 2 animations which are executed, these are as follows:
-	- Move to the location of the startCoordinate
-	- Zoom out and in again on the startCoordinate
-
-	The value: "1500" defines the amount of time it takes for the animation
-	to complete. You can increase or decrease it if you want.
-	*/
-	zoomToLocation(): void {
-		/*
-		The code below is used for the animation that moves to the start
-		coordinates of the activeItem.
-		The view of the OpenLayers Map instance is obtained using the syntax:
-		".getView()" on the map instance. Then we animate the view by calling the
-		function:".animate()"
-		*/
-		this.map.getView().animate({
-			center: this.activeItem.startCoordinate,
-			duration: 1500
-		});
-
-		/*
-		The code below is used for the animation zooms in and out while moving to
-		the start coordinates of the activeItem.
-		*/
-		this.map.getView().animate({
-			zoom: this.map.getView().getZoom() - 4,
-			duration: 1500 / 2
-		}, {
-			zoom: 12,
-			duration: 1500 / 2
-		});
 	};
 
 	/*
@@ -576,7 +507,8 @@ export class MapComponent implements OnInit {
 				trackers.forEach(tracker => {
 					this.addItem(
 						tracker['_id']['$oid'], tracker['name'], 'tracker',
-						tracker['transmission_Count'], 'timestamp', [tracker['start_date']['$date'], tracker['end_date']['$date']],
+						tracker['transmission_Count'], 'timestamp',
+						[tracker['start_date']['$date'], tracker['end_date']['$date']],
 					);
 				})
 			)
@@ -593,9 +525,45 @@ export class MapComponent implements OnInit {
 			)
 		);
 
+    // Here we call the function getPorts in our PortService file.
+		// We pass the results in the function: createPortLayer() which will
+		// then create the portLayer.
 		this._PortService.getPorts().subscribe(
-				(ports: []) => (this.createPortLayer(ports))
+			(ports: []) => (this.createPortLayer(ports))
 		);
+	};
+
+	/*
+	Here we create a function called: "timeConverter()".
+	This function is used to convert all the timestamps received from the
+	datastores and passed to the function into a human readable date time group.
+	*/
+	timeConverter(timestamp): string {
+
+		// First we create a new Date using the timestamp passed as parameter.
+		// We assing the new date to a variable called: "a".
+		let a = new Date(timestamp);
+
+		// Here we obtain the year of the timestamp passed as parameter in this
+		// function.
+		let year = a.getFullYear();
+		// Here we obtain the month of the timestamp passed as parameter in this
+		// function.
+		let month = ('0' + (a.getMonth()+1).toString()).slice(-2);
+		// Here we obtain the day of the timestamp passed as parameter in this
+		// function.
+		let day = ('0' + a.getDate().toString()).slice(-2);
+
+		// Here we add a fix to make sure that when a day or month is equal to
+		// 0, it will be set to 1.
+		day == '00' ? day = '01' : null;
+		month == '00' ? month = '01' : null;
+
+		// Here we create a string by combining the day, month and year.
+		let time = day + '-' + month + '-' + year;
+
+		// Here we return the valid datetime as string.
+		return time;
 	};
 
 	/*
@@ -608,33 +576,33 @@ export class MapComponent implements OnInit {
 	1) The selected item becomes the activeItem.
 
 	2) the function: ".filter()" is executed on the global JavascriptMap:
-	   "selectedItems".
+		 "selectedItems".
 
-	   This JavascriptMap contains all the items that are have
-	   been selected.
+		 This JavascriptMap contains all the items that are have
+		 been selected.
 
-	   The filter function is used to check whether the id (From
-	   the item that is being selected) is already in the list assigned to the
-	   global variable: "selectedItems".
+		 The filter function is used to check whether the id (From
+		 the item that is being selected) is already in the list assigned to the
+		 global variable: "selectedItems".
 
-	   If this is the case nothing will happen since the Item was already selected.
+		 If this is the case nothing will happen since the Item was already selected.
 
-	   If the itemId, of the item that is being selected, is not in the list of
-	   selectedItems the following will happen:
+		 If the itemId, of the item that is being selected, is not in the list of
+		 selectedItems the following will happen:
 
-	   1) The function: "getInitalItemData()" will be triggered. In the function
-	      the item will be passed. This function will retrieve the first 100
-	      transmissions / signals belonging to that item.
+		 1) The function: "getInitalItemData()" will be triggered. In the function
+				the item will be passed. This function will retrieve the first 100
+				transmissions / signals belonging to that item.
 
-	   2) The item is added to the selectedItems list.
+		 2) The item is added to the selectedItems list.
 
 	3) The dateRange (The start and end date in the DTG picker) global
-	   variable is changed to the dateRangeTotal of the selected item.
+ 	   variable is changed to the dateRangeTotal of the selected item.
 
-	4) Since the selected item is now the activeItem, the overlays
-		 (the information popups) will be filled with the information of
-	   the item that is currently active (The item that was selected), using the
-	   function setStaticOverlays().
+ 	4) Since the selected item is now the activeItem, the overlays
+ 		 (the information popups) will be filled with the information of
+ 	   the item that is currently active (The item that was selected), using the
+ 	   function setStaticOverlays().
 
 	*/
 	selectItem(item: Item): void {
@@ -647,9 +615,12 @@ export class MapComponent implements OnInit {
 				data => data.id.includes(item.id)).length == 1 ? null :
 			(this.getInitalItemData(item), this.selectedItems.push(item))
 
+		// Here we make sure that the dateRange in the NgbCalendar is updated
+		// with the dateRange of the selectedItem.
 		this.dateRange = this.activeItem.dateRangeTotal;
 
-		this.setStaticOverlays(item);
+		// Here we create the new static overlays (start and end marker overlays)
+		this.setStaticOverlays(item)
 	};
 
 	/*
@@ -680,7 +651,6 @@ export class MapComponent implements OnInit {
 						this.loadItemData(transmissions)
 					}
 				);
-				break;
 			case 'trail':
 				this._TrailService.getSignalsID(item.id).subscribe(
 					(signals) => {
@@ -705,66 +675,68 @@ export class MapComponent implements OnInit {
 	Each of these functions obtain data from the MongoDB datastore and pass the
 	returned data to the function "loadItemData()" as parameter.
 
-
 	The function then does the following:
 	1) Assign the activeItem to a variable called: "item". This is done so we
-	   only need to use the variable item instead of code: "this.activeItem".
+		 only need to use the variable item instead of code: "this.activeItem".
 
-	2) Set the value of the coordinateList belonging to the item to an empty list.
+	2) Check wether the data passed as parameter is not empty. If the data is empty
+	   the function will return because there is no data to be loaded.
 
-	3) Set the value of the altitudeList belonging to the item to an empty list.
+	3) Set the value of the coordinateList belonging to the item to an empty list.
 
-	4) Set the value of the datetimeList belonging to the item to an empty list.
+	4) Set the value of the altitudeList belonging to the item to an empty list.
 
-	5) Execute a forEach loop on the ItemList, the foreach loop does the following
-	   for all the rows in the list of data:
+	5) Set the value of the datetimeList belonging to the item to an empty list.
 
-	   5.1) Obtain the value of the coordinates and transform them to a format
-	        which can be used with OpenLayers. For this we use the the syntax:
-	        "ol.proj.fromLonLat()", in which we pass the value of the
-	        coordinate column as parameter. After the coordinate has been
-	        transformed it is added to the coordinateList belonging to the item.
+	6) Execute a forEach loop on the ItemList, the foreach loop does the following
+		 for all the rows in the list of data:
 
-	   5.2) Obtain the value of the altitude column and append it to the
-	        altitudeList belonging to the item.
+		 6.1) Obtain the value of the coordinates and transform them to a format
+					which can be used with OpenLayers. For this we use the the syntax:
+					"ol.proj.fromLonLat()", in which we pass the value of the
+					coordinate column as parameter. After the coordinate has been
+					transformed it is added to the coordinateList belonging to the item.
 
-	   5.3) Obtain the value of the timestamp column and append it to the
-	        datetimeList belonging to the item.
+		 6.2) Obtain the value of the altitude column and append it to the
+					altitudeList belonging to the item.
 
-	6) Assign the first value of the coordinateList (the value at index 0) to
-	   the variable: "startCoordinate".
+		 6.3) Obtain the value of the timestamp column and append it to the
+					datetimeList belonging to the item.
 
-	7) Assign the last value of the coordinateList (the value at index length
-	   of the datalist passed as parameter - 1) to the variable endCoordinate.
+	7) Assign the first value of the coordinateList (the value at index 0) to
+		 the variable: "startCoordinate".
 
-	8) Create a list containing the first item in the datetimeList and the last
-	   item of the datetimeList, created in step 5.3, and assign it to the
-	   variable: "dateRangeSelected".
+	8) Assign the last value of the coordinateList (the value at index length
+		 of the datalist passed as parameter - 1) to the variable endCoordinate.
 
-	9) Trigger the function: "addLayerGroup()", and pass the activeItem as
-	   parameter. The function: "addLayerGroup()" wil then create the first
-	   layerGroup.
+	9) Create a list containing the first item in the datetimeList and the last
+		 item of the datetimeList, created in step 5.3, and assign it to the
+		 variable: "dateRangeSelected".
 
-	10) Trigger the function: "setStaticOverlays()", this function will add
-	    the data of the selectedItem to the overlays and set the overlays to
-	    the correct position.
+	10) Trigger the function: "addLayerGroup()", and pass the activeItem as
+		 parameter. The function: "addLayerGroup()" wil then create the first
+		 layerGroup.
 
-	11) Trigger the function: "createElevationProfile()", this function will
-	    add populate the elevation profile chart with the data of the new item.
+	11) Trigger the function: "setStaticOverlays()", this function will add
+			the data of the selectedItem to the overlays and set the overlays to
+			the correct position.
+
+	12) Trigger the function: "createElevationProfile()", this function will
+			add populate the elevation profile chart with the data of the new item.
 	*/
 	loadItemData(data: any[]): void {
 		// Here we assign the activeItem to a variable called item
 		let item = this.activeItem;
 
+		// Perform a check to see if the data passed as parameter is bigger than
+		// 0. If this is the case, no item data will be loaded.
 		if (data.length == 0){
 			return;
 		}
 
 		// Here we create empty lists to which we are going to append the data.
 		item.coordinateList = [];
-
 		item.altitudeList = [];
-
 		item.datetimeList = [];
 
 		// Here we create a foreach loop which loops through all the rows in the data
@@ -792,7 +764,7 @@ export class MapComponent implements OnInit {
 		item.endCoordinate = item.coordinateList[data.length - 1];
 
 		// Here we set the last and the first values of the timestamp columns as
-		// start en end date of the selected route.
+		// start and end date of the selected route.
 		item.dateRangeSelected = (
 			this.timeConverter(data[0][item.timestampColumn]['$date']) + '/' +
 			this.timeConverter(data[data.length - 1][item.timestampColumn]['$date'])
@@ -801,11 +773,53 @@ export class MapComponent implements OnInit {
 		// Here we create a new layerGroup and add the item as parameter.
 		this.addLayerGroup(item);
 
-		// Here we set the static overlays to contain the values of the item.
-		this.setStaticOverlays(item);
+		// Here we create the new static overlays (start and end marker overlays)
+		this.setStaticOverlays(item)
 
-		// Here we create an elevationProfile for the Item.
+		// Here we create an elevationProfile for the item.
 		this.createElevationProfile();
+	};
+
+	/*
+	Here we create a function called: "zoomToLocation()"
+
+	This function is assigned to the button: "Zoom to start", defined in the
+	HTML file of the MapComponent.
+
+	The function gets the current view and animates it to move to the start
+	coordinates of the item on which the: "zoom to start" button is clicked.
+
+	There are 2 animations which are executed, these are as follows:
+	- Move to the location of the startCoordinate
+	- Zoom out and in again on the startCoordinate
+
+	The value: "1500" defines the amount of time it takes for the animation
+	to complete. You can increase or decrease it if you want.
+	*/
+	zoomToLocation(): void {
+		/*
+		The code below is used for the animation that moves to the start
+		coordinates of the activeItem.
+		The view of the OpenLayers Map instance is obtained using the syntax:
+		".getView()" on the map instance. Then we animate the view by calling the
+		function:".animate()"
+		*/
+		this.map.getView().animate({
+			center: this.activeItem.startCoordinate,
+			duration: 1500
+		});
+
+		/*
+		The code below is used for the animation zooms in and out while moving to
+		the start coordinates of the activeItem.
+		*/
+		this.map.getView().animate({
+			zoom: this.map.getView().getZoom() - 4,
+			duration: 1500 / 2
+		}, {
+			zoom: 12,
+			duration: 1500 / 2
+		});
 	};
 
 	/*
@@ -815,181 +829,181 @@ export class MapComponent implements OnInit {
 	parameter when te function is triggered in the function:"loadItemData()":
 	- lineLayer: This is the layer that creates the lines between the datapoints.
 	- pointLayer: This is  the layer which will contain the arrows that visualize
-	              the direction in which the item is going.
+								the direction in which the item is going.
 	- markerLayer: This layer contains the start and end marker of the visualized
-	               route.
+								 route.
 
 	The following happens when the function is triggered:
 
 	1) We assign the value of "this" to a variable called: "_this". We need to do
-	   this when we want to use global variables in an nested function. A nested
-	   function is a function inside another function.
+		 this when we want to use global variables in an nested function. A nested
+		 function is a function inside another function.
 
 	2) We assign the value of the dateRangeSelected selected to the variable
-	   called: "layerGroupSelector". We do this because the keys in the
-	   JavascriptMap are the dateRangeSelected values of each layerGroup.
+		 called: "layerGroupSelector". We do this because the keys in the
+		 JavascriptMap are the dateRangeSelected values of each layerGroup.
 
-	   We are going to use the variable: "layerGroupSelector" to select specific
-	   layerGroups.
+		 We are going to use the variable: "layerGroupSelector" to select specific
+		 layerGroups.
 
 	3) A check is performed to see whether a layerGroup with that key already
-	   exists in the JavascriptMap: "layerGroups".
+		 exists in the JavascriptMap: "layerGroups".
 
-	   If this is the case nothing will happen.
+		 If this is the case nothing will happen.
 
-	   If this is NOT the case the following steps will be executed.
+		 If this is NOT the case the following steps will be executed.
 
 	4) We create a new OpenLayers lineString geometry using the syntax:
-	   "new ol.geom.LineString()" in which we pass the coordinateList belonging
-	   to the item for which we are going to create a layerGroup.
+		 "new ol.geom.LineString()" in which we pass the coordinateList belonging
+		 to the item for which we are going to create a layerGroup.
 
-	   After the geometry of type LineString is created we assign it to a variable
-	   called: "lineGeometry".
+		 After the geometry of type LineString is created we assign it to a variable
+		 called: "lineGeometry".
 
 	5) We create a new lineLayer to which we assign the lineGeometry as geometry.
-	   We also use a styling function to assign the styling of the lineString.
-	   The styling is defined and assigned to the global variable: "layerStyles".
+		 We also use a styling function to assign the styling of the lineString.
+		 The styling is defined and assigned to the global variable: "layerStyles".
 
-	   The value assigned to this global variable is a dictionary that contains
-	   three entries:
-	   - lineString, which is the styling of the lineLayer.
-	   - startMarker, which is the styling of the startMarker.
-	   - endMarker, which is the styling of the endMarker.
+		 The value assigned to this global variable is a dictionary that contains
+		 three entries:
+		 - lineString, which is the styling of the lineLayer.
+		 - startMarker, which is the styling of the startMarker.
+		 - endMarker, which is the styling of the endMarker.
 
 	6) An empty list of points is created. We will add all the points, which will
-	   be created later on, to this list. Then we will pass this list to the
-	   pointLayer.
+		 be created later on, to this list. Then we will pass this list to the
+		 pointLayer.
 
 	7) An empty list of pointRotations is created. We will add al the calculated
-	   rotations of the points to this list. The rotation of the point defines
-	   in which way the arrow icon will point. The arrow icons visualize the
-	   direction in which the item was moving.
+		 rotations of the points to this list. The rotation of the point defines
+		 in which way the arrow icon will point. The arrow icons visualize the
+		 direction in which the item was moving.
 
 	8) Create a FORLoop that loops trough all the coordinates in the
-	   coordinateList belonging to the item to which a layerGroup is added.
-	   In this for loop the following happens for each entry (datarow) in the
-	   list:
+		 coordinateList belonging to the item to which a layerGroup is added.
+		 In this for loop the following happens for each entry (datarow) in the
+		 list:
 
-	   8.1) A variable point1 is created to which we assign the value of the
-	        coordinate on the index that the FORLoop is on.
+		 8.1) A variable point1 is created to which we assign the value of the
+					coordinate on the index that the FORLoop is on.
 
-	   8.2) A variable point2 is created to which we assign the value of the
-	        coordinate on the index + 1 that the FORLoop is on.
+		 8.2) A variable point2 is created to which we assign the value of the
+					coordinate on the index + 1 that the FORLoop is on.
 
-	   8.3) The rotation(direction in which the item was moving) is calculated
-	        using the build-in JavaScript function: "Math.atan2()". In this
-	        function we pass 2 parameters, these parameters are as follows:
-	        - parameter 1: The latitude coordinate of point2 - the latitude
-	                       coordinate of point1.
-	        - parameter 2: The longitude coordinate of point2 - the longitude
-	                       coordinate of point2.
-	        The result of this calculation is then added to the pointRotations
-	        list using the build-in JavaScript function: ".push()".
+		 8.3) The rotation(direction in which the item was moving) is calculated
+					using the build-in JavaScript function: "Math.atan2()". In this
+					function we pass 2 parameters, these parameters are as follows:
+					- parameter 1: The latitude coordinate of point2 - the latitude
+												 coordinate of point1.
+					- parameter 2: The longitude coordinate of point2 - the longitude
+												 coordinate of point2.
+					The result of this calculation is then added to the pointRotations
+					list using the build-in JavaScript function: ".push()".
 
-	   8.4) The distance between point 1 and point 2 is calculated by creating
-	        a new OpenLayers geometry of type: "LineString" and passing that
-	        lineString as parameter in the build-in OpenLayers function:
-	        "ol.sphere.getLength()".
+		 8.4) The distance between point 1 and point 2 is calculated by creating
+					a new OpenLayers geometry of type: "LineString" and passing that
+					lineString as parameter in the build-in OpenLayers function:
+					"ol.sphere.getLength()".
 
-	        Then we add the result to the distance that was calculate in the
-	        previous pass trough the loop FORLoop.
+					Then we add the result to the distance that was calculate in the
+					previous pass trough the loop FORLoop.
 
-	        Then we add the result of the step above to the list:
-	        "routeDistanceList", using the build-in JavaScript function:".push()".
+					Then we add the result of the step above to the list:
+					"routeDistanceList", using the build-in JavaScript function:".push()".
 
-	        Using this technique makes sure that when we animate the visualized
-	        route we can see the distance that is traveled.
+					Using this technique makes sure that when we animate the visualized
+					route we can see the distance that is traveled.
 
-	   8.5) A new feature is created.
-	        The value (coordinates) of point1 are assigned as geometry of this
-	        feature.
+		 8.5) A new feature is created.
+					The value (coordinates) of point1 are assigned as geometry of this
+					feature.
 
-	        We also create a new styling which is assigned to the style of the
-	        feature. The styling of the feature is an .svg of an arrow. This svg
-	        is located in the folder: "../../assets/img/" and is called:
-	        "arrow.svg".
+					We also create a new styling which is assigned to the style of the
+					feature. The styling of the feature is an .svg of an arrow. This svg
+					is located in the folder: "../../assets/img/" and is called:
+					"arrow.svg".
 
-	        We pass the rotation which was calculated in step 7.3 as rotation
-	        of the svg. Because we do this the arrow will point in the direction
-	        the item was moving.
+					We pass the rotation which was calculated in step 7.3 as rotation
+					of the svg. Because we do this the arrow will point in the direction
+					the item was moving.
 
-	   8.6) After the point feature is created it's added to the points list.
+		 8.6) After the point feature is created it's added to the points list.
 
 	9) A new layer is created and assigned to the variable: "pointLayer". We
-	   create a new VectorSource and assign it to the value: "source" of the
-	   layer.
+		 create a new VectorSource and assign it to the value: "source" of the
+		 layer.
 
-	   In the newly created VectorSource we assign the list of points, created
-	   in step 7, to the value: "features".
+		 In the newly created VectorSource we assign the list of points, created
+		 in step 7, to the value: "features".
 
-	   We set the layer visibility to false because we only want to show the
-	   pointLayer when the user toggles it on.
+		 We set the layer visibility to false because we only want to show the
+		 pointLayer when the user toggles it on.
 
 	10) A new Layer is created and assigned to the variable: "markerLayer".
-	   We create a new VectorSource and assign it to the value: "source" of the
-	   layer.
+		 We create a new VectorSource and assign it to the value: "source" of the
+		 layer.
 
-	   In the VectorSource we create 2 new features. These features are as follows:
-	   - A feature with the type: "startMarker". We assign the startCoordinate
-	     value of the item as the feature's geometry.
-	   - A feature with the type: "endMarker". We assign the endCoordinate value
-	     of the item as the feature's geometry.
+		 In the VectorSource we create 2 new features. These features are as follows:
+		 - A feature with the type: "startMarker". We assign the startCoordinate
+			 value of the item as the feature's geometry.
+		 - A feature with the type: "endMarker". We assign the endCoordinate value
+			 of the item as the feature's geometry.
 
-	   Here we also use a styling function to assign the styling of the start and
-	   endMarker. The styling is defined and assigned to the global
-	   variable: "layerStyles".
+		 Here we also use a styling function to assign the styling of the start and
+		 endMarker. The styling is defined and assigned to the global
+		 variable: "layerStyles".
 
-	   As mentioned before: The value assigned to this global variable is a
-	   dictionary that contains three entries:
-	     - lineString, which is the styling of the lineLayer.
-	     - startMarker, which is the styling of the startMarker.
-	     - endMarker, which is the styling of the endMarker.
+		 As mentioned before: The value assigned to this global variable is a
+		 dictionary that contains three entries:
+			 - lineString, which is the styling of the lineLayer.
+			 - startMarker, which is the styling of the startMarker.
+			 - endMarker, which is the styling of the endMarker.
 
-	   Then we set the zIndex of the markerLayer to 100. This makes sure that
-	   the markers are displayed on top of the other features.
+		 Then we set the zIndex of the markerLayer to 100. This makes sure that
+		 the markers are displayed on top of the other features.
 
 	11) A new layerGroup entry is added to the JavascriptMap: "layerGroups"
-	    belonging to the item.
-	    The key of this new layerGroup entry is the value of the variable:
-	    "layerGroupSelector".
-	    The value of this new layerGroup entry is a dictionary that contains
-	    the following entries:
+			belonging to the item.
+			The key of this new layerGroup entry is the value of the variable:
+			"layerGroupSelector".
+			The value of this new layerGroup entry is a dictionary that contains
+			the following entries:
 
-	    - lineLayer, which has the following values:
-	      - layer, which contains the actual lineLayer of this layerGroup.
-	      - coordinates, which contains the coordinates of the datapoints in
-	        this layerGroup.
-	      - altitudes, which contains the altitude values of the datapoints in
-	        this layerGroup.
-	      - dates, which contains the DTG values of the datapoints in
-	        this layerGroup.
-	      - distance, which contains the total distance of the layerGroup.
-	        The total distance is calculated using the build-in OpenLayers
-	        function:"ol.sphere.getLength()", in which we pass the value of the
-	        variable: "lineGeometry", which we created in step 4.
+			- lineLayer, which has the following values:
+				- layer, which contains the actual lineLayer of this layerGroup.
+				- coordinates, which contains the coordinates of the datapoints in
+					this layerGroup.
+				- altitudes, which contains the altitude values of the datapoints in
+					this layerGroup.
+				- dates, which contains the DTG values of the datapoints in
+					this layerGroup.
+				- distance, which contains the total distance of the layerGroup.
+					The total distance is calculated using the build-in OpenLayers
+					function:"ol.sphere.getLength()", in which we pass the value of the
+					variable: "lineGeometry", which we created in step 4.
 
-	    - pointLayer, which has the following values:
-	      - layer, which contains the actual pointLayer of this layerGroup.
-	      - pointRotations, which contains the rotations of all the datapoints in
-	        this layerGroup.
-	      - routeDistance, which contains the distance's from point to point in
-	        this layerGroup.
+			- pointLayer, which has the following values:
+				- layer, which contains the actual pointLayer of this layerGroup.
+				- pointRotations, which contains the rotations of all the datapoints in
+					this layerGroup.
+				- routeDistance, which contains the distance's from point to point in
+					this layerGroup.
 
-	    - markerLayer, which has the following values:
-	      - layer, which contains the actual markerLayer of this layerGroup.
+			- markerLayer, which has the following values:
+				- layer, which contains the actual markerLayer of this layerGroup.
 
 	12) The newly created layerGroup is set as activeLayerGroup using the function:
-	    "setLayerGroup()", and passing the variable: "layerGroupSelector" as
-	    parameter in this function.
+			"setLayerGroup()", and passing the variable: "layerGroupSelector" as
+			parameter in this function.
 
 	13) The lineLayer is added to the map using the build-in OpenLayers function:
-	    ".addLayer()", in which the lineLayer is passed as parameter.
+			".addLayer()", in which the lineLayer is passed as parameter.
 
 	14) The pointLayer is added to the map using the build-in OpenLayers function:
-	    ".addLayer()", in which the pointLayer is passed as parameter.
+			".addLayer()", in which the pointLayer is passed as parameter.
 
 	15) The markerLayer is added to the map using the build-in OpenLayers function:
-	    ".addLayer()", in which the markerLayer is passed as parameter.
+			".addLayer()", in which the markerLayer is passed as parameter.
 	*/
 	addLayerGroup(item: Item): void {
 
@@ -1105,14 +1119,14 @@ export class MapComponent implements OnInit {
 			let markerLayer = new ol.layer.Vector({
 				source: new ol.source.Vector({
 					features: [
-            // We set the geometry of the startMarker to the startCoordinate of
-            // the item which we are going to add.
+						// We set the geometry of the startMarker to the startCoordinate of
+						// the item which we are going to add.
 						new ol.Feature({
 							type: 'startMarker',
 							geometry: new ol.geom.Point(item.startCoordinate)
 						}),
-            // We set the geometry of the endMarker to the endCoordinate of
-            // the item which we are going to add.
+						// We set the geometry of the endMarker to the endCoordinate of
+						// the item which we are going to add.
 						new ol.Feature({
 							type: 'endMarker',
 							geometry: new ol.geom.Point(item.endCoordinate)
@@ -1162,257 +1176,195 @@ export class MapComponent implements OnInit {
 	};
 
 	/*
-	Here we create a function called: "setLayerGroup()".
+		Here we create a function called: "setLayerGroup()".
 
-	This function is triggered in the following functions:
+		This function is triggered in the following functions:
 
-	1) removeLayerGroup(), when removing the currect active layer group we need to
-	   set the next selected layer group to be the active layer group.
+		1) removeLayerGroup(), when removing the currect active layer group we need to
+		   set the next selected layer group to be the active layer group.
 
-	2) addLayerGroup(), when a layer group is added we need to set the added
-	   layer group to be the activeLayerGroup
+		2) addLayerGroup(), when a layer group is added we need to set the added
+		   layer group to be the activeLayerGroup
 
-	This function is used to set the active layer group and assign the values
-	of the active layer group to the correct parameters of the activeItem.
-	These values are as follows:
+		This function is used to set the active layer group and assign the values
+		of the active layer group to the correct parameters of the activeItem.
+		These values are as follows:
 
-	1) The selected dateRange of the active layer group, which is used to set
-	   the start and end date of the DTG selection dropdown boxes.
+		1) The selected dateRange of the active layer group, which is used to set
+		   the start and end date of the DTG selection dropdown boxes.
 
-	2) The totalRouteDistance of the active layer group, which is used to calculate
-	   the routeDistance traveled by an item.
+		2) The totalRouteDistance of the active layer group, which is used to calculate
+		   the routeDistance traveled by an item.
 
-	3) The coordinateList of the active layer group, which is used to visualize
-	   the data points and lines on the map. The coordinateList is also used
-	   when animating the route.
+		3) The coordinateList of the active layer group, which is used to visualize
+		   the data points and lines on the map. The coordinateList is also used
+		   when animating the route.
 
-	4) The altitudeList of the active layer group, which is used in the
-	   elevationProfile.
+		4) The altitudeList of the active layer group, which is used in the
+		   elevationProfile.
 
-	5) The datetimeList of the active layer group, which is used to display the
-	   start and end date of the route. This list is also used in the information
-	   box when animating the route.
+		5) The datetimeList of the active layer group, which is used to display the
+		   start and end date of the route. This list is also used in the information
+		   box when animating the route.
 
-	6) The startCoordinate of the active layer group, which is used to set the
-	   start marker.
+		6) The startCoordinate of the active layer group, which is used to set the
+		   start marker.
 
-	7) The endCoordinate of the active layer group, which is used to set the
-	   end marker.
+		7) The endCoordinate of the active layer group, which is used to set the
+		   end marker.
 
-	This function also toggles all the overlays of the previous active layerGroup
-	off and then creates new overlays related to the new active layerGroup.
+		This function also toggles all the overlays of the previous active layerGroup
+		off and then creates new overlays related to the new active layerGroup.
 	*/
 	setLayerGroup(groupKey: string): void {
 
-		// Here we assign the current active item to a variable called: "item".
-		let item = this.activeItem;
+			// Here we assign the current active item to a variable called: "item".
+			let item = this.activeItem;
 
-		// Here we clear the animation of the current active layer group. This will
-		// only happen if an animation is running. This is done because otherwise
-		// the animation of the previous active layer group will keep running when
-		// selecting a new layer group.
-		this.clearAnimation();
+			// Here we clear the animation of the current active layer group. This will
+			// only happen if an animation is running. This is done because otherwise
+			// the animation of the previous active layer group will keep running when
+			// selecting a new layer group.
+			//this.clearAnimation();
 
-		// Here we assign the layer group selector (which is the dateRange of the
-		// selected layerGroup) to the variable:"dateRangeSelected".
-		item.dateRangeSelected = groupKey;
+			// Here we assign the layer group selector (which is the dateRange of the
+			// selected layerGroup) to the variable:"dateRangeSelected".
+			item.dateRangeSelected = groupKey;
 
-		// Here we set the layerGroup which is selected to be the activeLayerGroup
-		// using the layerGroupSelector (groupKey).
-		item.activeLayerGroup = item.layerGroups.get(groupKey);
+			// Here we set the layerGroup which is selected to be the activeLayerGroup
+			// using the layerGroupSelector (groupKey).
+			item.activeLayerGroup = item.layerGroups.get(groupKey);
 
-		// Here we assign the value of the distance of the lineLayer to the variable
-		// totalRouteDistance. This value was added to the lineLayer dict when the
-		// layerGroup was created in the function: "addLayerGroup".
-		item.totalRouteDistance = item.activeLayerGroup.lineLayer.distance;
+			// Here we assign the value of the distance of the lineLayer to the variable
+			// totalRouteDistance. This value was added to the lineLayer dict when the
+			// layerGroup was created in the function: "addLayerGroup".
+			item.totalRouteDistance = item.activeLayerGroup.lineLayer.distance;
 
-		// Here we assign the list of coordinates of the lineLayer to the variable
-		// coordinateList. This value was also added to the lineLayer dict when the
-		// layerGroup was created in the function: "addLayerGroup".
-		item.coordinateList = item.activeLayerGroup.lineLayer.coordinates;
+			// Here we assign the list of coordinates of the lineLayer to the variable
+			// coordinateList. This value was also added to the lineLayer dict when the
+			// layerGroup was created in the function: "addLayerGroup".
+			item.coordinateList = item.activeLayerGroup.lineLayer.coordinates;
 
-		// Here we assign the list of altitudes of the lineLayer to the variable
-		// altitudeList. This value was also added to the lineLayer dict when the
-		// layerGroup was created in the function: "addLayerGroup".
-		item.altitudeList = item.activeLayerGroup.lineLayer.altitudes;
+			// Here we assign the list of altitudes of the lineLayer to the variable
+			// altitudeList. This value was also added to the lineLayer dict when the
+			// layerGroup was created in the function: "addLayerGroup".
+			item.altitudeList = item.activeLayerGroup.lineLayer.altitudes;
 
-		// Here we assign the list of DTG's of the lineLayer to the variable
-		// datetimeList. This value was also added to the lineLayer dict when the
-		// layerGroup was created in the function: "addLayerGroup".
-		item.datetimeList = item.activeLayerGroup.lineLayer.dates;
+			// Here we assign the list of DTG's of the lineLayer to the variable
+			// datetimeList. This value was also added to the lineLayer dict when the
+			// layerGroup was created in the function: "addLayerGroup".
+			item.datetimeList = item.activeLayerGroup.lineLayer.dates;
 
-		// Here we assign the first coordinate of the coordinateList (on index 0)
-		// of the lineLayer to the variable startCoordinate.
-		item.startCoordinate = item.activeLayerGroup.lineLayer.coordinates[0];
+			// Here we assign the first coordinate of the coordinateList (on index 0)
+			// of the lineLayer to the variable startCoordinate.
+			item.startCoordinate = item.activeLayerGroup.lineLayer.coordinates[0];
 
-		// Here we assign the first coordinate of the coordinateList (on index
-		// (length of coordinateList - 1)) of the lineLayer to the variable
-		// endCoordinate.
-		item.endCoordinate = item.activeLayerGroup.lineLayer.coordinates[
-			item.coordinateList.length - 1
-		]
+			// Here we assign the first coordinate of the coordinateList (on index
+			// (length of coordinateList - 1)) of the lineLayer to the variable
+			// endCoordinate.
+			item.endCoordinate = item.activeLayerGroup.lineLayer.coordinates[
+				item.coordinateList.length - 1
+			]
 
-		// Here we call the function toggleOverlay and pass "all" as parameter.
-		// This makes sure the old overlays are removed from the map.
-		this.toggleOverlay("all");
+			// Here we call the function toggleOverlay and pass "all" as parameter.
+			// This makes sure the old overlays are removed from the map.
+			//this.toggleOverlay("all");
 
-		// Here we create the new static overlays (start and end marker overlays)
-		// using the information (assigned in the lines above) of the current item.
-		this.setStaticOverlays(item)
-	}
+			// Here we create the new static overlays (start and end marker overlays)
+			// using the information (assigned in the lines above) of the current item.
+			this.setStaticOverlays(item)
+		};
 
 	/*
-	Here we create a function called: "removeLayerGroup()".
+		Here we create a function called: "addOverlays()".
 
-	This function is triggered when the red button next to a selectedLayerGroup
-	is clicked.
+	  This function is only called in the function:"createOpenLayersMap".
 
-	This function first clears the running animation, which will only happen if
-	an animation is running.
+	  The purpose of this function is to instantiate the overlays on the
+	  map. These overlays are as follows:
 
-	Then the function will remove each layer in the layerGroup from the map.
+	  1) The GeoMaker, which is the marker that moves from coordinate to coordinate
+	     when the animation is playing.
 
-	After the layers of the layerGroup are removed the layerGroup itself is removed
-	from the JavaScriptMap called: "layerGroups".
+	  2) Info box of the GeoMaker, which is the information box that moves with the
+	     GeoMaker when the animation is running (The currentCoordinateIndex).
+	     This information box contains the following DYNAMIC info:
+	     - The name of the route that is visualized
+	     - The coordinates on which the GeoMaker is. This value is constantly updated
+	       using the coordinateList belonging to the item that is currently visualized
+	     - The DTG on which the GeoMaker is. This value is also constantly updated
+	       using the datetimeList belonging to the item that is currently visualized.
 
-  Finally a check is performed to see if the layerGroup that is removed was
-  the last layerGroup in layerGroups JavaScriptMap. If this is the case, the
-  function: removeItem() is called since we want to remove the item which does
-  not have any selectedLayerGroups. If this is NOT the case the next layerGroup
-  in the layerGroups JavaScriptMap will become the active layerGroup.
+	  3) The Start Marker info box, which is the information box assigned to the
+	     start marker (first coordinate of the coordinateList) of the visualized
+	     route. This information box contains the following STATIC info:
+	     - The name of the route that is visualized
+	     - The first set of coordinates in the coordinateList belonging to the
+	       item that is currently visualized.
+	     - The first DTG in the datetimeList belonging to the item that is currently
+	       visualized.
 
-	*/
-	removeLayerGroup(layerGroupKey: string): void {
+	  4) The End Marker info box, which is the information box assigned to the
+	     end marker (the last coordinate of the coordinateList) of the visualized
+	     route. This information box contains the following STATIC info:
+	     - The name of the route that is visualized.
+	     - The last set of coordinates in the coordinateList belonging to the
+	       item that is currently visualized.
+	     - The last DTG in the datetimeList belonging to the item that is currently
+	       visualized.
 
-    // Here we assign the activeItem to a variable called: "item"
-		let item = this.activeItem;
-
-    // Here we obtain the layerGroup which has to be removed from the
-    // layerGroups JavaScriptMap using the layerGroupKey passed as parameter
-    // on the function call. We assign the layerGroup to a variable called:
-    // "groupToRemove".
-		let groupToRemove = item.layerGroups.get(layerGroupKey)
-
-    // Here we loop through all the entries in the layerGroup. We do this to
-    // remove all the layers, belonging to the layerGroup to remove, from the
-    // OpenLayers Map. We do this by calling the functio:".removeLayer" on the
-    // OpenLayers Map instance and passing the value of the layers (pointLayer,
-    // lineLayer and markerLayer).
-		for (let [key, value] of Object.entries(groupToRemove)) {
-			this.map.removeLayer(value['layer'])
-		}
-
-    // Here we remove the layerGroup from the JavaScriptMap containing the
-    // selected layerGroups. We do this by calling the: ".delete()" function
-    // on the JavaScriptMap and passing the layerGroupKey as parameter.
-		item.layerGroups.delete(layerGroupKey)
-
-    // Here a check if performed to see if the size of the layerGroups JavaScriptMap
-    // is bigger than 0.
-    //
-    // If this is the case, it means that there is/are one or more other selected
-    // layerGroups, so one of these will be set as activeLayerGroup using the
-    // function: "setLayerGroup" and passing the value of the key
-    // (the layerGroupSelector) as parameter.
-    //
-    // If this is NOT the case, it means that there ar NO other layerGroups selected
-    // so the activeItem needs to be removed. This is done by calling the function:
-    // "removeItem" and passing the activeItem as parameter.
-		item.layerGroups.size > 0 ? this.setLayerGroup(item.layerGroups.keys().next().value) :
-			this.removeItem(item)
-
-	};
-
-  /*
-	Here we create a function called: "addOverlays()".
-
-  This function is only called in the function:"createOpenLayersMap".
-
-  The purpose of this function is to instantiate the overlays on the
-  map. These overlays are as follows:
-
-  1) The GeoMaker, which is the marker that moves from coordinate to coordinate
-     when the animation is playing.
-
-  2) Info box of the GeoMaker, which is the information box that moves with the
-     GeoMaker when the animation is running (The currentCoordinateIndex).
-     This information box contains the following DYNAMIC info:
-     - The name of the route that is visualized
-     - The coordinates on which the GeoMaker is. This value is constantly updated
-       using the coordinateList belonging to the item that is currently visualized
-     - The DTG on which the GeoMaker is. This value is also constantly updated
-       using the datetimeList belonging to the item that is currently visualized.
-
-  3) The Start Marker info box, which is the information box assigned to the
-     start marker (first coordinate of the coordinateList) of the visualized
-     route. This information box contains the following STATIC info:
-     - The name of the route that is visualized
-     - The first set of coordinates in the coordinateList belonging to the
-       item that is currently visualized.
-     - The first DTG in the datetimeList belonging to the item that is currently
-       visualized.
-
-  4) The End Marker info box, which is the information box assigned to the
-     end marker (the last coordinate of the coordinateList) of the visualized
-     route. This information box contains the following STATIC info:
-     - The name of the route that is visualized.
-     - The last set of coordinates in the coordinateList belonging to the
-       item that is currently visualized.
-     - The last DTG in the datetimeList belonging to the item that is currently
-       visualized.
-
-  The way to create an overlay is as follows:
-  The syntax used for creating an overlay is ol.Overlay. Then we pass the
-  following values:
-  - An id which represents the overlay.
-  - The positioning in which the overlay should be displayed.
-  - The position of the overlay. When instantiating the overlay, we set the
-    position to undefined since we don't have any position yet.
-  - The HTML element which represents the overlay. These elements are defined
-    at the top of the map.component.html file. For this we use the syntax:
-    "document.getElementById('{the id of the element in the HTML file}')"
+	  The way to create an overlay is as follows:
+	  The syntax used for creating an overlay is ol.Overlay. Then we pass the
+	  following values:
+	  - An id which represents the overlay.
+	  - The positioning in which the overlay should be displayed.
+	  - The position of the overlay. When instantiating the overlay, we set the
+	    position to undefined since we don't have any position yet.
+	  - The HTML element which represents the overlay. These elements are defined
+	    at the top of the map.component.html file. For this we use the syntax:
+	    "document.getElementById('{the id of the element in the HTML file}')"
 	*/
 	addOverlays(): any[] {
 
-    // Here we create the GeoMaker overlay and assign it to a variable called:
-    // "marker".
-    let marker = new ol.Overlay({
-      id: 'geomarker',
-      positioning: 'center-center',
-      position: undefined,
-      element: document.getElementById('geomarker'),
-    });
+	    // Here we create the GeoMaker overlay and assign it to a variable called:
+	    // "marker".
+	    let marker = new ol.Overlay({
+	      id: 'geomarker',
+	      positioning: 'center-center',
+	      position: undefined,
+	      element: document.getElementById('geomarker'),
+	    });
 
-    // Here we create the GeoMaker Info overlay and assign it to a variable
-    // called:"markerInfo".
-		let markerInfo = new ol.Overlay({
-			id: 'geomarkerInfo',
-			positioning: 'center-center',
-			position: undefined,
-			element: document.getElementById('geomarkerInfo'),
-		});
+	    // Here we create the GeoMaker Info overlay and assign it to a variable
+	    // called:"markerInfo".
+			let markerInfo = new ol.Overlay({
+				id: 'geomarkerInfo',
+				positioning: 'center-center',
+				position: undefined,
+				element: document.getElementById('geomarkerInfo'),
+			});
 
-    // Here we create the startMarker Info overlay and assign it to a variable
-    // called:"startMarkerInfo".
-		let startMarkerInfo = new ol.Overlay({
-			id: 'startmarkerInfo',
-			positioning: 'center-center',
-			position: undefined,
-			element: document.getElementById('startmarkerInfo'),
-		});
+	    // Here we create the startMarker Info overlay and assign it to a variable
+	    // called:"startMarkerInfo".
+			let startMarkerInfo = new ol.Overlay({
+				id: 'startmarkerInfo',
+				positioning: 'center-center',
+				position: undefined,
+				element: document.getElementById('startmarkerInfo'),
+			});
 
-    // Here we create the endMarker Info overlay and assign it to a variable
-    // called:"endMarkerInfo".
-		let endMarkerInfo = new ol.Overlay({
-			id: 'endmarkerInfo',
-			positioning: 'center-center',
-			position: undefined,
-			element: document.getElementById('endmarkerInfo'),
-		});
+	    // Here we create the endMarker Info overlay and assign it to a variable
+	    // called:"endMarkerInfo".
+			let endMarkerInfo = new ol.Overlay({
+				id: 'endmarkerInfo',
+				positioning: 'center-center',
+				position: undefined,
+				element: document.getElementById('endmarkerInfo'),
+			});
 
-    //Here we return a list containing the marker instances.
-		return [marker, markerInfo, startMarkerInfo, endMarkerInfo]
-	}
+	    //Here we return a list containing the marker instances.
+			return [marker, markerInfo, startMarkerInfo, endMarkerInfo]
+		};
 
 	/*
 	Here we create a function called: "setDynamicOverlays()".
@@ -1515,12 +1467,12 @@ export class MapComponent implements OnInit {
 		// Here we set the content of the GeoMaker Info box HTML element.
 		// We use the syntax: "\u000A" to add a next line to the text.
 		geoMarkerInfo.getElement().setAttribute('data-hint',
-			'Geomarker of: ' + item.type + ': ' + item.name +
+			'Geomarker of ' + item.type + ': ' + item.name +
 			'\u000A' +'Distance traveled: ' + distance + 'M' +
 			'\u000A\u000ACoordinates:\u000ALongitude: ' + longitudeCoord +
 			'\u000ALatitude: ' + latitudeCoord +
 			'\u000A\u000ACurrent DTG:' + datetime);
-	}
+	};
 
 	/*
 	Here we create a function called: "setStaticOverlays()".
@@ -1571,7 +1523,6 @@ export class MapComponent implements OnInit {
 	 	 is added using the data extracted in the previous steps.
 
 	8) The elevationData is loaded by triggering the function: "loadElevationData()"
-
 	*/
 	setStaticOverlays(item: Item): void {
 
@@ -1617,7 +1568,7 @@ export class MapComponent implements OnInit {
 
 		// Here we trigger the function which loads the elevationData.
 		this.loadElevationData();
-	}
+	};
 
 	/*
 	Here we create a function called: "removeItem()"
@@ -1666,7 +1617,7 @@ export class MapComponent implements OnInit {
 		 If the itemId of the item to remove is the same as the id of the item that
 		 is currently active. Change the activeItem to the next item in the list.
 		*/
-		this.activeItem.id == item.id ? (this.clearAnimation(),
+		this.activeItem.id == item.id ? (
 				this.selectItem(this.selectedItems.values().next().value)) :
 			null;
 
@@ -1698,7 +1649,7 @@ export class MapComponent implements OnInit {
 		*/
 		this.selectedItems.length == 0 ? this.toggleOverlay('all') :
 			this.setStaticOverlays(this.activeItem)
-	}
+	};
 
 	/*
 	Here we create a function called: "getItemDataByDTG()"
@@ -1779,13 +1730,77 @@ export class MapComponent implements OnInit {
 	};
 
 	/*
+	Here we create a function called: "removeLayerGroup()".
+
+	This function is triggered when the red button next to a selectedLayerGroup
+	is clicked.
+
+	This function first clears the running animation, which will only happen if
+	an animation is running.
+
+	Then the function will remove each layer in the layerGroup from the map.
+
+	After the layers of the layerGroup are removed the layerGroup itself is removed
+	from the JavaScriptMap called: "layerGroups".
+
+  Finally a check is performed to see if the layerGroup that is removed was
+  the last layerGroup in layerGroups JavaScriptMap. If this is the case, the
+  function: removeItem() is called since we want to remove the item which does
+  not have any selectedLayerGroups. If this is NOT the case the next layerGroup
+  in the layerGroups JavaScriptMap will become the active layerGroup.
+
+	*/
+	removeLayerGroup(layerGroupKey: string): void {
+
+    // Here we assign the activeItem to a variable called: "item"
+		let item = this.activeItem;
+
+    // Here we clear the animation if any is running.
+		//this.clearAnimation()
+
+    // Here we obtain the layerGroup which has to be removed from the
+    // layerGroups JavaScriptMap using the layerGroupKey passed as parameter
+    // on the function call. We assign the layerGroup to a variable called:
+    // "groupToRemove".
+		let groupToRemove = item.layerGroups.get(layerGroupKey)
+
+    // Here we loop through all the entries in the layerGroup. We do this to
+    // remove all the layers, belonging to the layerGroup to remove, from the
+    // OpenLayers Map. We do this by calling the functio:".removeLayer" on the
+    // OpenLayers Map instance and passing the value of the layers (pointLayer,
+    // lineLayer and markerLayer).
+		for (let [key, value] of Object.entries(groupToRemove)) {
+			this.map.removeLayer(value['layer'])
+		}
+
+    // Here we remove the layerGroup from the JavaScriptMap containing the
+    // selected layerGroups. We do this by calling the: ".delete()" function
+    // on the JavaScriptMap and passing the layerGroupKey as parameter.
+		item.layerGroups.delete(layerGroupKey)
+
+    // Here a check if performed to see if the size of the layerGroups JavaScriptMap
+    // is bigger than 0.
+    //
+    // If this is the case, it means that there is/are one or more other selected
+    // layerGroups, so one of these will be set as activeLayerGroup using the
+    // function: "setLayerGroup" and passing the value of the key
+    // (the layerGroupSelector) as parameter.
+    //
+    // If this is NOT the case, it means that there ar NO other layerGroups selected
+    // so the activeItem needs to be removed. This is done by calling the function:
+    // "removeItem" and passing the activeItem as parameter.
+		item.layerGroups.size > 0 ? this.setLayerGroup(item.layerGroups.keys().next().value) :
+			this.removeItem(item)
+	};
+
+	/*
 	Here we create a function called: "getItemDataByAmount()"
 
-	This function is triggerd when a amount is selected from the dropdown list
+	This function is triggered when a amount is selected from the dropdown list
 	related to the amount selection (which is defined in the HTML page).
 
 	This function contains a switch/case. The switch case takes the itemType,
-	which in our case can be a tracker or a trail, as input. Depending on the
+	which in our case can be a tracker as input. Depending on the
 	itemType, the corresponding function is triggered.
 
 	These functions trigger a function in the service related to the item which
@@ -1827,7 +1842,7 @@ export class MapComponent implements OnInit {
 	global JavaScriptMap countryList) are than passed to this function.
 
 	This function contains a switch/case. The switch case takes the itemType,
-	which in our case can be a tracker or a trail, as input. Depending on the
+	which in our case can be a tracker, as input. Depending on the
 	itemType, the corresponding function is triggerd.
 
 	These functions trigger a function in the service related to the item which
@@ -1852,8 +1867,7 @@ export class MapComponent implements OnInit {
 		};
 	};
 
-
-  /*
+	/*
 	Here we create a function called: "toggleLayer()".
 
 	This function is used to toggle layers such as the MarkerLayer, PointLayer,
@@ -1887,7 +1901,6 @@ export class MapComponent implements OnInit {
 		layerToToggle.getVisible() == true ? layerToToggle.setVisible(false) :
 			layerToToggle.setVisible(true)
 	};
-
 
 	/*
 	Here we create a function called: "toggleOverlay()".
@@ -2015,9 +2028,9 @@ export class MapComponent implements OnInit {
 
 	The following steps are executed in this function:
 	1) A switch case is executed which does the following depending on the layerType
-	   which was passed as input parameter on the function call.
+		 which was passed as input parameter on the function call.
 
-     incase the layerType is equal to lineLayer:
+		 incase the layerType is equal to lineLayer:
 
 		 A new OpenLayers LineStyle (stroke) is created using the values which are
 		 set in the styleDict (selected by the user in the application) as
@@ -2038,7 +2051,7 @@ export class MapComponent implements OnInit {
 
 		 A new OpenLayers IconStyle (image) is created for both the Start and End
 		 Markers. We use the color set in the styleDict (selected by the user in
-	   the application) to specify the image src (Source). These images represent
+		 the application) to specify the image src (Source). These images represent
 		 the pins which are found in the folder: assets/img/pins.
 
 		 We pass the selected color in the source link. For example:
@@ -2077,7 +2090,7 @@ export class MapComponent implements OnInit {
 				// called: "newLineStyle"
 				let newLineStyle = new ol.style.Style({
 					stroke: new ol.style.Stroke({
-					  // Here we obtain the value of the widthList entry using the width
+						// Here we obtain the value of the widthList entry using the width
 						// entry in the styleDict (which was set by the user).
 						width: this.widthList.get(this.styleDict['width']),
 						// Here we obtain the value of the colorList entry using the color
@@ -2093,14 +2106,16 @@ export class MapComponent implements OnInit {
 				})
 
 				// Here we update the activeLayerGroup LineLayer style using the newLineStyle.
-				this.activeItem.activeLayerGroup['lineLayer']['layer'].getSource().getFeatures()[0].setStyle(newLineStyle)
+				this.activeItem.activeLayerGroup['lineLayer']['layer'].getSource()
+				.getFeatures()[0].setStyle(newLineStyle)
 
 				break;
 
 			// The following code is executed when the layerType == markerLayer
 			case 'markerLayer':
-			  // Here we create a new Startmarker style (image) and assign it to a variable
-		    // called: "newStartMarkerStyle"
+
+				// Here we create a new Startmarker style (image) and assign it to a variable
+				// called: "newStartMarkerStyle"
 				let newStartMarkerStyle = new ol.style.Style({
 					image: new ol.style.Icon({
 						// Here we set the amount of Pixels on which the icon should be displayed.
@@ -2115,10 +2130,10 @@ export class MapComponent implements OnInit {
 				})
 
 				// Here we create a new Endmarker style (image) and assign it to a variable
-		    // called: "newEndMarkerStyle"
+				// called: "newEndMarkerStyle"
 				let newEndMarkerStyle = new ol.style.Style({
 					image: new ol.style.Icon({
-					  // Here we set the amount of Pixels on which the icon should be displayed.
+						// Here we set the amount of Pixels on which the icon should be displayed.
 						anchor: [0.5, 1],
 						// Here we set the source location of the pin using the color value in
 						// the styleDict.
@@ -2129,25 +2144,29 @@ export class MapComponent implements OnInit {
 					zIndex: 5
 				})
 
-				// Here we set the div element styling of the GeoMaker to have the color set by the user.
-				document.getElementById('geomarker').style["background-color"] = this.colorList.get(this.styleDict.color)
+				// Here we set the div element styling of the GeoMaker to have the color
+				// which was set by the user.
+				document.getElementById('geomarker').style["background-color"] = this.colorList
+				.get(this.styleDict.color)
 
 				// Here we update the endMarker styling using the newEndMarkerStyle.
-				this.activeItem.activeLayerGroup['markerLayer']['layer'].getSource().getFeatures()[1].setStyle(newEndMarkerStyle)
+				this.activeItem.activeLayerGroup['markerLayer']['layer'].getSource()
+				.getFeatures()[1].setStyle(newEndMarkerStyle)
 
 				// Here we update the startMarker styling using the newStartMarkerStyle.
-				this.activeItem.activeLayerGroup['markerLayer']['layer'].getSource().getFeatures()[0].setStyle(newStartMarkerStyle)
+				this.activeItem.activeLayerGroup['markerLayer']['layer'].getSource()
+				.getFeatures()[0].setStyle(newStartMarkerStyle)
+
 				break;
 
 			// The following code is executed when the layerType == pointLayer.
 			case 'pointLayer':
 				break;
 		}
-	}
-
+	};
 
 	/*
-	Here we create a function called:"animateRoue()".
+	Here we create a function called:"animateRoute()".
 
 	This function is used to animate a route which is visualized on the OpenLayers
 	map. This function is bound to a button in the HTML layout page of the
@@ -2221,44 +2240,161 @@ export class MapComponent implements OnInit {
 	*/
 	animateRoute(): void {
 
+		// Here we assign the variable this to a variable: "_this".
+		// This is required to access global variables in nested functions.
 		let _this = this;
 
+		// Here we obtain the value of the speed input slider which is defined in
+		// the MapComponent HTML page.
 		let speed = ( < HTMLInputElement > document.getElementById('speed')).value;
 
+		// Here we perform a check to see if the activeItem's animation value
+		// is not equal to undefined. If the value is not equal to undefined, the
+		// function pauseAnimation is triggerd. If the value is equal to undefined
+		// the JavaScript interval function is created in which we pass the function
+		// startAnimation() and the value of the variable: "speed" as the amount
+		// of miliseconds after which the function startAnimation() has to be
+		// triggered.
 		this.activeItem.animation != undefined ? pauseAnimation() :
 			this.activeItem.animation = setInterval(function () {
 				startAnimation();
 			}, parseInt(speed));
 
+		// Here we create the nested function: "startAnimation".
 		function startAnimation() {
 
+			// Here we set the dynamic overlays by passing the activeItem as input
+			// parameter.
 			_this.setDynamicOverlays(_this.activeItem)
 
-			_this.activeItem.currentCoordinateIndex++;
+			// Here we Increment the activeItem's currentCoordinateIndex by 3.
+			_this.activeItem.currentCoordinateIndex += 3;
 
+			// Here we perform a check to see if the currentCoordinateIndex value does
+			// not exeed the length of the activeItem's coordinateList.
 			_this.activeItem.currentCoordinateIndex < _this.activeItem.coordinateList.length ? null :
 				(pauseAnimation(), _this.activeItem.currentCoordinateIndex = 0)
-		}
+		};
 
+		// Here we create the nested function: "pauseAnimation".
 		function pauseAnimation() {
 
+			// Here we clear the JavaScript interval by passing the activeItem's
+			// animation value as input parameter.
 			clearInterval(_this.activeItem.animation);
 
+			// Here we set the activeItem's animation value to undefined.
 			_this.activeItem.animation = undefined
+		};
+	};
 
-		}
-	}
+	/*
+	Here we create a function called:"clearAnimation()".
 
+	This function is used to clear an animation that is currently running. The
+	function is triggered by clicking on the clear button defined in the HTML
+	layout of the MapComponent or in the following functions:
+
+	- setLayerGroup(), this is because when a new layerGroup is set, the running
+	  animation needs te be stopped. Otherwise the data (coordinateList etc.)
+		from the new layerGroup will be used in the animation that is running.
+
+	- removeItem(), this is because when an item is removed and an animation of
+	  that item is running, error's will occur since the data used by the animation
+		is removed when removing the item.
+
+	When the function is triggered the following steps are executed:
+
+	1) The activeItem's currentCoordinateIndex is set to 0.
+
+	2) The JavaScript interval is cleared.
+
+	3) The activeItem's animation value is set to undefined.
+
+	4) The dynamic overlays are set to the new activeItem.
+
+	*/
 	clearAnimation(): void {
 
+		// Here we set the activeItem's currentCoordinateIndex to 0.
 		this.activeItem.currentCoordinateIndex = 0;
 
+		// Here we clear the JavaScript interval by passing the activeItem's
+		// animation value as input parameter.
 		clearInterval(this.activeItem.animation);
 
+		// Here we set the activeItem's animation value to undefined.
 		this.activeItem.animation = undefined;
 
+		// Here we set the dynamic overlays by passing the activeItem as input
+		// parameter.
 		this.setDynamicOverlays(this.activeItem)
-	}
+	};
+
+	/*
+	Here we create a function called: "createElevationProfile()"
+
+	This function is used to create the default chart data, create the chart
+	settings and create a ChartistJS line chart instance using the default chart
+	data and the chart settings.
+
+	The function is triggerd in the function: "loadItemData()".
+
+	The following steps are executed when the function is triggered:
+	1) Create an instance of the tooltip module.
+	2) Create the default chart data.
+	3) Create the chart settings.
+	4) Create an instance of a ChartistJS Line chart and assign it to the global
+	   variable:"elevationProfile".
+	*/
+	createElevationProfile(): void {
+
+		// Here we instantiate the tooltip module imported at the top of this file.
+		let tool = tooltip
+
+		// Here we create the default values of the chart.
+		let chartData = {
+			// We create an empty list of labels.
+			labels: [],
+			// We create a list of series with only 1 entry which is the default entry 0
+			series: [
+				[0]
+			]
+		};
+
+		// Here we create the chart settings.
+		let chartSettings = {
+			// The default max value of the chart is set to 10.
+			high: 10,
+			// The default low value of the chart is set to 0.
+			low: 0,
+			// We turn the X-axis gridlines off.
+			axisX: {
+				showGrid: false
+			},
+			// We turn the Y-axis gridlines off.
+			axisY: {
+				showGrid: false
+			},
+			// We set the area below the line to also be colored.
+			showArea: true,
+			// We turn the gridlines off.
+			showGrid: false,
+			// We turn the line off.
+			showLine: false,
+			// We turn the full chart width on.
+			fullWidth: true,
+			// We set assign the chartist tooltip plugin as plugin of the chart.
+			plugins: [
+				Chartist.plugins.tooltip()
+			]
+		};
+
+		// Here we create the chartistJS line chart instance and assign it to the
+		// global variable: "elevationProfile". We pass the default data and
+		// settings as input parameters.
+		this.elevationProfile = new Chartist.Line('.ct-chart', chartData, chartSettings);
+	};
 
 	/*
 	Here we create a function called: "loadElevationData()"
@@ -2327,74 +2463,7 @@ export class MapComponent implements OnInit {
 		};
 	};
 
-
-
 	/*
-	Here we create a function called: "createElevationProfile()"
-
-	This function is used to create the default chart data, create the chart
-	settings and create a ChartistJS line chart instance using the default chart
-	data and the chart settings.
-
-	The function is triggerd in the function: "loadItemData()".
-
-	The following steps are executed when the function is triggered:
-	1) Create an instance of the tooltip module.
-	2) Create the default chart data.
-	3) Create the chart settings.
-	4) Create an instance of a ChartistJS Line chart and assign it to the global
-	   variable:"elevationProfile".
-	*/
-	createElevationProfile(): void {
-
-		// Here we instantiate the tooltip module imported at the top of this file.
-		let tool = tooltip
-
-		// Here we create the default values of the chart.
-		let chartData = {
-			// We create an empty list of labels.
-			labels: [],
-			// We create a list of series with only 1 entry which is the default entry 0
-			series: [
-				[0]
-			]
-		};
-
-		// Here we create the chart settings.
-		let chartSettings = {
-			// The default max value of the chart is set to 10.
-			high: 10,
-			// The default low value of the chart is set to 0.
-			low: 0,
-			// We turn the X-axis gridlines off.
-			axisX: {
-				showGrid: false
-			},
-			// We turn the Y-axis gridlines off.
-			axisY: {
-				showGrid: false
-			},
-			// We set the area below the line to also be colored.
-			showArea: true,
-			// We turn the gridlines off.
-			showGrid: false,
-			// We turn the line off.
-			showLine: false,
-			// We turn the full chart width on.
-			fullWidth: true,
-			// We set assign the chartist tooltip plugin as plugin of the chart.
-			plugins: [
-				Chartist.plugins.tooltip()
-			]
-		};
-
-		// Here we create the chartistJS line chart instance and assign it to the
-		// global variable: "elevationProfile". We pass the default data and
-		// settings as input parameters.
-		this.elevationProfile = new Chartist.Line('.ct-chart', chartData, chartSettings);
-	}
-
-  /*
 	Here we create a function called: "createPortLayer()".
 
 	This function is used to create datapoints on the map which each represent
@@ -2402,8 +2471,11 @@ export class MapComponent implements OnInit {
 	list of ports as input parameter.
 
 	The following steps are executed when the function is triggered:
+
 	1) An empty list of points is created.
+
 	2) A new OpenLayers style is created.
+
 	3) A forEach loop is executed on the list of ports that is passed on the
 	   function call.
 
@@ -2411,9 +2483,12 @@ export class MapComponent implements OnInit {
 		 in the list:
 		 3.1) create a new OpenLayers feature, obtain and transform the coordinates
 		      of the entry and assign it as geometry of the newly created feature.
+
 		 3.2) Assign the point styling to the newly created feature.
+
 		 3.3) Add the newly created feature to the empty pointList which was created
 		      in the first step.
+
 	4) A new VectorLayer is created, a new VectorSource is created to which we
 	   assign the pointList (containing the features created in the previous step
 	   ) as features. We assign the newly created VectorSource as source of the
@@ -2474,4 +2549,4 @@ export class MapComponent implements OnInit {
 			// Here we set the zIndex of the portLayer to 100.
 			this.portLayer.setZIndex(100)
 	};
-}
+};

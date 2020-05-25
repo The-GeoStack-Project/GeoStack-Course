@@ -137,7 +137,7 @@ export class DatePickerComponent implements OnInit {
   // dates is inbetween the start and end dates.
   isInRange(date: NgbDate) {
       return date.after(this.startDate) && date.before(this.endDate);
-  }
+  };
 
   // Here we create a function to check which date is currently selected.
   // The value returned by this function will be marked with a blue Circle
