@@ -389,65 +389,162 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                   In this div element we add the logic related to changing layer styles
                   -->
                   <div id="styleSelection">
+                      <!-- Here we add the text which tells the user that he can change layer styling. -->
                       <li class="header-title">Change Styles:</li>
+
+                      <!-- Here we create the ngbDropdown related to changing the LineLayer styling -->
+                      <!-- We set autoClose to false to make sure the popup does not automatically close. -->
+                      <!-- We set the class to pull-left to make sure the buttons can be placed next to eachother. -->
                       <div ngbDropdown id="main-dropdown" [autoClose]="false" class="pull-left">
-                          <button class="btn btn-white" ngbDropdownToggle><i id="lineColorButton" class="material-icons">show_chart</i></button>
+                          <!-- Here we add the button which is used to open the lineLayer styling menu -->
+                          <!-- We set the icon of the button to a chart line icon. -->
+                          <button class="btn btn-white" ngbDropdownToggle><i id="lineColorButton"
+                            class="material-icons">show_chart</i></button>
+                          <!-- Here we define the popup menu which shows up when the toggle button
+                           is clicked. All the content in this div element is shown in the popup. -->
                           <div id="main-dropdown-menu"  ngbDropdownMenu>
+                              <!-- Here we add the text which tells the user that he is currently
+                              editing the lineLayer Styling -->
                               <li class="header-title">Change Line styling</li>
+                              <!-- Here we add the text which tells the user that he can change the line
+                              color using the button below -->
                               <li class="header-title">Change Line color</li>
+                              <!-- Here we add the dropdown menu which is used to select a color -->
                               <div ngbDropdown>
-                                  <button class="btn btn-white btn-block" ngbDropdownToggle>Select color: {{styleDict.color}}</button>
+                                  <!-- Here we add the button which is used to open the color selection
+                                  dropdown menu.The text of the button is set to the color which is currently
+                                  active (set in the styleDict) -->
+                                  <button class="btn btn-white btn-block" ngbDropdownToggle>
+                                    Select color: {{styleDict.color}}</button>
+                                  <!-- Here we define the dropdown menu which pops up when the color selection
+                                  button is clicked. -->
                                   <div ngbDropdownMenu>
+                                      <!-- Here we define a for each loop which loops through the colorList  -->
+                                      <!-- For each entry in the list the following code is executed. -->
                                       <ng-container *ngFor="let color of colorList | keyvalue">
-                                          <button ngbDropdownItem (click)='styleDict.color = color.key'>{{color.key}}</button>
+                                          <!-- For each color in the colorList a button is created -->
+                                          <!-- The text of the button is the key of the entry in the
+                                          JavaScriptMap (so the color name) When one of the buttons is clicked the
+                                          value belonging to the key that was clicked is set in the styleDict -->
+                                          <button ngbDropdownItem (click)='styleDict.color = color.key'>
+                                            {{color.key}}</button>
                                       </ng-container>
                                   </div>
                               </div>
+                              <!-- Here we add the text which tells the user that he can change the line width
+                              using the button below -->
                               <li class="header-title">Change Line size</li>
                               <div ngbDropdown>
-                                  <button class="btn btn-white btn-block" ngbDropdownToggle>Select width:  {{styleDict.width}}</button>
+                                  <!-- Here we add the button which is used to open the width selection
+                                  dropdown menu. The text of the button is set to the width which is currently
+                                  active (set in the styleDict) -->
+                                  <button class="btn btn-white btn-block" ngbDropdownToggle>
+                                    Select width:  {{styleDict.width}}</button>
+                                  <!-- Here we define the dropdown menu which pops up when the width selection
+                                   button is clicked. -->
                                   <div ngbDropdownMenu>
+                                      <!-- Here we define a for each loop which loops through the widthList  -->
+                                      <!-- For each entry in the list the following code is executed. -->
                                       <ng-container *ngFor="let width of widthList | keyvalue">
-                                          <button ngbDropdownItem (click)='styleDict.width = width.key'>{{width.key}}</button>
+                                          <!-- For each width in the widthList a button is created -->
+                                          <!-- The text of the button is the key of the entry in the
+                                           JavaScriptMap (so the pixel amount) When one of the buttons is clicked
+                                           the value belonging to the key that was clicked is set in the styleDict -->
+                                          <button ngbDropdownItem (click)='styleDict.width = width.key'>
+                                            {{width.key}}</button>
                                       </ng-container>
                                   </div>
                               </div>
+                              <!-- Here we add the text which tells the user that he can change the type
+                               color using the button below -->
                               <li class="header-title">Change Line type</li>
                               <div ngbDropdown>
-                                  <button class="btn btn-white btn-block" ngbDropdownToggle>Select type:  {{styleDict.type}}</button>
+                                  <!-- Here we add the button which is used to open the width selection
+                                  dropdown menu. The text of the button is set to the width which is currently
+                                  active (set in the styleDict) -->
+                                  <button class="btn btn-white btn-block" ngbDropdownToggle>
+                                    Select type:  {{styleDict.type}}</button>
+                                  <!-- Here we define the dropdown menu which pops up when the type selection
+                                   button is clicked. -->
                                   <div ngbDropdownMenu>
+                                      <!-- Here we define a for each loop which loops through the lineTypeList  -->
+                                      <!-- For each entry in the list the following code is executed. -->
                                       <ng-container *ngFor="let type of lineTypeList| keyvalue">
-                                          <button ngbDropdownItem (click)='styleDict.type = type.key'>{{type.key}}</button>
+                                          <!-- For each line type in the LineTypeList a button is created -->
+                                          <!-- The text of the button is the key of the entry in the JavaScriptMap
+                                           (so the type name) When one of the buttons is clicked the value
+                                           belonging to the key that was clicked is set in the styleDict -->
+                                          <button ngbDropdownItem (click)='styleDict.type = type.key'>
+                                            {{type.key}}</button>
                                       </ng-container>
                                   </div>
                               </div>
-                              <button class="btn btn-white btn-block" (click)='setLayerStyle("lineLayer")'> CHANGE </button>
+                              <!-- Here we define the button which is used to update lineLayer style according
+                              to the values selected by the user.-->
+                              <!-- We assign the function: "setLayerStyle()" to the button in which we pass
+                              the layerType:"lineLayer" -->
+                              <button class="btn btn-white btn-block" (click)='setLayerStyle("lineLayer")'>
+                                 CHANGE </button>
                           </div>
                       </div>
 
+                      <!-- Here we create the ngbDropdown related to changing the markerLayer styling -->
+                      <!-- We set autoClose to false to make sure the popup does not
+                      automatically close.We set the class to pull-left to make sure the buttons can
+                      be placed next to eachother. -->
                       <div ngbDropdown id="main-dropdown" [autoClose]="false" class="pull-left">
-                          <button class="btn btn-white" ngbDropdownToggle><i class="material-icons">gps_fixed</i></button>
+                          <!-- Here we add the button which is used to open the markerLayer styling menu -->
+                          <!-- We set the icon of the button to a GPS logo icon. -->
+                          <button class="btn btn-white" ngbDropdownToggle><i class="material-icons">
+                            gps_fixed</i></button>
+                          <!-- Here we define the popup menu which shows up when the toggle button is clicked. -->
+                          <!-- All the content in this div element is shown in the popup. -->
                           <div id="main-dropdown-menu"  ngbDropdownMenu>
+                              <!-- Here we add the text which tells the user that he is currently
+                              editing the markerLayer Styling -->
                               <li class="header-title">Change marker styling</li>
+                              <!-- The text of the button is set to the color which is currently
+                              active (set in the styleDict) -->
                               <li class="header-title">Change marker color</li>
                               <div ngbDropdown>
-                                  <button class="btn btn-white btn-block" ngbDropdownToggle>Select color {{styleDict.color}}</button>
+                                  <!-- Here we add the button which is used to open the color
+                                  selection dropdown menu. The text of the button is set to the color
+                                  which is currently active (set in the styleDict) -->
+                                  <button class="btn btn-white btn-block" ngbDropdownToggle>
+                                    Select color {{styleDict.color}}</button>
+                                  <!-- Here we define the dropdown menu which pops up when the width
+                                  selection button is clicked. -->
                                   <div ngbDropdownMenu>
+                                      <!-- Here we define a for each loop which loops through the colorList  -->
+                                      <!-- For each entry in the list the following code is executed. -->
                                       <ng-container *ngFor="let color of colorList | keyvalue">
-                                          <button ngbDropdownItem (click)='styleDict.color = color.key'>{{color.key}}</button>
+                                          <!-- For each line type in the LineTypeList a button is created -->
+                                          <!-- The text of the button is the key of the entry in the
+                                          JavaScriptMap (so the type name) When one of the buttons is clicked
+                                          the value belonging to the key that was clicked is set in the styleDict -->
+                                          <button ngbDropdownItem (click)='styleDict.color = color.key'>
+                                            {{color.key}}</button>
                                       </ng-container>
                                   </div>
                               </div>
-                              <button class="btn btn-white btn-block" (click)='setLayerStyle("markerLayer")'> CHANGE </button>
+                              <!-- Here we define the button which is used to update markerLayer style
+                              according to the values selected by the user.-->
+                              <!-- We assign the function: "setLayerStyle()" to the button in which we
+                              pass the layerType:"markerLayer" -->
+                              <button class="btn btn-white btn-block" (click)='setLayerStyle("markerLayer")'>
+                                 CHANGE </button>
                           </div>
                       </div>
 
+                      <!-- Here we create the ngbDropdown related to changing the pointLayer styling -->
+                      <!-- We set autoClose to false to make sure the popup does not automatically close. -->
+                      <!-- We set the class to pull-left to make sure the buttons can be placed next to eachother. -->
                       <div ngbDropdown id="main-dropdown" [autoClose]="false" class="pull-left">
-                          <button class="btn btn-white" ngbDropdownToggle><i class="material-icons">navigation</i></button>
+                          <button class="btn btn-white" ngbDropdownToggle><i class="material-icons">
+                            navigation</i></button>
                       </div>
+
                   </div>
-
-
                   <!--
                   In this div element we add the logic related to animating the route.
                   -->

@@ -2013,49 +2013,133 @@ export class MapComponent implements OnInit {
 	empty but when the user changes the styling of a layer, the selected values
 	will be assigned to the correct entry in the styleDict.
 
+	The following steps are executed in this function:
+	1) A switch case is executed which does the following depending on the layerType
+	   which was passed as input parameter on the function call.
+
+     incase the layerType is equal to lineLayer:
+
+		 A new OpenLayers LineStyle (stroke) is created using the values which are
+		 set in the styleDict (selected by the user in the application) as
+		 values for the:
+		 - width by calling this.styleDict['width']
+		 - color by calling  this.styleDict['color']
+		 - lineType by calling this.styleDict['type']
+
+		 The linelayer object Style of the currently active layerGroup is then changed
+		 using the following syntax:
+
+		 activeLayerGroup.lineLayer[layer].getSource() to obtain the layer source.
+		 .getFeatures() to obtain the features in the lineLayer source.
+		 .setStyle() to change the styling of all the features. The newly created
+		 style is passed as parameter in the setStyle() function call.
+
+		 incase the layerType is equal to markerLayer:
+
+		 A new OpenLayers IconStyle (image) is created for both the Start and End
+		 Markers. We use the color set in the styleDict (selected by the user in
+	   the application) to specify the image src (Source). These images represent
+		 the pins which are found in the folder: assets/img/pins.
+
+		 We pass the selected color in the source link. For example:
+		 `assets/img/pins/pin_s_${this.styleDict.color}.png`
+
+		 would become:
+		 `assets/img/pins/pin_s_Red.png`
+
+		 if the user selected the color red in the application.
+
+		 After the new styles have been created the overlay HTML element of the
+		 GeoMaker (the dot that moves along the visualized route when animating)
+		 is obtained. The color of the dot is set to color which was selected by
+		 the user.
+
+		 Finally the Start and End marker styles are updated using the same method
+		 as mentioned above when changing the lineLayer style. We pass the new marker
+		 styles as input parameter in the .setStyle() function.
+
+
+		 incase the layerType is equal to pointLayer:
+		 At this point the functionality for changing the SVG icon representing the
+		 arrows has not been implemented. You could do this yourself if you would like.
 
 	*/
 	setLayerStyle(layerType: string): void {
+
+		// Here we define the switch/case statement which determines what to do next
+		// depending on the layerType which was passed on the function call.
 		switch (layerType) {
+
+			// The following code is executed when the layerType == lineLayer
 			case 'lineLayer':
 
+				// Here we create a new line style (stroke) and assign it to a variable
+				// called: "newLineStyle"
 				let newLineStyle = new ol.style.Style({
 					stroke: new ol.style.Stroke({
+					  // Here we obtain the value of the widthList entry using the width
+						// entry in the styleDict (which was set by the user).
 						width: this.widthList.get(this.styleDict['width']),
+						// Here we obtain the value of the colorList entry using the color
+						// entry in the styleDict (which was set by the user).
 						color: this.colorList.get(this.styleDict['color']),
+						// Here we obtain the value of the lineTypeList entry using the type
+						// entry in the styleDict (which was set by the user).
 						lineDash: this.lineTypeList.get(this.styleDict['type'])
 					}),
+					// We set the zIndex of the layer to 3 to make sure the layer is shown
+					// below the marker and point layer.
 					zIndex: 3
 				})
 
+				// Here we update the activeLayerGroup LineLayer style using the newLineStyle.
 				this.activeItem.activeLayerGroup['lineLayer']['layer'].getSource().getFeatures()[0].setStyle(newLineStyle)
 
 				break;
 
+			// The following code is executed when the layerType == markerLayer
 			case 'markerLayer':
+			  // Here we create a new Startmarker style (image) and assign it to a variable
+		    // called: "newStartMarkerStyle"
 				let newStartMarkerStyle = new ol.style.Style({
 					image: new ol.style.Icon({
+						// Here we set the amount of Pixels on which the icon should be displayed.
 						anchor: [0.5, 1],
+						// Here we set the source location of the pin using the color value in
+						// the styleDict.
 						src: `assets/img/pins/pin_s_${this.styleDict.color}.png`
 					}),
+					// We set the zIndex of the layer to 5 to make sure the layer is shown
+					// above the LineLayer.
 					zIndex: 5
 				})
 
+				// Here we create a new Endmarker style (image) and assign it to a variable
+		    // called: "newEndMarkerStyle"
 				let newEndMarkerStyle = new ol.style.Style({
 					image: new ol.style.Icon({
+					  // Here we set the amount of Pixels on which the icon should be displayed.
 						anchor: [0.5, 1],
+						// Here we set the source location of the pin using the color value in
+						// the styleDict.
 						src: `assets/img/pins/pin_e_${this.styleDict.color}.png`
 					}),
+					// We set the zIndex of the layer to 5 to make sure the layer is shown
+					// above the LineLayer.
 					zIndex: 5
 				})
 
+				// Here we set the div element styling of the GeoMaker to have the color set by the user.
 				document.getElementById('geomarker').style["background-color"] = this.colorList.get(this.styleDict.color)
 
+				// Here we update the endMarker styling using the newEndMarkerStyle.
 				this.activeItem.activeLayerGroup['markerLayer']['layer'].getSource().getFeatures()[1].setStyle(newEndMarkerStyle)
 
+				// Here we update the startMarker styling using the newStartMarkerStyle.
 				this.activeItem.activeLayerGroup['markerLayer']['layer'].getSource().getFeatures()[0].setStyle(newStartMarkerStyle)
 				break;
 
+			// The following code is executed when the layerType == pointLayer.
 			case 'pointLayer':
 				break;
 		}
