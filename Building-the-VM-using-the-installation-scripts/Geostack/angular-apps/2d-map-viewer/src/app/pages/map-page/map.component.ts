@@ -318,13 +318,13 @@ export class MapComponent implements OnInit {
 	Here we create a global variable called: "elevationProfile".
 	After creating an instance of the elevation profile, this instance will
 	be assigned to this variable.*/
-	private elevationProfile: any;
+	public elevationProfile: any;
 
 	/*
 	Here we create a global variable called: "elevationProfileOpen". The value
 	of this variable will either be TRUE or FALSE depending on whether the
 	elevation profile is opened or not.*/
-	private elevationProfileOpen: boolean;
+	public elevationProfileOpen: boolean;
 
 	/*
 	Here we create the class constructor of the MapComponent. We pass the map and
@@ -2260,89 +2260,218 @@ export class MapComponent implements OnInit {
 		this.setDynamicOverlays(this.activeItem)
 	}
 
+	/*
+	Here we create a function called: "loadElevationData()"
+
+	This function is used to load the elevation data from a selected item in the
+	ChartistJS elevation profile which is created in the function:
+	"createElevationProfile()".
+
+	The function is triggerd in the function: "setStaticOverlays()" since every
+	time the setStaticOverlays are set, the elevationData also needs to be loaded.
+
+	The following steps are executed when the function is triggered:
+	1) The elevationData is obtained from the activeItem's activeLayerGroup
+	   lineLayer.
+  2) A check is performed to see if the elevation profile is open.
+
+	   If this is the case a JavaScript timeout method is called.
+
+		 The JavaScript timeout method is used to wait an N amount of time before
+		 the code inside the timeout method is executed. We do this because
+		 we need to wait one second after the elevationProfile is opened to load
+		 the data. If we don't do this, some errors will occur.
+
+		 The code inside the JavaScript timeout method will update the elevationProfile
+		 by passing the elevation data as series in the ChartistJS chart.
+
+		 The max en min values of the Chart are also updated by calculating the
+		 highest and lowest values of in the elevationData.
+	*/
 	loadElevationData(): void {
 
+		// Here we assign the variable this to a variable: "_this".
+		// This is required to access global variables in nested functions.
 		let _this = this;
 
+		// Here we obtain the activeLayerGroup's altitudes (elevationData). This
+		// data was assigned to the layer in the function:"addLayerGroup()".
 		let elevationData = this.activeItem.activeLayerGroup['lineLayer']['altitudes'];
 
+		// Here we perform a check to see if the elevationProfile is opened.
 		if (this.elevationProfileOpen) {
+			// Here we create the JavaScript timeout method.
+			// All the code inside this method is executed after 1 second.
 			setTimeout(function () {
+			// Here we update the elevationProfile by using the syntax:"profile.update".
  			_this.elevationProfile.update({
+				  // We set the metadata of the data points to: "height Above MSL".
+					// This is the text that is shown in the tooltip when hovering over
+					// the graphLine.
 					series: [{
 						meta: 'Height above MSL',
+						// We set the values of the series to contain the list of elevationData.
+						// We use the slice method to make sure only 1000 datapoints are shown
+						// in the elevationProfile. This is because the profile will become
+						// very laggy if there are more than 100 datapoints selected.
 						value: elevationData.slice(0, 1000)
 					}]
 				}, {
+					// Here we set the highest y-axis value to the highest value in the
+					// list of elevation data.
 					high: Math.max(...elevationData.slice(0, 1000)),
+					// Here we set the lowest y-axis value to the lowest value in the
+					// list of elevation data.
 					low: Math.min(...elevationData.slice(0, 1000))
-				}, true)}
-			, 1);
+				}, true)}, 1);
 		};
-	}
+	};
 
+
+
+	/*
+	Here we create a function called: "createElevationProfile()"
+
+	This function is used to create the default chart data, create the chart
+	settings and create a ChartistJS line chart instance using the default chart
+	data and the chart settings.
+
+	The function is triggerd in the function: "loadItemData()".
+
+	The following steps are executed when the function is triggered:
+	1) Create an instance of the tooltip module.
+	2) Create the default chart data.
+	3) Create the chart settings.
+	4) Create an instance of a ChartistJS Line chart and assign it to the global
+	   variable:"elevationProfile".
+	*/
 	createElevationProfile(): void {
+
+		// Here we instantiate the tooltip module imported at the top of this file.
 		let tool = tooltip
 
+		// Here we create the default values of the chart.
 		let chartData = {
+			// We create an empty list of labels.
 			labels: [],
+			// We create a list of series with only 1 entry which is the default entry 0
 			series: [
 				[0]
 			]
-		}
+		};
 
+		// Here we create the chart settings.
 		let chartSettings = {
+			// The default max value of the chart is set to 10.
 			high: 10,
+			// The default low value of the chart is set to 0.
 			low: 0,
+			// We turn the X-axis gridlines off.
 			axisX: {
 				showGrid: false
 			},
+			// We turn the Y-axis gridlines off.
 			axisY: {
 				showGrid: false
 			},
+			// We set the area below the line to also be colored.
 			showArea: true,
+			// We turn the gridlines off.
 			showGrid: false,
+			// We turn the line off.
 			showLine: false,
+			// We turn the full chart width on.
 			fullWidth: true,
+			// We set assign the chartist tooltip plugin as plugin of the chart.
 			plugins: [
 				Chartist.plugins.tooltip()
 			]
-		}
+		};
 
+		// Here we create the chartistJS line chart instance and assign it to the
+		// global variable: "elevationProfile". We pass the default data and
+		// settings as input parameters.
 		this.elevationProfile = new Chartist.Line('.ct-chart', chartData, chartSettings);
 	}
 
+  /*
+	Here we create a function called: "createPortLayer()".
+
+	This function is used to create datapoints on the map which each represent
+	a port. The function is triggered in the function:"getItems()" and takes a
+	list of ports as input parameter.
+
+	The following steps are executed when the function is triggered:
+	1) An empty list of points is created.
+	2) A new OpenLayers style is created.
+	3) A forEach loop is executed on the list of ports that is passed on the
+	   function call.
+
+		 The forEach loop does the following for each of the entries (ports)
+		 in the list:
+		 3.1) create a new OpenLayers feature, obtain and transform the coordinates
+		      of the entry and assign it as geometry of the newly created feature.
+		 3.2) Assign the point styling to the newly created feature.
+		 3.3) Add the newly created feature to the empty pointList which was created
+		      in the first step.
+	4) A new VectorLayer is created, a new VectorSource is created to which we
+	   assign the pointList (containing the features created in the previous step
+	   ) as features. We assign the newly created VectorSource as source of the
+		 newly created VectorLayer.
+
+	5) The zIndex of the portLayer is set to 100 to make sure the layer is
+	   displayed on top of all the other layers.
+
+	*/
 	createPortLayer(ports){
+		  // Here we create an empty list of points.
 			let points = []
 
+			// Here we create the styling of the datapoints
 			let pointStyle = new ol.style.Style({
 					image: new ol.style.Circle({
+						  // We set the inside of the Circle to lightRed
 							fill: new ol.style.Fill({
 									color: 'rgba(178,34,34, 0.7)'
 							}),
+						  // We set the border of the Circle to darkRed with a width of 1
+							// pixel
 							stroke: new ol.style.Stroke({
 									width: 1,
 									color: 'rgba(178,34,34, 1)'
 							}),
+							// We set the radius of the circle (size) to 3 pixels.
 							radius: 3,
 					}),
 			});
 
+			// Here we create a forEach loop which loops through all the entries in
+			// the list of ports which is passed on the function call.
 			ports.forEach(coord => {
+				   // Here we create a new Feature. We transform the coordinates
+					 // in the portList to a format which OpenLayers understands.
+					 // We assign the transformed coordinates as geometry of the newly
+					 // created feature.
 					 let point = new ol.Feature({
 							 geometry: new ol.geom.Point(ol.proj.fromLonLat(coord)),
 					 });
 
-					//Set the style of the points
+					// Set the style of the newly created feature using the pointStyle
+					// which we created earlier.
 					point.setStyle(pointStyle)
-					//Add the point to our point list
+
+					//Add the newly created feature (point) to the empty pointList.
 					points.push(point);
 			})
 
+			// Here we create a new VectorLayer and VectorSource to which we assign
+			// the pointList (containing all the point features). We assign the
+			// newly created VectorLayer to the global variable:"portLayer".
 			this.portLayer = new ol.layer.Vector({
 					source: new ol.source.Vector({features: points}),
 			});
 
+			// Here we set the zIndex of the portLayer to 100.
 			this.portLayer.setZIndex(100)
 	};
 }
