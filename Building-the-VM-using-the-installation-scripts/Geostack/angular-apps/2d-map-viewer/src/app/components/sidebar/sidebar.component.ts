@@ -39,6 +39,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/base-page', title: 'Base Page', icon: 'map', class: '' },
 ];
 
+
 /*
 Here we define the component metadata. The following applies to the code below:
 - The selector is going to be: "app-sidebar", so when we want to use this
