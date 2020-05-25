@@ -1,8 +1,18 @@
+<!-- Below we create an HTML element: "nav" because of this element the application
+know that everything inside this element had to do with the navigation bar.  -->
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
+    <!-- Below we create a div element with the class container-fluid this
+    class makes sure everything inside this div element is displayed over the
+    full width of the screen.-->
     <div class="container-fluid">
         <div class="navbar-wrapper">
+          <!-- Below we add the title of our sidebar, we call the function
+          getTitle() defined in our navbar.component.ts file-->
           <a class="navbar-brand">{{getTitle()}}</a>
         </div>
+        <!-- Below we create the button which is the navabar Toggle, we add
+        3 bars using <span> tags. We add the sidebarToggle() function, defined
+        in our navbar.component.ts file a onClick function.-->
         <button mat-raised-button class="navbar-toggler" (click)="sidebarToggle()">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -11,4 +21,3 @@
         </button>
     </div>
 </nav>
-

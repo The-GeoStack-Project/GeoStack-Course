@@ -34,7 +34,6 @@ import { NavbarComponent } from '../app/components/navbar/navbar.component';
 to the declarations section in this file.*/
 import { BaseComponent } from '../app/pages/base-page/base-page.component';
 
-
 /*Here we import the map component which is our map page and will be added
 to the declarations section in this file.*/
 import { MapComponent } from '../app/pages/map-page/map.component';
