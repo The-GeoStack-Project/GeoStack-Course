@@ -1,15 +1,13 @@
-<!-- Here we add the empty div elements related to the overlays. -->
-<div id="geomarker" style="background-color: red; height: 10px; width: 10px; border-radius: 100px;"></div>
-<div id="geomarkerInfo" class="hint--no-animate hint--right hint--always" data-hint=""></div>
-<div id="startmarkerInfo" class="hint--no-animate hint--right hint--always" data-hint=""></div>
-<div id="endmarkerInfo" class="hint--no-animate hint--left hint--always " data-hint=""></div>
-
 <!--
 Here we create a div element to which the OpenLayers map will be assigned
 We give the div a height of 100vh (Full screen height) and a width of 100%
 which is the full width of the screen. -->
 <div id="map" style="height: 100vh; width: 100%;"></div>
 
+<div id="geomarker" style="background-color: red; height: 10px; width: 10px; border-radius: 100px;"></div>
+<div id="geomarkerInfo" class="hint--no-animate hint--right hint--always" data-hint=""></div>
+<div id="startmarkerInfo" class="hint--no-animate hint--right hint--always" data-hint=""></div>
+<div id="endmarkerInfo" class="hint--no-animate hint--left hint--always " data-hint=""></div>
 <!--
 In this div element all the logic related to the map settings is added.
 The class: "fixed-plugin" make sure the settings menu is shown on the web page.
@@ -37,7 +35,7 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
             from our application.
             -->
             <div id="settings">
-              <!--
+                <!--
                 In this div element we add the logic for switching between map
                 providers.
                 -->
@@ -132,7 +130,6 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                         </div>
                     </div>
                 </div>
-
                 <!--
                 All the logic in the following div element will only be displayed when
                 one or more items are selected and thus the size of the selectedItems list
@@ -231,60 +228,34 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                                   Zoom to start marker</button>
                             </div>
                         </div>
-                  </div>
+                    </div>
 
-                  <!--
-                  In this div element we add the logic related to switching between layergroups
-                  and selecting multiple timeframes
-                  -->
-                  <div id="dateSelection" style="height: 100px;">
-                       <!-- Here we add the text which is used to display the timeframe which is currently active -->
-                       <li class="header-title">Current timeframe: {{activeItem.dateRangeSelected}}</li>
-                       <!-- Here we add the text which is used to tell the user that he can add extra timeframes -->
-                       <li class="header-title">Select one or more timeframes:</li>
-                       <!-- Here we add an ngbDropdown element -->
-                       <div ngbDropdown class="pull-left">
-                          <!-- Here we add the button which is used to open the selected
-                             layerGroups dropdown-box and switch between layerGroups -->
-                          <button class="btn btn-white btn-block" ngbDropdownToggle>
-                          Selected DTGs: {{activeItem.layerGroups.size}}</button>
-                          <!-- Here we add theh popup that opens when the dropdown button is clicked related to
-                             switching between selected timeframes. All the code inside this div element is shown
-                             in the popup-->
-                          <div ngbDropdownMenu>
-                             <!-- Here we add a for loop which makes sure that all the selectedDTG's (layerGroups)
-                                are added in the dropdown box -->
-                             <ng-container *ngFor="let group of activeItem.layerGroups | keyvalue; let i = index">
-                                <!-- Here we add a button for each of the selected layerGroups
-                                   if a layerGroup is clicked the function: "setLayerGroup()" is triggerd to make
-                                   the clicked layergroup the activeLayerGroup -->
-                                <button ngbDropdownItem (click)="setLayerGroup(group.key)">
-                                   {{i+1}}: {{group.key}}
-                                   <!-- Here we add the icon which is used to remove a layerGroup. -->
-                                   <a class="material-icons" style="color: red; margin-left: 15px;"
-                                      (click)='removeLayerGroup(group.key)'>not_interested</a>
-                                </button>
-                             </ng-container>
+                    <!--
+                    In this div element we add the logic related to switching between layergroups
+                    and selecting multiple timeframes
+                    -->
+                    <div id="dateSelection" style="height: 100px;">
+                      <li class="header-title">Current timeframe: {{activeItem.dateRangeSelected}}</li>
+                      <li class="header-title">Select one or more timeframes:</li>
+                      <div ngbDropdown class="pull-left">
+                              <button class="btn btn-white btn-block" ngbDropdownToggle>Selected DTGs: {{activeItem.layerGroups.size}}</button>
+                              <div ngbDropdownMenu>
+                                  <ng-container *ngFor="let group of activeItem.layerGroups | keyvalue; let i = index">
+                                      <button ngbDropdownItem (click)="setLayerGroup(group.key)">{{i+1}}: {{group.key}}
+                                          <a class="material-icons" style="color: red; margin-left: 15px;" (click)='removeLayerGroup(group.key)'>not_interested</a>
+                                      </button>
+                                  </ng-container>
+                              </div>
                           </div>
-                       </div>
-
-                       <!-- Here we add another ngbDropdown which is used to select new DTG's -->
-                       <div ngbDropdown id="main-dropdown"  [autoClose]="false" class="pull-right">
-                          <!-- Here we add a button which is used to open the date selection menu -->
+                      <div ngbDropdown id="main-dropdown"  [autoClose]="false" class="pull-right">
                           <button class="btn btn-white" ngbDropdownToggle>
-                          <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                              <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
                           </button>
-
-                          <!-- Here we add the popup which will open when the calendar icon is clicked -->
                           <div id="main-dropdown-menu" ngbDropdownMenu >
-                             <!-- Here we add te text displayed in the popup -->
-                             <li class="header-title">Add new datetime group:</li>
-                             <!-- Here we add the DateTimePicker component
-                             we assign the function: "getDTGEvent()" to th component -->
-                             <dtgpicker [dateRange]="dateRange" (dateEvent)="getDTGEvent(activeItem.id,$event);">
-                             </dtgpicker>
+                              <li class="header-title">Add new datetime group:</li>
+                              <dtgpicker [dateRange]="dateRange" (dateEvent)="getDTGEvent(activeItem.id,$event);"></dtgpicker>
                           </div>
-                       </div>
+                      </div>
                   </div>
 
                   <!--
@@ -325,31 +296,30 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                                     </button>
                                 </div>
                         </div>
-                  </div>
-
-                  <!--
-                  In this div element we add the logic related to selecting all data in a given polygone
-                  -->
-                  <div id="countrySelection">
-                     <!-- Here we create a ngbDropdown related to selecting countries -->
-                     <div ngbDropdown>
-                        <!-- Here we add the dropdown button which is used to open the dropdown list -->
-                        <button class="btn btn-white btn-block" ngbDropdownToggle>Choose from Country:</button>
-                        <div ngbDropdownMenu>
-                           <!-- Here we add a forEach loop which loops trough all the entries in the JavaScriptMap:
-                              "countryList".-->
-                           <ng-container *ngFor="let country of countryList | keyvalue; let i = index;">
-                              <!-- For each entry in the countryList a button is created.
-                                 We assign the key of the entry (the country name) as text to the button.
-                                 We also assign the function: "getItemDataByCountry()" to the button in which we pass
-                                 the activeItem and the set of coordinates (the polygon) belonging to the clicked country. -->
-                              <button ngbDropdownItem
-                                 (click)='getItemDataByCountry(activeItem,country.value)'>{{i + 1}}: {{country.key}}
-                              </button>
-                           </ng-container>
-                        </div>
-                     </div>
-                  </div>
+                    </div>
+                    <!--
+                       In this div element we add the logic related to selecting all data in a given polygone
+                       -->
+                    <div id="countrySelection">
+                       <!-- Here we create a ngbDropdown related to selecting countries -->
+                       <div ngbDropdown>
+                          <!-- Here we add the dropdown button which is used to open the dropdown list -->
+                          <button class="btn btn-white btn-block" ngbDropdownToggle>Choose from Country:</button>
+                          <div ngbDropdownMenu>
+                             <!-- Here we add a forEach loop which loops trough all the entries in the JavaScriptMap:
+                                "countryList".-->
+                             <ng-container *ngFor="let country of countryList | keyvalue; let i = index;">
+                                <!-- For each entry in the countryList a button is created.
+                                   We assign the key of the entry (the country name) as text to the button.
+                                   We also assign the function: "getItemDataByCountry()" to the button in which we pass
+                                   the activeItem and the set of coordinates (the polygon) belonging to the clicked country. -->
+                                <button ngbDropdownItem
+                                   (click)='getItemDataByCountry(activeItem,country.value)'>{{i + 1}}: {{country.key}}
+                                </button>
+                             </ng-container>
+                          </div>
+                       </div>
+                    </div>
                   <!--
                   In this div element we add the logic related to toggling layers and overlay
                   -->
@@ -415,7 +385,6 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                           </div>
                       </div>
                   </div>
-
                   <!--
                   In this div element we add the logic related to changing layer styles
                   -->
@@ -574,37 +543,24 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                           <button class="btn btn-white" ngbDropdownToggle><i class="material-icons">
                             navigation</i></button>
                       </div>
-                  </div>
 
+                  </div>
                   <!--
                   In this div element we add the logic related to animating the route.
                   -->
                   <div id="animationSelection"  style="margin-top:55px;">
-                      <!-- Here we add the title which tells the user that he can animate the route. -->
-                      <li class="header-title"> Animate the route: </li>
-                      <!-- Here we add the speed slider which is used to set the speed in which
-                      the route has to be played -->
+                      <li class="header-title">
+                          Animate the route:
+                      </li>
                       <div class="input-group no-border">
-                          <!-- Here we define the slider. We set the id to speed, the min value to -100,
-                           the max value to 200, the increment steps to 10 and the start value to 100.
-                           we also set the direction to RTL which makes sure the steps are inverted. -->
-                          <input #speed id="speed" type="range" min="-100" max="200"
-                          step="10" value="100" style="direction: rtl;" />
+                          <input #speed id="speed" type="range" min="-1000" max="200" step="10" value="100" style="direction: rtl;" />
                       </div>
-                      <!-- Here we define the start button. If the value of the activeItem's animation
-                      is equal to undefined, this button is shown. We assign the function
-                      animateRoute() to the button. -->
                       <div *ngIf="activeItem.animation == undefined">
                           <button class="btn btn-white pull-left" (click)='animateRoute();'>Start</button>
                       </div>
-                      <!-- Here we define the pause button. If the value of the activeItem's animation
-                      is not equal to undefined, this button is shown. We assign the function
-                      animateRoute() to the button. -->
                       <div *ngIf="activeItem.animation != undefined">
                           <button class="btn btn-white pull-left" (click)='animateRoute();'>Pause</button>
                       </div>
-                      <!-- Here we define the button which is used to clear any running animations. We
-                      assign the function: "clearAnimation" to this button. -->
                       <button class="btn btn-white pull-left" (click)='clearAnimation()'>Clear</button>
                   </div>
                 </div>
@@ -614,41 +570,22 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
 </div>
 
 
-<!-- Here we definean angular if statement which determines if the length
-of the selectedItems list is bigger than 0. If this is the case the following
-HTML code will be executed. -->
 <div *ngIf="selectedItems.length> 0">
-    <!-- Here we define a new fixed plu
-    gin which is shown on the map. -->
     <div class="fixed-plugin-chart" id="fixed-plugin-chart">
-        <!-- Here we define a new ngbDropdown. We set autoClose to false so that is does not
-        automatically closes when the user clicks somewhere. -->
         <div ngbDropdown [autoClose]="false">
-            <!-- Here we create the button which is used to open or close the elevationProfile.
-             If the button is clicked the elevationProfileOpen variable is set to True and the
-             elevationData is loaded using the function:"loadElevationData()" -->
-            <a ngbDropdownToggle
-            (click)='elevationProfileOpen = elevationProfileOpen ? false:true; loadElevationData() '>
-                <!-- We give the button a chart icon. -->
+            <a ngbDropdownToggle (click)='elevationProfileOpen = elevationProfileOpen ? false:true; loadElevationData() '>
                 <i class="fa fa-area-chart fa-2x" style="color: white; padding: 5px 0px 10px 0px;"> </i>
             </a>
-            <!-- Here we define the ngbDropdown menu popup -->
             <div ngbDropdownMenu id="main-dropdown-menu">
-               <!-- Here we create the ChartistJS chart.-->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-chart">
                             <div class="card-header card-header-primary">
-                               <!-- Here we add the element to which the Chart will be assigned
-                                after it has been created. -->
                                 <div class="ct-chart" id="elevationProfile"></div>
                             </div>
-                            <!-- Here we set the text displayed below the ChartistJS chart.
-                            We obtain the activeItem's type and name.-->
                             <div class="card-body">
-                                <h4 class="card-title">
-                                 Elevation Profile (Metres above sealevel)
-                                 from {{activeItem.type}}: {{activeItem.name}}</h4>
+                                <h4 class="card-title"
+                                >Elevation Profile (Metres above sealevel) from {{activeItem.type}}: {{activeItem.name}}</h4>
                             </div>
                         </div>
                     </div>
