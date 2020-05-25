@@ -2145,13 +2145,85 @@ export class MapComponent implements OnInit {
 		}
 	}
 
+
+	/*
+	Here we create a function called:"animateRoue()".
+
+	This function is used to animate a route which is visualized on the OpenLayers
+	map. This function is bound to a button in the HTML layout page of the
+	MapComponent.
+
+	This function contains 2 nested functions which are as follows:
+	- startAnimation, which is only triggered if NO animation is running.
+	- pauseAnimation, which is only triggered if AN animation is running.
+
+	When the button is clicked and the function is triggered the following
+	steps are executed:
+
+	1) The value of the slider (related to the speed of the animation) is obtained
+	   from the HTML page.
+
+	2) A check is performed to see if the animation value of the activeItem is
+	   not equal to undefined.
+
+		 If this is not the case (so the value of the animation is equal to undefined)
+		 It means that no animation is running so that an animation has to be started.
+		 this is done by creating a JavaScript interval method and assigning the
+		 value of the interval to the activeItem's animation (so it's not undefined)
+		 anymore.
+
+		 The javascript interval method is used to trigger a function after a N amount
+		 of seconds / miliseconds. The N amount of seconds is the value of the speed
+		 slider which is set by the user in the application.
+
+		 The function that is triggered in the JavaScript interval method is the
+		 nested function: "startAnimation()". This function does the following when
+		 it's triggerd:
+
+		 1) Trigger the function: "setDynamicOverlays()" to make sure the GeoMaker
+		 		and the GeoMaker information box are updated.
+
+		 2) Increment the activeItem's currentCoordinateIndex by 3 to make sure
+		    that the coordinateList and datetimeList values are also updated.
+				As mentioned before; using the JavaScript interval method will make
+				sure that the function:"startAnimation()" is triggered multiple times.
+				So each time the startAnimation() function is triggered, the
+				currentCoordinateIndex will be incremented by +3 to make sure the geomarker
+				moves and the geoMarkerInfo overlay also moves.
+
+		 3) A check is performed to see if the activeItem's currentCoordinateIndex
+		    is lower than the length of the activeItem's coordinateList.
+				If this is the case (so the currentCoordinateIndex is lower) nothing
+				will happen and the function: "startAnimation()" will be triggered again
+				using the JavaScript interval method.
+
+				If this is not the case (so the currentCoordinateIndex is higher) it
+				means that the animation reached the end of the visualized route so the
+				animation has to be paused using the nested function: "pauseAnimation()".
+				The activeItem's currentCoordinateIndex is also set to 0 to make sure
+				the animation can start again if the user clicks on the start button
+				again.
+
+		 If the activeItem's animation value is no equal to undefined it means an
+		 animation is currently running (because an interval is assigned to the
+	   activeItem's animation) so the animation has to be paused. This is
+		 done by calling the function: "pauseAnimation()".
+
+		 The function pauseAnimation() does the following when it's triggered:
+
+		 1) Clear the JavaScript interval which was assigned to the activeItem's
+		    animation value.
+
+		 2) Set the activeItem's animation value to undefined. This makes sure that
+		    the animation can be restarted if the user clicks on the start button
+				again.
+
+	*/
 	animateRoute(): void {
 
 		let _this = this;
 
 		let speed = ( < HTMLInputElement > document.getElementById('speed')).value;
-
-		console.log(speed)
 
 		this.activeItem.animation != undefined ? pauseAnimation() :
 			this.activeItem.animation = setInterval(function () {
@@ -2162,7 +2234,6 @@ export class MapComponent implements OnInit {
 
 			_this.setDynamicOverlays(_this.activeItem)
 
-			_this.activeItem.currentCoordinateIndex++;
 			_this.activeItem.currentCoordinateIndex++;
 
 			_this.activeItem.currentCoordinateIndex < _this.activeItem.coordinateList.length ? null :
