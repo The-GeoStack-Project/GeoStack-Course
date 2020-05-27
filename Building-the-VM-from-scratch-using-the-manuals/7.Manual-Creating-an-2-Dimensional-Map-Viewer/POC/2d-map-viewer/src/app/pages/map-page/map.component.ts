@@ -1200,7 +1200,7 @@ export class MapComponent implements OnInit {
 			// only happen if an animation is running. This is done because otherwise
 			// the animation of the previous active layer group will keep running when
 			// selecting a new layer group.
-			//this.clearAnimation();
+			this.clearAnimation();
 
 			// Here we assign the layer group selector (which is the dateRange of the
 			// selected layerGroup) to the variable:"dateRangeSelected".
@@ -1243,7 +1243,7 @@ export class MapComponent implements OnInit {
 
 			// Here we call the function toggleOverlay and pass "all" as parameter.
 			// This makes sure the old overlays are removed from the map.
-			//this.toggleOverlay("all");
+			this.toggleOverlay("all");
 
 			// Here we create the new static overlays (start and end marker overlays)
 			// using the information (assigned in the lines above) of the current item.
@@ -1592,7 +1592,7 @@ export class MapComponent implements OnInit {
 		 If the itemId of the item to remove is the same as the id of the item that
 		 is currently active. Change the activeItem to the next item in the list.
 		*/
-		this.activeItem.id == item.id ? (
+		this.activeItem.id == item.id ? (this.clearAnimation(),
 				this.selectItem(this.selectedItems.values().next().value)) :
 			null;
 
@@ -1731,7 +1731,7 @@ export class MapComponent implements OnInit {
 		let item = this.activeItem;
 
     // Here we clear the animation if any is running.
-		//this.clearAnimation()
+		this.clearAnimation()
 
     // Here we obtain the layerGroup which has to be removed from the
     // layerGroups JavaScriptMap using the layerGroupKey passed as parameter
