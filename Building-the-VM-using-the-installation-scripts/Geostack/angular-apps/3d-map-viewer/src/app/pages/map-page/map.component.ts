@@ -288,6 +288,7 @@ export class MapComponent implements OnInit {
 
     this.map.allowDataSourcesToSuspendAnimation = false;
   };
+
   /*
   Here we create a function called: "zoomToLocation()"
 
