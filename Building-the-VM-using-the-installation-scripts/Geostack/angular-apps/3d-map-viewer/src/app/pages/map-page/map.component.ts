@@ -734,6 +734,7 @@ export class MapComponent implements OnInit {
 
             //Actually create the entity
             var entity = viewer.entities.add({
+              
                 name:_this.activeItem.name,
             //Set the entity availability to the same interval as the simulation time.
                 availability : new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
