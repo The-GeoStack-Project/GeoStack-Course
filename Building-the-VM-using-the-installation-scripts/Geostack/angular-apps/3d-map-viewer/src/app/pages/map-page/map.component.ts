@@ -105,15 +105,28 @@ export class MapComponent implements OnInit {
 
   /*
   Here we create a global variable called: "mapTileLayer". This is the variable
-  to which the baselayer containing the tiles of the map wil be assigned.
+  to which the baselayer containing the tiles of the map is assigned.
+  We assign the elevationMaps by creating a new OpenStreetMapImageryProvider and
+  passing the location of the TileStache Tileserver running behind the NGINX
+  webserver as URL.
+
+  We set the local OpenStreetMap tiles as default WMS. So when the application
+  is loaded, the local OpenStreetMap tiles are loaded aswell.
   */
-  private mapTileLayer:any = new Cesium.OpenStreetMapImageryProvider({
+  public mapTileLayer:any = new Cesium.OpenStreetMapImageryProvider({
     url : 'http://localhost/tiles/openstreetmap-web/'
   });
 
   /*
   Here we create a global variable called: "mapTerrainLayer". This is the
-  variable to which the baselayer containing the elevationMaps wil be assigned.
+  variable to which the baselayer containing the elevationMaps is assigned.
+  We assign the elevationMaps by creating a new CesiumTerrainProvider and
+  passing the location of the Cesium Terrain Server running behind the NGINX
+  webserver as URL.
+
+  We set the local Hamert DSM files as default Terrain files.
+  So when the application is loaded, the local (DTM) terrain files of the
+  Hamert are loaded aswell.
   */
   private mapTerrainLayer:any =  new Cesium.CesiumTerrainProvider({
     url : 'http://localhost:8080/tilesets/M_52EZ2'
@@ -272,20 +285,55 @@ export class MapComponent implements OnInit {
   };
 
   /*
-  Here we create the function which creates a new instance of an OpenLayers map.
-  in the function we create a View and assign the baselayer to the map. The map
-  will be created in the HTML div element with the id: "map". This is the div
-  element in the layout of the MapComponent (map.component.html)
+  Here we create a function called: "createCesiumMap()".
+
+  This function is used to create the Cesium Map instance which is also known
+  as the Cesium Viewer.
+
+  The function is triggered in the function: "ngOnInit()" to make sure
+  that the Cesium Map (Viewer) is created when the MapComponent is loaded.
+
+  The map instance will be created in the HTML div element with the id:'map'.
+  This div element is defined in the HTML layout of the MapComponent which can
+  be found in the file: "map.component.html".
+
+  The following steps are executed when the function is triggered:
+
+  1) Trigger the function:"getMapProviders()" which is used to obtain all the
+     available WMS's (WebMapServers) which are defined in our TileStache
+     configuration file.
+
+  2) Optional: Assign your Cesium ION Token key to the Cesium instance.
+
+  3) Create a new Cesium Map instance (Viewer) to which we assing the
+     global variable:"mapTileLayer" as imageryProvider (tile layer) and
+     the global variable:"mapTerrainLayer" as terrainProvider
+     (Elevation map layer)
+
+  4) set allowDataSourcesToSuspendAnimation to false to make sure that when
+     an animation is started it will not stop when a Terrain file or Tile is
+     loaded.
   */
   createCesiumMap():void{
+    // Here we trigger the function:"getMapProviders()" to obtain all the
+    // available WMS's.
     this.getMapProviders()
-    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwYmQ5NzVhYS04YjUxLTRjZmQtYTM1My04NjQ3N2E3NTUyMDUiLCJpZCI6MTc3MDQsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1NzI2MTg1MTd9.QZm6CyLKf8qp3HZbEVgViRpGP5OvuayzTuAO-mzfudQ';
+
+    // Here we assign the Cesium ION Token to the Cesium instance.
+    Cesium.Ion.defaultAccessToken = 'Paste Your Cesium token';
+
+    // Here we create a new Cesium Map instance (Viewer). We pass the id ('map')
+    // of the div element in the HTML layout in which the Viewer will be added.
     this.map = new Cesium.Viewer('map',
      {
+        // Here we assign the mapTileLayer as imageryProvider.
         imageryProvider: this.mapTileLayer,
+        // Here we assign the mapTerrainLayer as terrainProvider.
         terrainProvider: this.mapTerrainLayer,
       });
 
+    // Here we make sure that animations are not stopped when a data object
+    // is loaded.
     this.map.allowDataSourcesToSuspendAnimation = false;
   };
 
@@ -734,7 +782,7 @@ export class MapComponent implements OnInit {
 
             //Actually create the entity
             var entity = viewer.entities.add({
-              
+
                 name:_this.activeItem.name,
             //Set the entity availability to the same interval as the simulation time.
                 availability : new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
