@@ -266,21 +266,48 @@ export class MapComponent implements OnInit {
   };
 
   /*
-  Here we create the function that changes the mapProvider. When the function is
-  triggerd a providerKey is passed. This providerKey is the key of the entry in
-  the javascript map: "mapProviders". This function is assigned to the WMSSelection
-  settings menu.
+  Here we create a function called: "setMapProvider()".
+
+  This function is used to switch between the map providers which are served
+  by our TileStache Tileserver.
+
+  This function is bound to the buttons (related to switching between map
+  providers) which are defined in the HTML layout of the MapComponent.
+
+  The function takes a providerKey as input parameter. The providerKey is the
+  name of the entry that is clicked by the user when selecting a mapProvider
+  from the dropdown list in the application.This providerKey is the key of the
+  entry in the javascript map: "mapProviders".
+
+  The following steps are executed when the function is triggered:
+
+  1) Obtain the current imageryLayers from the Cesium map.
+
+  2) Remove all the current imageryLayers from the Cesium map.
+
+  3) Create a new OpenStreetMapImageryProvider and set the URL of the
+     imageryProvider using the providerKey that was passed as parameter on the
+     function call. We assign the newly created imageryProvider to the global
+     variable: "mapTileLayer".
+
+  4) Add the newly created imageryProvider to the Cesium map.
   */
   setMapProvider(providerKey):void{
 
+    // Here we obtain the current imageryLayers from the Cesium Map.
     var layers = this.map.scene.imageryLayers;
 
+    // Here we remove all the current imageryLayers from the Cesium Map.
     layers.removeAll();
 
+    // Here we create a new OpenStreetMapImageryProvider to which we assign
+    // the URL to our TileStache Server running behind the NGINX webserver.
+    // We use the providerKey to determine which WMS should be used.
     this.mapTileLayer = new Cesium.OpenStreetMapImageryProvider({
         url : "http://localhost/tiles/"+providerKey+"/"
     });
 
+    // Here we add the new imageryLayer to the Cesium Map.
     layers.addImageryProvider(this.mapTileLayer);
   };
 
