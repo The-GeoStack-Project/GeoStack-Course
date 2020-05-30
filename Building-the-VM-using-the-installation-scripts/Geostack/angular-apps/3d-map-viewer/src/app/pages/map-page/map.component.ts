@@ -370,24 +370,33 @@ export class MapComponent implements OnInit {
   This function is assigned to the button: "Zoom to start", defined in the
   HTML file of the MapComponent.
 
-  The function gets the current view and animates it to move to the start
+  The function gets the Cesium Viewer Scene and animates it to move to the start
   coordinates of the item on which the: "zoom to start" button is clicked.
 
-  There are 2 animations which are executed, these are as follows:
-  - Move to the location of the startCoordinate
-  - Zoom out and in again on the startCoordinate
+  We use the build in Cesium function called: ".flyTo()" to zoom to a
+  given location.
 
-  The variable: "duration" defines the amount of time it takes for the animation
-  to complete.
+  In this function we set the destination to which has to be zoomed to
+  the start longitude and latitude coordinates of the active Item.
+
+  We also set the duration which defines the amount of time (in seconds) it
+  takes for the animation to complete.
   */
   zoomToLocation():void{
+
+    // Here we obtain the Cesium Viewer Scene camera an call the function:
+    // "flyTo" on the camer.
     this.map.scene.camera.flyTo({
+      // Here we set the destination to a Cartesian3 in which we pass the
+      // longitude, latitude and a predefined altitude value (1000).
+      // The higher the altitude value the more zoomed out the map will be.
       destination: Cesium.Cartesian3.fromDegrees(
         this.activeItem.startCoordinate[0],
         this.activeItem.startCoordinate[1],
         1000),
+      // We set the duration of the animation to 3 seconds.
       duration: 3,
-    })
+    });
   };
 
   /*

@@ -1588,10 +1588,9 @@ export class MapComponent implements OnInit {
 	*/
 	removeItem(item: Item): void {
 
-		/*
-		 If the itemId of the item to remove is the same as the id of the item that
-		 is currently active. Change the activeItem to the next item in the list.
-		*/
+		// Here we check if the itemId of the item to remove is the same as the
+		// id of the item that is currently activeItem. If this is the case we
+		// change the activeItem to the next item in the selectedItem's list.
 		this.activeItem.id == item.id ? (this.clearAnimation(),
 				this.selectItem(this.selectedItems.values().next().value)) :
 			null;
