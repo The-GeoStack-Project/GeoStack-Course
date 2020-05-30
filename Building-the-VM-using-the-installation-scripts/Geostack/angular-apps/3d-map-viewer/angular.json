@@ -84,10 +84,6 @@
           }
         }
       }
-    }
-  },
-  "defaultProject": "3d-map-viewer",
-  "cli": {
-    "analytics": "51c48692-31de-4ba2-9359-d85730c93fab"
-  }
+    }},
+  "defaultProject": "3d-map-viewer"
 }

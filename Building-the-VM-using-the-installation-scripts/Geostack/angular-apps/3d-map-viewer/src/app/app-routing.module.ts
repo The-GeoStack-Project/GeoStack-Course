@@ -5,13 +5,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /*Here we import the base component which is required to create a new
-Angular route for the base page.*/
+Angular route.*/
 import { BaseComponent } from '../app/pages/base-page/base-page.component';
+
 
 /*Here we import the map component which is required to create a new
 Angular route for the map page.*/
 import { MapComponent } from '../app/pages/map-page/map.component';
-
 
 /*
 Below we add the route of our base page to the angular routes list. We do this

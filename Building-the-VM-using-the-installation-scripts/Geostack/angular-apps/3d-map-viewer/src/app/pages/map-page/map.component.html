@@ -1,15 +1,30 @@
 <!--
-Here we create a div element to which the OpenLayers map will be assigned
-We give the div a height of 100vh (Full screen height) and a width of 100%
-which is the full width of the screen. -->
-<div id="map" style="margin-top: 50px; margin-left: 580px; height:80VH; width:70%;"></div>
+Here we create a div element to which the Cesium map will be assigned
+We give the div a height of 94vh and a width of 100% which is the full width of
+the screen. We also set a margin of 55px; to make sure the Navbar does not
+overlap with the Cesium Viewer controls. -->
+<div id="map" style="margin-top:55px; height: 94vh; width: 100%;"></div>
 
-
-<div class="fixed-plugin" style="top:150px !important" id="fixed-plugin">
+<!--
+In this div element all the logic related to the map settings is added.
+The class: "fixed-plugin" make sure the settings menu is shown on the web page.
+-->
+<div class="fixed-plugin" id="fixed-plugin">
+    <!--
+    Here we add the dropdown. We set autoClose to false to make sure the menu
+    does not close when a setting is selected.
+    -->
     <div id="main-dropdown" ngbDropdown [autoClose]="false">
+        <!--
+        Here we add the togglebutton. We give the button a cog icon.
+        -->
         <a ngbDropdownToggle>
             <i class="fa fa-cog fa-2x"></i>
         </a>
+        <!--
+        Here we add the menu that opens when the dropdown toggle is clicked.
+        We add the title settings menu.
+        -->
         <div id="main-dropdown-menu" ngbDropdownMenu>
             <li class="header-title"> Settings menu</li>
             <!--
@@ -17,14 +32,33 @@ which is the full width of the screen. -->
             from our application.
             -->
             <div id="settings">
-                <!--
+              <!--
                 In this div element we add the logic for switching between map
                 providers.
                 -->
                 <div id="WMSSelection">
+                    <!--
+                    Here we add the dropdown. We set autoClose to false to make sure the menu
+                    does not close when a setting is clicked.
+                    -->
                     <div ngbDropdown [autoClose]="false">
-                        <button class="btn btn-white btn-block" ngbDropdownToggle>Switch Map Provider:</button>
+                        <!--
+                        Here we add the dropdown toggle button and give it some text.
+                        -->
+                        <button class="btn btn-white btn-block"
+                         ngbDropdownToggle>Switch Map Provider:</button>
+                         <!--
+                         Here we add the menu that opens when the dropdown button is clicked.
+                         -->
                         <div ngbDropdownMenu>
+                            <!--
+                            Here we add a ng-container that contains a FORloop that displays all
+                            the entries in the JavaScriptMap:"mapProviders" as key values.
+
+                            For each of the entries a button will be created which when clicked
+                            triggers the function: "setMapProvider()" and passes the key of
+                            the clicked entry as parameter.
+                            -->
                             <ng-container *ngFor="let map of mapProviders | keyvalue">
                                 <button ngbDropdownItem (click)='setMapProvider(map.key)'>{{map.key}}
                                 </button>
@@ -36,26 +70,44 @@ which is the full width of the screen. -->
                 In this div element we add the logic for selecting an item to visualize
                 -->
                 <div id="itemSelection">
+                    <!--
+                    Here we add the dropdown. We set autoClose to false to make sure the menu
+                    does not close when a setting is clicked.
+                    -->
                     <div ngbDropdown id="main-dropdown" [autoClose]="false">
+                        <!--
+                        Here we add the dropdown toggle button and give it some text.
+                        -->
                         <button class="btn btn-white btn-block" ngbDropdownToggle>Item to visualize:</button>
+                        <!--
+                        Here we add the menu that opens when the dropdown button is clicked.
+                        -->
                         <div id="main-dropdown-menu" ngbDropdownMenu>
+                            <!--
+                            Here we add the dropdown box which contains all the trackers from our database
+                            -->
                             <li class="header-title">Choose from all Crane trackers:</li>
                             <div ngbDropdown>
+                                <!--
+                                Here we add the dropdown toggle button for out tracker selection dropdown
+                                -->
                                 <button class="btn btn-white btn-block" ngbDropdownToggle>Select Crane trackers</button>
                                 <div ngbDropdownMenu>
+                                    <!--
+                                    Here we add a ng-container that contains a FORloop that displays all
+                                    the objects in our items list which is defined in the component.ts file
+
+                                    For each of the entries a button will be created which when clicked
+                                    triggers the function: "selectItem()" and passes the item which is selected as
+                                    parameter.
+                                    -->
                                     <ng-container *ngFor="let item of items">
+                                        <!--
+                                        Here we check if the item type is equal to tracker. We do this because
+                                        when we add other types of datasets to our application we dont want them
+                                        to be in the dropdown box for our trackers.
+                                        -->
                                         <div *ngIf="item.type == 'tracker'">
-                                            <button ngbDropdownItem (click)='selectItem(item);'>{{item.name}}</button>
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </div>
-                            <li class="header-title">Choose from all GPS-Routes:</li>
-                            <div ngbDropdown>
-                                <button class="btn btn-white btn-block" ngbDropdownToggle>Select GPS-Routes</button>
-                                <div ngbDropdownMenu>
-                                    <ng-container *ngFor="let item of items">
-                                        <div *ngIf="item.type == 'trail'">
                                             <button ngbDropdownItem (click)='selectItem(item);'>{{item.name}}</button>
                                         </div>
                                     </ng-container>
@@ -64,6 +116,7 @@ which is the full width of the screen. -->
                         </div>
                     </div>
                 </div>
+
                 <!--
                 All the logic in the following div element will only be displayed when
                 one or more items are selected and thus the size of the selectedItems list
@@ -76,9 +129,32 @@ which is the full width of the screen. -->
                   -->
                   <div id="selectedItemsSelection">
                       <div ngbDropdown>
-                          <button class="btn btn-white btn-block" ngbDropdownToggle>Selected items:{{selectedItems.length}} </button>
-                          <div ngbDropdownMenu>
-                              <ng-container *ngFor="let item of selectedItems; let i = index;">
+                        <!--
+                        Here we create the dropdown toggle button and add the length of the selectedItems list
+                        as text of the button. We do this by using the syntax {{selectedItems.length}}.
+                        -->
+                          <button class="btn btn-white btn-block"
+                          ngbDropdownToggle>Selected items:{{selectedItems.length}} </button>
+
+                          <!--
+                          Here we create the dropdown menu and set the width of the menu to: "max-content" this is
+                          done to fix the styling of the remove button next to the selected item entries.
+                          -->
+                          <div ngbDropdownMenu style="width:max-content;">
+                            <!--
+                            Here we create a ng-container which contains a FORloop that creates a button
+                            for all of the entries in our selectedItems list.
+
+                            We add the function:"selectItem()" to the buttons in which we pass the item that
+                            is clicked as parameter.
+
+                            The text of the button will be the name of the item. we do this by adding the
+                            syntax: {{item.name}}
+
+                            We also create a button next to each item which when clicked triggers the function
+                            removeItem() and passes the item as parameter.
+                            -->
+                              <ng-container *ngFor="let item of selectedItems">
                                   <div>
                                       <button class="pull-left" ngbDropdownItem
                                       (click)='selectItem(item);'>{{item.name}}</button>
@@ -89,86 +165,174 @@ which is the full width of the screen. -->
                           </div>
                       </div>
                   </div>
+
                   <!--
                   In this div element we add the logic for displaying extra information
                   related to the activeItem.
                   -->
                   <div id="itemInfoSelection" style="margin-bottom:30px;">
+                        <!--
+                        Here we add the dropdown. We set autoClose to false to make sure the menu
+                        does not close when a setting is selected.
+                        -->
                         <div ngbDropdown id="main-dropdown"  [autoClose]="false">
+                            <!--
+                            Here we add a list item which contains the name and type of the activeItem as
+                            title and an icon as dropdown toggle.
+                            -->
                             <li class="header-title" >{{activeItem.type}}: {{activeItem.name}}
                                 <button ngbDropdownToggle class="btn btn-white btn-round btn-just-icon info">
                                     <i class="material-icons">info</i>
                                 </button>
                             </li>
+                            <!--
+                            Here we add the menu that opens when the dropdown button is clicked.
+                            In this menu we add list items that each represent the data belonging to the activeItem.
+                            -->
                             <div id="main-dropdown-menu" ngbDropdownMenu>
-                                <li class="header-title" style="margin-bottom: 10px;">INFO of {{activeItem.type}} : {{activeItem.name}} </li>
+                                <li class="header-title" style="margin-bottom: 10px;">
+                                  INFO of {{activeItem.type}} : {{activeItem.name}} </li>
                                 <li class="header-title">Total distance: {{activeItem.totalRouteDistance}}KM</li>
+                                <!--
+                                Here we convert the total date range of the route using the timeConverter function.
+                                We grab the value at index 0 (of the dateRangeTotal) for the start date and the value at
+                                index 1 for the end date of the total route.
+                                -->
                                 <li class="header-title">Start date: {{timeConverter(activeItem.dateRangeTotal[0])}}</li>
                                 <li class="header-title">End date: {{timeConverter(activeItem.dateRangeTotal[1])}}</li>
-                                <li class="header-title" style="margin-bottom: 10px;">Total datapoints: {{activeItem.totalDataLength| number: '2.'}} </li>
-                                <button class="btn btn-white btn-block" (click)='zoomToLocation()'> Zoom to start marker</button>
+                                <!--
+                                Here we add the total amount of datapoints belonging to the selected item.
+                                We make sure that the number is human readable and uses commas by adding the syntax"
+                                "|number:'2.'" behind the value the value of the totalDataLength.
+                                -->
+                                <li class="header-title" style="margin-bottom: 10px;">
+                                  Total datapoints: {{activeItem.totalDataLength| number: '2.'}} </li>
+                                <!--
+                                Here we add a button which has the function: "zoomToLocation()" bound to it.
+                                When this button is clicked the map will move to the startCoordinate of the selected item.
+                                -->
+                                <button class="btn btn-white btn-block" (click)='zoomToLocation()'>
+                                  Zoom to start marker</button>
                             </div>
                         </div>
-                    </div>
-
-                    <!--
-                    In this div element we add the logic related to switching between layergroups
-                    and selecting multiple timeframes
-                    -->
-                    <div id="dateSelection" style="height: 100px;">
-                      <li class="header-title">Current timeframe: {{activeItem.dateRangeSelected}}</li>
-                      <li class="header-title">Select one or more timeframes:</li>
-                      <div ngbDropdown class="pull-left">
-                              <button class="btn btn-white btn-block" ngbDropdownToggle>Selected DTGs: {{activeItem.layerGroups.size}}</button>
-                              <div ngbDropdownMenu>
-                                  <ng-container *ngFor="let group of activeItem.layerGroups | keyvalue; let i = index">
-                                      <button ngbDropdownItem (click)="setLayerGroup(group.key)">{{i+1}}: {{group.key}}
-                                          <a class="material-icons" style="color: red; margin-left: 15px;" (click)='removeLayerGroup(group.key)'>not_interested</a>
-                                      </button>
-                                  </ng-container>
-                              </div>
-                          </div>
-                      <div ngbDropdown id="main-dropdown"  [autoClose]="false" class="pull-right">
-                          <button class="btn btn-white" ngbDropdownToggle>
-                              <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-                          </button>
-                          <div id="main-dropdown-menu" ngbDropdownMenu >
-                              <li class="header-title">Add new datetime group:</li>
-                              <dtgpicker [dateRange]="dateRange" (dateEvent)="getDTGEvent(activeItem.id,$event);"></dtgpicker>
-                          </div>
-                      </div>
                   </div>
+
                   <!--
-                  In this div element we add the logic related to selecting a N amount of datarows
+                  In this div element we add the logic related to switching between layergroups
+                  and selecting multiple timeframes
+                  -->
+                  <div id="dateSelection" style="height: 100px;">
+                       <!-- Here we add the text which is used to display the timeframe which is currently active -->
+                       <li class="header-title">Current timeframe: {{activeItem.dateRangeSelected}}</li>
+                       <!-- Here we add the text which is used to tell the user that he can add extra timeframes -->
+                       <li class="header-title">Select one or more timeframes:</li>
+                       <!-- Here we add an ngbDropdown element -->
+                       <div ngbDropdown class="pull-left">
+                          <!-- Here we add the button which is used to open the selected
+                             layerGroups dropdown-box and switch between layerGroups -->
+                          <button class="btn btn-white btn-block" ngbDropdownToggle>
+                          Selected DTGs: {{activeItem.layerGroups.size}}</button>
+                          <!-- Here we add theh popup that opens when the dropdown button is clicked related to
+                             switching between selected timeframes. All the code inside this div element is shown
+                             in the popup-->
+                          <div ngbDropdownMenu>
+                             <!-- Here we add a for loop which makes sure that all the selectedDTG's (layerGroups)
+                                are added in the dropdown box -->
+                             <ng-container *ngFor="let group of activeItem.layerGroups | keyvalue; let i = index">
+                                <!-- Here we add a button for each of the selected layerGroups
+                                   if a layerGroup is clicked the function: "setLayerGroup()" is triggerd to make
+                                   the clicked layergroup the activeLayerGroup -->
+                                <button ngbDropdownItem (click)="setLayerGroup(group.key)">
+                                   {{i+1}}: {{group.key}}
+                                   <!-- Here we add the icon which is used to remove a layerGroup. -->
+                                   <a class="material-icons" style="color: red; margin-left: 15px;"
+                                      (click)='removeLayerGroup(group.key)'>not_interested</a>
+                                </button>
+                             </ng-container>
+                          </div>
+                       </div>
+
+                       <!-- Here we add another ngbDropdown which is used to select new DTG's -->
+                       <div ngbDropdown id="main-dropdown"  [autoClose]="false" class="pull-right">
+                          <!-- Here we add a button which is used to open the date selection menu -->
+                          <button class="btn btn-white" ngbDropdownToggle>
+                          <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                          </button>
+
+                          <!-- Here we add the popup which will open when the calendar icon is clicked -->
+                          <div id="main-dropdown-menu" ngbDropdownMenu >
+                             <!-- Here we add te text displayed in the popup -->
+                             <li class="header-title">Add new datetime group:</li>
+                             <!-- Here we add the DateTimePicker component
+                             we assign the function: "getDTGEvent()" to th component -->
+                             <dtgpicker [dateRange]="dateRange" (dateEvent)="getDTGEvent(activeItem.id,$event);">
+                             </dtgpicker>
+                          </div>
+                       </div>
+                  </div>
+
+                  <!--
+                  In this div element we add the logic related to selecting a N amount of datarows from the datastore
                   -->
                   <div id="amountSelection">
                         <div ngbDropdown>
-                            <button class="btn btn-white btn-block" ngbDropdownToggle>Choose amount: {{ activeItem.coordinateList.length | number: '2.'}}</button>
+                          <!--
+                          Below we add a dropdown toggle which has the length of the coordinateList of the activeItem
+                          as text.
+                          -->
+                            <button class="btn btn-white btn-block" ngbDropdownToggle>
+                              Choose amount: {{ activeItem.coordinateList.length | number: '2.'}}
+                            </button>
+                                <!--
+                                Here we add the menu that opens when the dropdown button is clicked.
+                                In this menu we add the amounts: 1000, 10000, 20000 and the total amount of
+                                datapoints belonging to the activeItem.
+
+                                We use the syntax : {{1000| number: '2.'}} to make sure a comma is added to the number.
+                                -->
                                 <div ngbDropdownMenu>
-                                    <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,1000)'>{{1000| number: '2.'}}
+                                    <!-- Here we add the entry for 1000 datapoints -->
+                                    <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,1000)'>
+                                      {{1000| number: '2.'}}
                                     </button>
-                                    <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,10000)'>{{10000| number: '2.'}}
+                                    <!-- Here we add the entry for 10000 datapoints -->
+                                    <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,10000)'>
+                                      {{10000| number: '2.'}}
                                     </button>
-                                    <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,20000)'>{{20000| number: '2.'}}
+                                    <!-- Here we add the entry for 20000 datapoints -->
+                                    <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,20000)'>
+                                      {{20000| number: '2.'}}
                                     </button>
-                                    <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,activeItem.totalDataLength)'>{{activeItem.totalDataLength| number: '2.'}}
+                                    <!-- Here we add the entry for the total amount of datapoints available-->
+                                    <button ngbDropdownItem (click)='getItemDataByAmount(activeItem,activeItem.totalDataLength)'>
+                                      {{activeItem.totalDataLength| number: '2.'}}
                                     </button>
                                 </div>
                         </div>
-                    </div>
+                  </div>
+
                   <!--
                   In this div element we add the logic related to selecting all data in a given polygone
                   -->
                   <div id="countrySelection">
-                          <div ngbDropdown>
-                              <button class="btn btn-white btn-block" ngbDropdownToggle>Choose from Country:</button>
-                              <div ngbDropdownMenu>
-                                  <ng-container *ngFor="let country of countryList | keyvalue; let i = index;">
-                                      <button ngbDropdownItem (click)='getItemDataByCountry(activeItem,country.value)'>{{i + 1}}: {{country.key}}
-                                      </button>
-                                  </ng-container>
-                              </div>
-                          </div>
+                     <!-- Here we create a ngbDropdown related to selecting countries -->
+                     <div ngbDropdown>
+                        <!-- Here we add the dropdown button which is used to open the dropdown list -->
+                        <button class="btn btn-white btn-block" ngbDropdownToggle>Choose from Country:</button>
+                        <div ngbDropdownMenu>
+                           <!-- Here we add a forEach loop which loops trough all the entries in the JavaScriptMap:
+                              "countryList".-->
+                           <ng-container *ngFor="let country of countryList | keyvalue; let i = index;">
+                              <!-- For each entry in the countryList a button is created.
+                                 We assign the key of the entry (the country name) as text to the button.
+                                 We also assign the function: "getItemDataByCountry()" to the button in which we pass
+                                 the activeItem and the set of coordinates (the polygon) belonging to the clicked country. -->
+                              <button ngbDropdownItem
+                                 (click)='getItemDataByCountry(activeItem,country.value)'>{{i + 1}}: {{country.key}}
+                              </button>
+                           </ng-container>
+                        </div>
+                     </div>
                   </div>
                 </div>
             </div>
