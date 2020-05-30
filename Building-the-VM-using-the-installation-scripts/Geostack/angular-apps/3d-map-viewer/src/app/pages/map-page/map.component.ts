@@ -759,95 +759,140 @@ export class MapComponent implements OnInit {
 
     */
   addLayerGroup(item:Item):void{
+
+          // Assign this (used to access global variables) to a variable called:
+          // _this. We do this because we are going to create nested functions
+          // in which we want to access global variables.
           let _this = this;
 
+          // Here we set the layerGroupSelector to be the range (Start date ->
+          // End date) of the route. The layerGroupSelector can be seen as the
+          // unique identifier of the layerGroup.
           let layerGroupSelector = item.dateRangeSelected;
 
+          // Here we assing the Cesium Map (viewer) instance to a variable called
+          // "viewer". We do this so we don't need to write this.map all the time.
           let viewer = this.map
 
+          // Here we create an empty list called: "lineLayer" to which we are
+          // going to add all the entities after the have been created.
           let lineLayer = [];
 
-          if(!item.layerGroups.has(layerGroupSelector)){
-            //Set bounds of our simulation time
-            var start = Cesium.JulianDate.fromDate(new Date(2016, 7, 30, 0));
-            var stop = Cesium.JulianDate.addSeconds(start, _this.activeItem.coordinateList.length-1, new Cesium.JulianDate());
+          // Here we perform a check to see if the layerGroup already exists
+          // since we don't want to add it twice. If this is not the case (so
+          // the layerGroup does not exist yet) the following code is executed.
+          if (!item.layerGroups.has(layerGroupSelector)) {
 
-            //Make sure viewer is at the desired time.
-            viewer.clock.startTime = start.clone();
-            viewer.clock.stopTime = stop.clone();
-            viewer.clock.currentTime = start.clone();
-            viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP; //Loop at the end
-            viewer.clock.multiplier = 10;
-            viewer.timeline.zoomTo(start, stop);
+         console.log(this.activeItem.datetimeList[0])
 
-            //Generate a random circular pattern with varying heights.
-            function generateDataPoints() {
-                var property = new Cesium.SampledPositionProperty();
 
-                for (var i = 0; i < _this.activeItem.coordinateList.length-1; i+=4) {
+         //Set bounds of our simulation time
+         var start = Cesium.JulianDate.fromDate(new Date(this.activeItem.datetimeList[0]));
+         let end = Cesium.JulianDate.fromDate(new Date(this.activeItem.datetimeList[_this.activeItem.coordinateList.length - 1]));
 
-                    var time = Cesium.JulianDate.addSeconds(start, i, new Cesium.JulianDate());
+         let diff = Cesium.JulianDate.daysDifference(end,
+           start)
 
-                    var position = Cesium.Cartesian3.fromDegrees(_this.activeItem.coordinateList[i][0],_this.activeItem.coordinateList[i][1], _this.activeItem.altitudeList[i]+10);
+         console.log(diff)
 
-                    property.addSample(time, position);
+         let test = Cesium.JulianDate.addDays(
+             start, diff,
+             new Cesium.JulianDate());
 
-                    let entity = viewer.entities.add({
-                        position : position,
-                        point : {
-                            pixelSize : 10,
-                            color : Cesium.Color.TRANSPARENT
-                        }
-                    });
+         console.log(test)
 
-                    lineLayer.push(entity)
-                }
-                return property;
-            }
+         var stop = Cesium.JulianDate.addDays(
+             start, diff,
+             new Cesium.JulianDate());
 
-            var position = generateDataPoints();
+         //Make sure viewer is at the desired time.
+         viewer.clock.startTime = start.clone();
+         viewer.clock.stopTime = stop.clone();
+         viewer.clock.currentTime = start.clone();
+         viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP; //Loop at the end
+         viewer.clock.multiplier = 0.01;
+         viewer.timeline.zoomTo(start, stop);
 
-            //Actually create the entity
-            var entity = viewer.entities.add({
+         //Generate a random circular pattern with varying heights.
+         function generateDataPoints() {
 
-                name:_this.activeItem.name,
-            //Set the entity availability to the same interval as the simulation time.
-                availability : new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
-                    start : start,
-                    stop : stop
-                })]),
+             var property = new Cesium.SampledPositionProperty();
 
-                //Use our computed positions
-                position : position,
+             for (var i = 0; i < _this.activeItem.coordinateList.length - 1; i += 4) {
 
-                //Automatically compute orientation based on position movement.
-                orientation : new Cesium.VelocityOrientationProperty(position),
+                 let timeEnd = Cesium.JulianDate.fromDate(
+                   new Date(_this.activeItem.datetimeList[i]));
 
-                //Show the path as a pink line sampled in 1 second increments.
-                path : {
-                    leadTime: 0,
-                    trailTime: 3 * 60,  // 3 minutes, in seconds of simulation time
-                    resolution : 1,
-                    material : new Cesium.PolylineGlowMaterialProperty({
-                        glowPower : 0.1,
-                        color : Cesium.Color.YELLOW
-                    }),
-                    width : 10
-                },
-            });
+                 let timeDiff = Cesium.JulianDate.secondsDifference(timeEnd,start)
 
-            entity.position.setInterpolationOptions({
-                interpolationDegree : 10,
-                interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
-            });
+                 console.log(timeDiff)
 
-            lineLayer.push(entity)
+                 var time = Cesium.JulianDate.addSeconds(start,timeDiff , new Cesium.JulianDate());
 
-            item.layerGroups.set(layerGroupSelector,lineLayer)
 
-            this.setLayerGroup(layerGroupSelector);
-          }
-      };
+                 var position = Cesium.Cartesian3.fromDegrees(
+                     _this.activeItem.coordinateList[i][0],
+                     _this.activeItem.coordinateList[i][1],
+                     _this.activeItem.altitudeList[i] + 10);
+
+                 property.addSample(time, position);
+
+                 let entity = viewer.entities.add({
+                     position: position,
+                     point: {
+                         pixelSize: 10,
+                         color: Cesium.Color.TRANSPARENT
+                     }
+                 });
+
+                 lineLayer.push(entity)
+             }
+             return property;
+         }
+
+         var position = generateDataPoints();
+
+         //Actually create the entity
+         var entity = viewer.entities.add({
+
+             name: _this.activeItem.name,
+             //Set the entity availability to the same interval as the simulation time.
+             availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
+                 start: start,
+                 stop: stop
+             })]),
+
+             //Use our computed positions
+             position: position,
+
+             //Automatically compute orientation based on position movement.
+             orientation: new Cesium.VelocityOrientationProperty(position),
+
+             //Show the path as a pink line sampled in 1 second increments.
+             path: {
+                 leadTime: 0,
+                 trailTime: 10*60, // 3 minutes, in seconds of simulation time
+                 resolution: 1,
+                 material: new Cesium.PolylineGlowMaterialProperty({
+                     glowPower: 0.1,
+                     color: Cesium.Color.YELLOW
+                 }),
+                 width: 10
+             },
+         });
+
+         entity.position.setInterpolationOptions({
+             interpolationDegree: 5,
+             interpolationAlgorithm: Cesium.LagrangePolynomialApproximation
+         });
+
+         lineLayer.push(entity)
+
+         item.layerGroups.set(layerGroupSelector, lineLayer)
+
+         this.setLayerGroup(layerGroupSelector);
+     }
+ };
 
   setLayerGroup(groupKey:string):void{
 
