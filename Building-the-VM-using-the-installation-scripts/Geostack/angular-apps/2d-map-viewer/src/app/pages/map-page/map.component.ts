@@ -25,11 +25,11 @@ import {
 	CraneService
 } from 'src/app/services/crane.service'
 import {
-	TrailService
-} from 'src/app/services/trail.service'
-import {
 	PortService
 } from 'src/app/services/port.service'
+import {
+	TrailService
+} from 'src/app/services/trail.service'
 
 /*
 Here we create a global constant called:"ol".
@@ -96,7 +96,7 @@ Here we create the component metadata. The following applies to this code:
 @Component({
 	selector: 'app-map',
 	templateUrl: './map.component.html',
-	providers: [MapService, CraneService, TrailService ,PortService]
+	providers: [MapService, CraneService, PortService, TrailService]
 })
 export class MapComponent implements OnInit {
 
@@ -105,7 +105,7 @@ export class MapComponent implements OnInit {
 	to which the OpenLayers map will be assigned after it's created. Because
 	of the global variable we can use the map throughout the whole component.
 	*/
-	private map: any;
+	public map: any;
 
 	/*
 	Here we create a global variable called: "mapProviders". The variable
@@ -113,7 +113,7 @@ export class MapComponent implements OnInit {
 	populated with available map providers once the function:"getMapProviders()"
 	is triggered.
 	*/
-	private mapProviders: Map < any, any > = new Map();
+	public mapProviders: Map < any, any > = new Map();
 
 	/*
 	Here we create a global variable called: "mapLayer".
@@ -126,7 +126,7 @@ export class MapComponent implements OnInit {
 	are available served from the Tilestache Tileserver running behind the
 	NGINX webserver.
 	*/
-	private mapLayer: any = new ol.layer.Tile({
+	public mapLayer: any = new ol.layer.Tile({
 		source: new ol.source.XYZ({
 			url: "http://localhost/tiles/openstreetmap-local/{z}/{x}/{y}.png"
 		}),
@@ -139,7 +139,7 @@ export class MapComponent implements OnInit {
 	are available served from the Tilestache Tileserver running behind the
 	NGINX webserver.
 	*/
-	private seaLayer: any = new ol.layer.Tile({
+	public seaLayer: any = new ol.layer.Tile({
 		source: new ol.source.XYZ({
 			url: "http://localhost/tiles/openseamap-local/{z}/{x}/{y}.png"
 		}),
@@ -152,7 +152,7 @@ export class MapComponent implements OnInit {
 	that retrieve the trackers and routes from the datastore, the emtpy list will
 	be populated with these results.
 	*/
-	private items: Item[] = [];
+	public items: Item[] = [];
 
 	/*
 	Here we create a global variable called: "selectedItems".
@@ -162,14 +162,14 @@ export class MapComponent implements OnInit {
 
 	This function will then add the selected item to the selectedItems list.
 	*/
-	private selectedItems: Item[] = [];
+	public selectedItems: Item[] = [];
 
 	/*
 	Here we create a global variable called: "activeItem".
 	When an item is selected using the function: "selectItem()"
 	the item will become the activeItem.
 	*/
-	private activeItem: Item = new Item();
+	public activeItem: Item = new Item();
 
 	/*
 	Here we create a global variable called: "layerStyles".
@@ -183,7 +183,7 @@ export class MapComponent implements OnInit {
 	location of our pins as source of the icon. We also anchor the icon
 	to be displayed above the data point.
 	*/
-	private layerStyles: any = {
+	public layerStyles: any = {
 		'lineString': new ol.style.Style({
 			stroke: new ol.style.Stroke({
 				width: 2,
@@ -339,21 +339,17 @@ export class MapComponent implements OnInit {
 	variables to call the functions in our services which will then perform API
 	calls to our Flask-API.
 	*/
-	constructor(private _MapService: MapService,
-		private _CraneService: CraneService,
-		private _TrailService: TrailService,
-	  private _PortService: PortService) {}
+	constructor(public _MapService: MapService,
+		public _CraneService: CraneService,
+	  public _PortService: PortService,
+	  public _TrailService: TrailService) {}
 
 	/*
 	Here we create the ngOnInit() function. All the logic in this function will
 	be executed when the component is loaded.
 	*/
 	ngOnInit() {
-		// Here we trigger the function that created the OpenLayers map.
 		this.createOpenLayersMap();
-
-		// Here we trigger the function which retrieves all the trackers and
-		// trials from our datastore.
 		this.getItems();
 	};
 
@@ -514,6 +510,13 @@ export class MapComponent implements OnInit {
 			)
 		);
 
+    // Here we call the function getPorts in our PortService file.
+		// We pass the results in the function: createPortLayer() which will
+		// then create the portLayer.
+		this._PortService.getPorts().subscribe(
+			(ports: []) => (this.createPortLayer(ports))
+		);
+
 		this._TrailService.getTrails().subscribe(
 			(trails: []) => (
 				trails.forEach(trail => {
@@ -523,13 +526,6 @@ export class MapComponent implements OnInit {
 					);
 				})
 			)
-		);
-
-    // Here we call the function getPorts in our PortService file.
-		// We pass the results in the function: createPortLayer() which will
-		// then create the portLayer.
-		this._PortService.getPorts().subscribe(
-			(ports: []) => (this.createPortLayer(ports))
 		);
 	};
 
@@ -651,6 +647,7 @@ export class MapComponent implements OnInit {
 						this.loadItemData(transmissions)
 					}
 				);
+				break;
 			case 'trail':
 				this._TrailService.getSignalsID(item.id).subscribe(
 					(signals) => {
@@ -1225,7 +1222,7 @@ export class MapComponent implements OnInit {
 			// only happen if an animation is running. This is done because otherwise
 			// the animation of the previous active layer group will keep running when
 			// selecting a new layer group.
-			//this.clearAnimation();
+			this.clearAnimation();
 
 			// Here we assign the layer group selector (which is the dateRange of the
 			// selected layerGroup) to the variable:"dateRangeSelected".
@@ -1268,7 +1265,7 @@ export class MapComponent implements OnInit {
 
 			// Here we call the function toggleOverlay and pass "all" as parameter.
 			// This makes sure the old overlays are removed from the map.
-			//this.toggleOverlay("all");
+			this.toggleOverlay("all");
 
 			// Here we create the new static overlays (start and end marker overlays)
 			// using the information (assigned in the lines above) of the current item.
@@ -1613,11 +1610,10 @@ export class MapComponent implements OnInit {
 	*/
 	removeItem(item: Item): void {
 
-		/*
-		 If the itemId of the item to remove is the same as the id of the item that
-		 is currently active. Change the activeItem to the next item in the list.
-		*/
-		this.activeItem.id == item.id ? (
+		// Here we check if the itemId of the item to remove is the same as the
+		// id of the item that is currently activeItem. If this is the case we
+		// change the activeItem to the next item in the selectedItem's list.
+		this.activeItem.id == item.id ? (this.clearAnimation(),
 				this.selectItem(this.selectedItems.values().next().value)) :
 			null;
 
@@ -1756,7 +1752,7 @@ export class MapComponent implements OnInit {
 		let item = this.activeItem;
 
     // Here we clear the animation if any is running.
-		//this.clearAnimation()
+		this.clearAnimation()
 
     // Here we obtain the layerGroup which has to be removed from the
     // layerGroups JavaScriptMap using the layerGroupKey passed as parameter

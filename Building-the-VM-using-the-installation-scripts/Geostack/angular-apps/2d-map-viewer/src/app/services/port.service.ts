@@ -8,6 +8,6 @@ export class PortService {
     constructor(private http: HttpClient) { }
 
     getPorts(): Observable<any[]> {
-        return this.http.get<any[]>('api/ports/')
+        return this.http.get<any[]>('/api/ports/')
     };
 };

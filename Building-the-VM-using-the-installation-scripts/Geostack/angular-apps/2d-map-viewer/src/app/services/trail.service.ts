@@ -29,22 +29,22 @@ export class TrailService {
     constructor(private http: HttpClient) {}
 
     getTrails(): Observable<any[]> {
-        return this.http.get<any[]>('api/trails/')
+        return this.http.get<any[]>('/api/trails/')
     }
 
     getTrail(id:string): Observable<any> {
-        return this.http.get<any>(`api/trails/${id}`)
+        return this.http.get<any>(`/api/trails/${id}`)
     }
 
     getSignalsID(id:string): Observable<any[]> {
-        return this.http.get<any[]>(`api/signals_by_id/${id}`)
+        return this.http.get<any[]>(`/api/signals_by_id/${id}`)
     }
 
     getSignalsAmount(id:string,amount:number): Observable<any[]> {
-        return this.http.get<any[]>(`api/signals_by_amount/${id}/${amount}`)
+        return this.http.get<any[]>(`/api/signals_by_amount/${id}/${amount}`)
     }
 
     getSignalsDTG(id:string,dtg_1:string,dtg_2:string): Observable<any[]> {
-        return this.http.get<any[]>(`api/signals_by_dtg/${id}/${dtg_1}/${dtg_2}`)
+        return this.http.get<any[]>(`/api/signals_by_dtg/${id}/${dtg_1}/${dtg_2}`)
     }
 }
