@@ -96,13 +96,13 @@ Here we create the component metadata. The following applies to this code:
 	providers: [MapService, CraneService,PortService]
 })
 export class MapComponent implements OnInit {
-
+	
 	/*
 	Here we create a global variable called: "map". This is the variable
 	to which the OpenLayers map will be assigned after it's created. Because
 	of the global variable we can use the map throughout the whole component.
 	*/
-	private map: any;
+	public map: any;
 
 	/*
 	Here we create a global variable called: "mapProviders". The variable
@@ -110,7 +110,7 @@ export class MapComponent implements OnInit {
 	populated with available map providers once the function:"getMapProviders()"
 	is triggered.
 	*/
-	private mapProviders: Map < any, any > = new Map();
+	public mapProviders: Map < any, any > = new Map();
 
 	/*
 	Here we create a global variable called: "mapLayer".
@@ -123,7 +123,7 @@ export class MapComponent implements OnInit {
 	are available served from the Tilestache Tileserver running behind the
 	NGINX webserver.
 	*/
-	private mapLayer: any = new ol.layer.Tile({
+	public mapLayer: any = new ol.layer.Tile({
 		source: new ol.source.XYZ({
 			url: "http://localhost/tiles/openstreetmap-local/{z}/{x}/{y}.png"
 		}),
@@ -136,7 +136,7 @@ export class MapComponent implements OnInit {
 	are available served from the Tilestache Tileserver running behind the
 	NGINX webserver.
 	*/
-	private seaLayer: any = new ol.layer.Tile({
+	public seaLayer: any = new ol.layer.Tile({
 		source: new ol.source.XYZ({
 			url: "http://localhost/tiles/openseamap-local/{z}/{x}/{y}.png"
 		}),
@@ -149,7 +149,7 @@ export class MapComponent implements OnInit {
 	that retrieve the trackers and routes from the datastore, the emtpy list will
 	be populated with these results.
 	*/
-	private items: Item[] = [];
+	public items: Item[] = [];
 
 	/*
 	Here we create a global variable called: "selectedItems".
@@ -159,14 +159,14 @@ export class MapComponent implements OnInit {
 
 	This function will then add the selected item to the selectedItems list.
 	*/
-	private selectedItems: Item[] = [];
+	public selectedItems: Item[] = [];
 
 	/*
 	Here we create a global variable called: "activeItem".
 	When an item is selected using the function: "selectItem()"
 	the item will become the activeItem.
 	*/
-	private activeItem: Item = new Item();
+	public activeItem: Item = new Item();
 
 	/*
 	Here we create a global variable called: "layerStyles".
@@ -180,7 +180,7 @@ export class MapComponent implements OnInit {
 	location of our pins as source of the icon. We also anchor the icon
 	to be displayed above the data point.
 	*/
-	private layerStyles: any = {
+	public layerStyles: any = {
 		'lineString': new ol.style.Style({
 			stroke: new ol.style.Stroke({
 				width: 2,
