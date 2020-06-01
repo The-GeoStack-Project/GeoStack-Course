@@ -17,6 +17,10 @@ import {
 import {
 	CraneService
 } from 'src/app/services/crane.service'
+import{
+	TrailService
+} from 'src/app/services/trail.service'
+
 
 /*
 Here we create a global constant called:"Cesium".
@@ -83,7 +87,7 @@ Here we create the component metadata. The following applies to this code:
 @Component({
 	selector: 'app-map',
 	templateUrl: './map.component.html',
-	providers: [MapService, CraneService]
+	providers: [MapService, CraneService, TrailService]
 })
 export class MapComponent implements OnInit {
 
@@ -206,7 +210,8 @@ export class MapComponent implements OnInit {
 	calls to our Flask-API.
 	*/
 	constructor(private _MapService: MapService,
-		private _CraneService: CraneService) {}
+		private _CraneService: CraneService,
+		private _TrailService: TrailService) {}
 
 	/*
 	Here we create the ngOnInit() function. All the logic in this function will
@@ -448,6 +453,10 @@ export class MapComponent implements OnInit {
 	  "addItem()"
 	*/
 	getItems(): void {
+		// Here we call the function getTrackers in our CraneService file.
+		// We call the function: addItem() on each of the entries in the list of
+		// trackers which was returned by our Flask-API. We pass the required values
+		// as input parameters in the addItem function.
 		this._CraneService.getTrackers().subscribe(
 			(trackers: []) => (
 				trackers.forEach(tracker => {
@@ -455,6 +464,21 @@ export class MapComponent implements OnInit {
 						tracker['_id']['$oid'], tracker['name'], 'tracker',
 						tracker['transmission_Count'], 'timestamp',
 						[tracker['start_date']['$date'], tracker['end_date']['$date']],
+					);
+				})
+			)
+		);
+		// Here we call the function getTrails in our TrailService file.
+		// We call the function: addItem() on each of the entries in the list of
+		// trails which was returned by our Flask-API. We pass the required values
+		// as input parameters in the addItem function.
+		this._TrailService.getTrails().subscribe(
+			(trails: []) => (
+				trails.forEach(trail => {
+					this.addItem(
+						trail['_id']['$oid'], trail['name'], 'trail',
+						trail['t_points'], 'time', [trail['s_date']['$date'],
+						trail['e_date']['$date']],
 					);
 				})
 			)
@@ -572,10 +596,19 @@ export class MapComponent implements OnInit {
 	*/
 	getInitalItemData(item: Item): void {
 		switch (item.type) {
+			// This case is triggered when the item type is equal to tracker
 			case 'tracker':
 				this._CraneService.getTransmissionsID(item.id).subscribe(
 					(transmissions) => {
 						this.loadItemData(transmissions)
+					}
+				);
+				break;
+			// This case is triggered when the item type is equal to trail
+			case 'trail':
+				this._TrailService.getSignalsID(item.id).subscribe(
+					(signals) => {
+						this.loadItemData(signals)
 					}
 				);
 				break;
@@ -1251,6 +1284,19 @@ export class MapComponent implements OnInit {
 					}
 				)
 				break;
+			// In case the item.type is equal to 'trail', the following code is
+			// executed.
+			case 'trail':
+				// Here we trigger the function: "getSignalDTG" in the CraneService
+				// we pass the itemId, Start Date and End Data as parameters and subscribe
+				// the result to a variable called: "signals" which is then passed
+				// in the function: "loadItemData()"
+				this._TrailService.getSignalsDTG(item.id, dtg_s, dtg_e).subscribe(
+					(signals) => {
+						this.loadItemData(signals)
+					}
+				)
+				break;
 			default:
 				break;
 		}
@@ -1375,6 +1421,8 @@ export class MapComponent implements OnInit {
 	*/
 	getItemDataByAmount(item: Item, amount): void {
 		switch (item.type) {
+			// In case the item.type is equal to 'tracker', the following code is
+			// executed.
 			case 'tracker':
 				this._CraneService.getTransmissionsAmount(item.id, amount).subscribe(
 					(transmissions) => {
@@ -1382,10 +1430,24 @@ export class MapComponent implements OnInit {
 					}
 				)
 				break;
+			// In case the item.type is equal to 'trail', the following code is
+			// executed.
+			case 'trail':
+				// Here we trigger the function: "getSignalAmount" in the CraneService
+				// we pass the itemId and the amount as parameters and subscribe
+				// the result to a variable called: "signals" which is then passed
+				// in the function: "loadItemData()"
+				this._TrailService.getSignalsAmount(item.id, amount).subscribe(
+					(signals) => {
+						this.loadItemData(signals)
+					}
+				)
+				break;
 			default:
 				break;
 		};
 	};
+
 
 	/*
 	Here we create a function called: "getItemDataByCountry()"

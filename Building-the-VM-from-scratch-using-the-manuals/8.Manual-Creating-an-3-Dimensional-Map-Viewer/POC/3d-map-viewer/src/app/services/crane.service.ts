@@ -40,7 +40,7 @@ export class CraneService {
     The function:"getTrackers()" then returns all the trackers to our MapComponent.
     */
     getTrackers(): Observable < any[] > {
-        return this.http.get < any[] > ('api/trackers/')
+        return this.http.get < any[] > ('/api/trackers/')
     };
 
     /*
@@ -55,7 +55,7 @@ export class CraneService {
     The function:"getTracker()" then returns the tracker to our MapComponent.
     */
     getTracker(id: string): Observable < any[] > {
-        return this.http.get < any > (`api/trackers/${id}`)
+        return this.http.get < any > (`/api/trackers/${id}`)
     };
 
     /*
@@ -74,7 +74,7 @@ export class CraneService {
     */
     getTransmissionsID(id: string): Observable < any[] > {
         return this.http.get < any[] > (
-            `api/transmissions_by_id/${id}`)
+            `/api/transmissions_by_id/${id}`)
     };
 
     /*
@@ -96,7 +96,7 @@ export class CraneService {
     */
     getTransmissionsAmount(id: string, amount: number): Observable < any[] > {
         return this.http.get < any[] > (
-            `api/transmissions_by_amount/${id}/${amount}`)
+            `/api/transmissions_by_amount/${id}/${amount}`)
     };
 
     /*
@@ -116,7 +116,7 @@ export class CraneService {
     */
     getTransmissionsDTG(id: string, dtg_1: string, dtg_2: string): Observable < any[] > {
         return this.http.get < any[] > (
-            `api/transmissions_by_dtg/${id}/${dtg_1}/${dtg_2}`)
+            `/api/transmissions_by_dtg/${id}/${dtg_1}/${dtg_2}`)
     };
 
     /*
@@ -137,6 +137,6 @@ export class CraneService {
     getTransmissionsCountry(
         id: string, coords: Number[][]): Observable < any[] > {
         return this.http.get < any[] > (
-            `api/transmissions_in_polygon/${id}/${coords}`)
+            `/api/transmissions_in_polygon/${id}/${coords}`)
     };
 }

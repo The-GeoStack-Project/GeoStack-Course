@@ -27,7 +27,7 @@ import {
 import {
 	PortService
 } from 'src/app/services/port.service'
-import {
+import{
 	TrailService
 } from 'src/app/services/trail.service'
 
@@ -339,10 +339,10 @@ export class MapComponent implements OnInit {
 	variables to call the functions in our services which will then perform API
 	calls to our Flask-API.
 	*/
-	constructor(public _MapService: MapService,
-		public _CraneService: CraneService,
-	  public _PortService: PortService,
-	  public _TrailService: TrailService) {}
+	constructor(private _MapService: MapService,
+		private _CraneService: CraneService,
+	  private _PortService: PortService,
+	  private _TrailService: TrailService) {}
 
 	/*
 	Here we create the ngOnInit() function. All the logic in this function will
@@ -498,6 +498,11 @@ export class MapComponent implements OnInit {
 	  "addItem()"
 	*/
 	getItems(): void {
+
+		// Here we call the function getTrackers in our CraneService file.
+		// We call the function: addItem() on each of the entries in the list of
+		// trackers which was returned by our Flask-API. We pass the required values
+		// as input parameters in the addItem function.
 		this._CraneService.getTrackers().subscribe(
 			(trackers: []) => (
 				trackers.forEach(tracker => {
@@ -517,16 +522,22 @@ export class MapComponent implements OnInit {
 			(ports: []) => (this.createPortLayer(ports))
 		);
 
+		// Here we call the function getTrails in our TrailService file.
+		// We call the function: addItem() on each of the entries in the list of
+		// trails which was returned by our Flask-API. We pass the required values
+		// as input parameters in the addItem function.
 		this._TrailService.getTrails().subscribe(
 			(trails: []) => (
 				trails.forEach(trail => {
 					this.addItem(
 						trail['_id']['$oid'], trail['name'], 'trail',
-						trail['t_points'], 'time', [trail['s_date']['$date'], trail['e_date']['$date']],
+						trail['t_points'], 'time', [trail['s_date']['$date'],
+						trail['e_date']['$date']],
 					);
 				})
 			)
 		);
+
 	};
 
 	/*
@@ -639,8 +650,8 @@ export class MapComponent implements OnInit {
 	selected in the function: "selectItem()"
 	*/
 	getInitalItemData(item: Item): void {
-
 		switch (item.type) {
+			// This case is triggered when the item type is equal to tracker
 			case 'tracker':
 				this._CraneService.getTransmissionsID(item.id).subscribe(
 					(transmissions) => {
@@ -648,6 +659,7 @@ export class MapComponent implements OnInit {
 					}
 				);
 				break;
+			// This case is triggered when the item type is equal to trail
 			case 'trail':
 				this._TrailService.getSignalsID(item.id).subscribe(
 					(signals) => {
@@ -1686,6 +1698,19 @@ export class MapComponent implements OnInit {
 					}
 				)
 				break;
+			// In case the item.type is equal to 'trail', the following code is
+			// executed.
+			case 'trail':
+				// Here we trigger the function: "getSignalDTG" in the CraneService
+				// we pass the itemId, Start Date and End Data as parameters and subscribe
+				// the result to a variable called: "signals" which is then passed
+				// in the function: "loadItemData()"
+				this._TrailService.getSignalsDTG(item.id, dtg_s, dtg_e).subscribe(
+					(signals) => {
+						this.loadItemData(signals)
+					}
+				)
+				break;
 			default:
 				break;
 		}
@@ -1809,6 +1834,8 @@ export class MapComponent implements OnInit {
 	*/
 	getItemDataByAmount(item: Item, amount): void {
 		switch (item.type) {
+			// In case the item.type is equal to 'tracker', the following code is
+			// executed.
 			case 'tracker':
 				this._CraneService.getTransmissionsAmount(item.id, amount).subscribe(
 					(transmissions) => {
@@ -1816,7 +1843,13 @@ export class MapComponent implements OnInit {
 					}
 				)
 				break;
+			// In case the item.type is equal to 'trail', the following code is
+			// executed.
 			case 'trail':
+				// Here we trigger the function: "getSignalAmount" in the CraneService
+				// we pass the itemId and the amount as parameters and subscribe
+				// the result to a variable called: "signals" which is then passed
+				// in the function: "loadItemData()"
 				this._TrailService.getSignalsAmount(item.id, amount).subscribe(
 					(signals) => {
 						this.loadItemData(signals)

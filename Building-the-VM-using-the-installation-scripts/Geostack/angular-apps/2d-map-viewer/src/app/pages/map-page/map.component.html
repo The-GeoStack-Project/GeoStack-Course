@@ -123,10 +123,28 @@ The class: "fixed-plugin" make sure the settings menu is shown on the web page.
                             -->
                             <li class="header-title">Choose from all GPS-Routes:</li>
                             <div ngbDropdown>
+                                <!--
+                                Here we add the dropdown toggle button for out tracker selection dropdown
+                                -->
                                 <button class="btn btn-white btn-block" ngbDropdownToggle>Select GPS-Routes</button>
                                 <div ngbDropdownMenu>
+                                    <!--
+                                    Here we add a ng-container that contains a FORloop that displays all
+                                    the objects in our items list which is defined in the component.ts file
+
+                                    For each of the entries a button will be created which when clicked
+                                    triggers the function: "selectItem()" and passes the item which is selected as
+                                    parameter.
+                                    -->
                                     <ng-container *ngFor="let item of items">
+                                      <!--
+                                        Here we check if the item type is equal to tracker. We do this because
+                                        when we add other types of datasets to our application we dont want them
+                                        to be in the dropdown box for our trackers.
+                                        -->
                                         <div *ngIf="item.type == 'trail'">
+                                            <!-- When one of the items is clicked the function:"selectItem()" is triggered
+                                             in which the clicked item is passed. -->
                                             <button ngbDropdownItem (click)='selectItem(item);'>{{item.name}}</button>
                                         </div>
                                     </ng-container>
