@@ -497,26 +497,45 @@ def get_all_signals_by_id(id):
     # The result of the query is returned as JSON.
     return json.dumps(query_result, default=json_util.default)
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 22) Create the function which retrieves a certain amount of signals from a
+#     certain trail. This is done by passing the MongoID of a trail and an
+#     amount as input parameters.
 @app.route('/api/signals_by_amount/<id>/<amount>', methods=['GET'])
 def get_all_signals_amount(id,amount):
 
+    # Here we create a query which obtains a certain amounf ot signals belonging
+    # end date which were passed as input paramaters and transformed above.
+    # We transform the result to a list and assign the result to a variable
+    # called:"query_result".
     query_result = list(trail_connection.db.signal.find(
         {"trail": ObjectId(id)})[:int(amount)]
     )
 
+    # Here we return the query_result as JSON.
     return json.dumps(query_result, default=json_util.default)
 
-
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 23) Create the function which retrieves all signals between a timeframe from
+#     a certain trail. This is done by passing the MongoID of a trail, a start
+#     date (dtg_1) and an end date (dtg_2) as input parameters.
 @app.route('/api/signals_by_dtg/<id>/<dtg_1>/<dtg_2>', methods=['GET'])
 def get_all_signals_dtg(id,dtg_1,dtg_2):
 
+    # Here we convert the strings (representing the datetimes) to a valid
+    # datetime format.
     dtg_1= datetime.strptime(str(dtg_1), '%Y-%m-%d')
     dtg_2= datetime.strptime(str(dtg_2), '%Y-%m-%d')
 
+    # Here we create a query which obtains the signals between the start and
+    # end date which were passed as input paramaters and transformed above.
+    # We transform the result to a list and assign the result to a variable
+    # called:"query_result".
     query_result = list(trail_connection.db.signal.find(
         {"time": { "$gt": dtg_1, "$lt": dtg_2},"trail":ObjectId(id)})
     )
 
+    # Here we return the query_result as JSON.
     return json.dumps(query_result, default=json_util.default)
 
 
