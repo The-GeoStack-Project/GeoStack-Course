@@ -486,8 +486,15 @@ def get_all_signals_count():
 @app.route('/api/signals_by_id/<id>', methods=['GET'])
 def get_all_signals_by_id(id):
 
-    query_result = list(trail_connection.db.signal.find({"trail": ObjectId(id)})[:100])
+    # The query is performed on the signal collection
+    # the value of the Trail ReferenceField is compared to the
+    # id passed in the function. the [:100] is used to only return
+    # the first 100 results which are assigned to a variable called:
+    # "query_result"
+    query_result = list(trail_connection.db.signal.find(
+    {"trail": ObjectId(id)})[:100])
 
+    # The result of the query is returned as JSON.
     return json.dumps(query_result, default=json_util.default)
 
 @app.route('/api/signals_by_amount/<id>/<amount>', methods=['GET'])
