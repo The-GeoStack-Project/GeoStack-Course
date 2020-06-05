@@ -17,7 +17,6 @@ from flask import Flask, render_template
 # Flask is used to create a WSGI application object called 'app'
 # render_template is used to serve static HTML files from the templates folder.
 
-
 '''
 The PyMongo module is used to create MongoDB queries and connections to
 our MongoDB databases.
@@ -434,58 +433,109 @@ def get_all_tilestache_entries():
 #                      QUERIES RELATED TO TRAIL DATA                          #
 #                                                                             #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-# Connect to the Trial Database
+# The queries and functions below are similar to the ones related to the Crane
+# Tracker datasets. Below we connect to the Trail Database and create queries
+# which are performed on the Trail database to obtain the GPS-Route (Trail)
+# datasets.
+#
+# Here we connect to the Trial Database and assign the connection to a variable
+# Called: "trail_connection"
 trail_connection = PyMongo(app, uri=app.config["TRAIL_DATABASE_URI"])
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 18) Create the function which retrieves all the trails stored in our
+#     Trail database
 @app.route('/api/trails/', methods=['GET'])
 def get_all_trails():
 
+    # We transform the query result into a list and assign the result to a
+    # variable called: "query_result".
     query_result = list(trail_connection.db.trail.find())
 
+    # We return the query_result as json.
     return json.dumps(query_result, default=json_util.default)
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 19) Create the function which retrieves a trail, stored in our
+#     Trail database, by using it's MongoID.
 @app.route('/api/trails/<id>', methods=['GET'])
 def get_one_trail(id):
 
+    # We assign the result of the query to a variable called: "query_result".
     query_result = trail_connection.db.trail.find({"_id": ObjectId(id)})
 
+    # We return the query_result as JSON.
     return json.dumps(query_result, default=json_util.default)
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 20) Create the function which retrieves the total amount of signals in the
+#     Trail database.
 @app.route('/api/signals_count/', methods=['GET'])
 def get_all_signals_count():
 
+    # we assign transform the result of the query to a string and assign it to
+    # a variable called: "query_result".
     query_result = str(trail_connection.db.signal.count())
 
+    # We return the query_result which is a string.
     return query_result
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 21) Create the function which retrieves all the signals belonging to a certain
+#     trail. This is done by passing the MongoID of the trail as input parameter.
 @app.route('/api/signals_by_id/<id>', methods=['GET'])
 def get_all_signals_by_id(id):
 
-    query_result = list(trail_connection.db.signal.find({"trail": ObjectId(id)})[:2000])
+    # The query is performed on the signal collection
+    # the value of the Trail ReferenceField is compared to the
+    # id passed in the function. the [:100] is used to only return
+    # the first 100 results which are assigned to a variable called:
+    # "query_result"
+    query_result = list(trail_connection.db.signal.find(
+    {"trail": ObjectId(id)})[:100])
 
+    # The result of the query is returned as JSON.
     return json.dumps(query_result, default=json_util.default)
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 22) Create the function which retrieves a certain amount of signals from a
+#     certain trail. This is done by passing the MongoID of a trail and an
+#     amount as input parameters.
 @app.route('/api/signals_by_amount/<id>/<amount>', methods=['GET'])
 def get_all_signals_amount(id,amount):
 
+    # Here we create a query which obtains a certain amounf ot signals belonging
+    # end date which were passed as input paramaters and transformed above.
+    # We transform the result to a list and assign the result to a variable
+    # called:"query_result".
     query_result = list(trail_connection.db.signal.find(
         {"trail": ObjectId(id)})[:int(amount)]
     )
 
+    # Here we return the query_result as JSON.
     return json.dumps(query_result, default=json_util.default)
 
-
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 23) Create the function which retrieves all signals between a timeframe from
+#     a certain trail. This is done by passing the MongoID of a trail, a start
+#     date (dtg_1) and an end date (dtg_2) as input parameters.
 @app.route('/api/signals_by_dtg/<id>/<dtg_1>/<dtg_2>', methods=['GET'])
 def get_all_signals_dtg(id,dtg_1,dtg_2):
 
+    # Here we convert the strings (representing the datetimes) to a valid
+    # datetime format.
     dtg_1= datetime.strptime(str(dtg_1), '%Y-%m-%d')
     dtg_2= datetime.strptime(str(dtg_2), '%Y-%m-%d')
 
+    # Here we create a query which obtains the signals between the start and
+    # end date which were passed as input paramaters and transformed above.
+    # We transform the result to a list and assign the result to a variable
+    # called:"query_result".
     query_result = list(trail_connection.db.signal.find(
         {"time": { "$gt": dtg_1, "$lt": dtg_2},"trail":ObjectId(id)})
     )
 
+    # Here we return the query_result as JSON.
     return json.dumps(query_result, default=json_util.default)
 
 
