@@ -124,6 +124,7 @@ def import_osteetm(input_file):
     os.system('echo "done importing the data"')
 
     import_tool()
+    
 # Here we create a function called:"import_oseam".
 # This function takes an input file as input parameter.
 def import_oseam(input_file):
