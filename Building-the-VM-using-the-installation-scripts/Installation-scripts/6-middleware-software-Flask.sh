@@ -13,7 +13,7 @@ fi
 echo "-------------->>>> Installing Flask <<<<--------------"
 sleep 2
 # Install Flask using python pip 3
-pip3 install Flask
+sudo -H pip3 install Flask
 
 echo "-------------->>>> Installing BeautifullSoup <<<<--------------"
 sleep 2
