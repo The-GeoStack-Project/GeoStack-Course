@@ -104,9 +104,9 @@ parse_transform_GPX("OKT-25-09 164243 Hamert Fiets.gpx",'Trail-Hamert-Bike.json'
 
 os.system('mkdir -p /home/geostack/Geostack/datasets/JSON/Crane_JSON')
 filter_transform_CSV('20200103_Movebank_Common_Crane_Lithuania_GPS_2016_Dataset.csv','Lita-LT.json',"lt")
-filter_transform_CSV('20181003_Dataset_SV_GPS_Crane_9381_STAW_Crane_RRW-BuGBk_Frida.csv','Frida-SW.json',"sw")
-filter_transform_CSV('20181003_Dataset_SV_GPS_Crane_9407_STAW_Crane_RRW-BuGBk_Agnetha.csv','Agnetha-SW.json',"sw")
-filter_transform_CSV('20181003_Dataset_SV_GPS_Crane_9472_STAW_Crane_RRW-BuGR_Cajsa.csv','Cajsa-SW.json',"sw")
+filter_transform_CSV('20181003_Dataset_SV_GPS_Crane_9381_Crane_RRW-BuGBk_Frida.csv','Frida-SW.json',"sw")
+filter_transform_CSV('20181003_Dataset_SV_GPS_Crane_9407_Crane_RRW-BuGBk_Agnetha.csv','Agnetha-SW.json',"sw")
+filter_transform_CSV('20181003_Dataset_SV_GPS_Crane_9472_Crane_RRW-BuGR_Cajsa.csv','Cajsa-SW.json',"sw")
 filter_transform_CSV('20191103_Dataset_DE_GPS_Crane_181528_iCora_Crane_15_BuBuBr-WYW_Lotta.csv','Lotta-GE.json',"ge")
 filter_transform_CSV('20180928_Dataset_DE_GPS_Crane_181527_iCora_Crane_13_BuBuBr-YBuBk.csv','Nena-GE.json',"ge")
 
