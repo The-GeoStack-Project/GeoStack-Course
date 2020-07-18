@@ -15,22 +15,22 @@ pip3 install pandas
 echo "-------------->>>> Installing Pandas Profiling <<<<--------------"
 sleep 2
 # Install Pandas Profiling
-pip3 install pandas-profiling
+sudo -H pip3 install pandas-profiling
 
 echo "-------------->>>> Installing GeoPandas <<<<--------------"
 sleep 2
 # Install GeoPandas
-pip3 install geopandas
+sudo -H pip3 install geopandas
 
 echo "-------------->>>> Installing Cartopy <<<<--------------"
 sleep 2
 # Install cython before cartopy since it's a dependency for cartopy.
-pip3 install cython
+sudo -H pip3 install cython
 # Install cartopy matplotlib and scipy.
-pip3 install matplotlib scipy
+sudo -H pip3 install matplotlib scipy
 
 # Install Cartopy
-pip3 install git+https://github.com/SciTools/cartopy.git --no-binary cartopy
+sudo -H pip3 install git+https://github.com/SciTools/cartopy.git --no-binary cartopy
 
 
 echo "-------------->>>> Installing Tkinter GUI TOOL <<<<--------------"
