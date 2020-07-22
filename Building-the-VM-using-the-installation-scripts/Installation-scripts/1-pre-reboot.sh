@@ -47,13 +47,14 @@ sudo apt install gdal-bin
 echo "-------------->>>> Installing Python and PIP <<<<--------------"
 sleep 2
 
+# Uncomment the lines below to install Python 2 if necessary.
 # Install Python2 and Python2-Pip
-sudo apt install python
-curl -O -L https://bootstrap.pypa.io/get-pip.py
-sudo python get-pip.py
+#sudo apt install python
+#curl -O -L https://bootstrap.pypa.io/get-pip.py
+#sudo python get-pip.py
 
 # Remove the pip installer script
-rm get-pip.py
+#rm get-pip.py
 
 
 # Install Python3 and Python3-Pip
