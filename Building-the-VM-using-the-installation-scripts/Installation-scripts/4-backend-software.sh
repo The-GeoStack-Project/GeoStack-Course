@@ -4,7 +4,7 @@ echo "-------------->>>> Installing PostgreSQL <<<<--------------"
 sleep 2
 
 # Download the PostgreSQL signing key and add it to the key database.
-wget -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
 # Add the PostgreSQL repo to the systems repository list.
 sudo sh -c 'echo "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
