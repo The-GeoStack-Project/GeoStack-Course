@@ -43,14 +43,7 @@ echo "-------------->>>> Changed <<<<--------------"
 echo "-------------->>>> Installing PGMyAdmin <<<<--------------"
 sleep 2
 # Install PGMyAdmin4 depending on the Ubuntu version
-if [ `lsb_release -cs` == "focal" ] || [ `lsb_release -cs` == "Eoan" ]
-then
-    echo "Skipping PGAdmin4 install since its not available yet for ubuntu 20.4"
-    echo "as of 2020-05-01"
-else
-    sudo apt install pgadmin4
-fi
-
+sudo apt install pgadmin4
 
 echo "-------------->>>> Installing PsycoPG2 <<<<--------------"
 sleep 2
