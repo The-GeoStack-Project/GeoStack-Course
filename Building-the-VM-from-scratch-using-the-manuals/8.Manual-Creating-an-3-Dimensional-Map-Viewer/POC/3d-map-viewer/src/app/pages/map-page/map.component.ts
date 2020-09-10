@@ -918,6 +918,12 @@ export class MapComponent implements OnInit {
 	            startDate, startEndDiff,
 	            new Cesium.JulianDate());
 
+					// Check if the startDate is before the stopDate.
+					// If this is not the case both are set to the current date in order
+					// to prevent further errors.
+					Cesium.JulianDate.compare(startDate,stopDate) < 0 ? null :
+						 startDate = stopDate = Cesium.JulianDate.now();
+
 	        // Below we set the options of the Cesium clock (animation tool)
 					// Here we set the Start DTG of the clock to the startDate.
 	        viewer.clock.startTime = startDate.clone();
