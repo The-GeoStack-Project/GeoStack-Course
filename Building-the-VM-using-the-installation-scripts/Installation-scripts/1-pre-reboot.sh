@@ -12,12 +12,6 @@ sleep 2
 # Change the default root password.
 sudo passwd root
 
-echo "-------------->>>> Installing VM tools<<<<--------------"
-sleep 2
-
-# Install OpenVMTools for VMware
-sudo apt install open-vm-tools-desktop
-
 
 echo "-------------->>>> Installing Bleachbit <<<<--------------"
 sleep 2
