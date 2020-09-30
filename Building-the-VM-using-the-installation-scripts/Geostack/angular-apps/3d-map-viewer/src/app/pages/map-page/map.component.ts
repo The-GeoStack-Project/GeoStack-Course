@@ -137,16 +137,16 @@ export class MapComponent implements OnInit {
 
 	/*
 	Here we create a global variable called: "items". The type of the variable
-	is a list of Items. This list starts of empty, but when we call the function(s)
+	is a list of Items. This list starts off empty, but when we call the function(s)
 	that retrieve the trackers and routes from the datastore, the emtpy list will
-	be populated with these results.
+	be populated with the results.
 	*/
 	public items: Item[] = [];
 
 	/*
 	Here we create a global variable called: "selectedItems".
 	The type of the variable is a list of Items. This list starts of empty,
-	but when we select an item form the dropdown box in the application the
+	but when we select an item from the dropdown box in the application the
 	function: "selectItem()" will be triggered.
 
 	This function will then add the selected item to the selectedItems list.
@@ -156,7 +156,7 @@ export class MapComponent implements OnInit {
 	/*
 	Here we create a global variable called: "activeItem".
 	When an item is selected using the function: "selectItem()"
-	the item will become the activeItem.
+	the selected item will become the activeItem.
 	*/
 	public activeItem: Item = new Item();
 
@@ -428,14 +428,15 @@ export class MapComponent implements OnInit {
 	Here we create a function called: "getItems()"
 
 	This function is triggered in the ngOnInit() function. This function triggers
-	the function: "getTrackers()" in our CraneService file, which then returns
-	all the trackers in our MongoDB datastore.
+	the function: "getTrackers()" in our CraneService file and the function:
+	"getTrails()" in our TrailService file, which then returns
+	all the trackers and trails in our MongoDB datastore.
 
 	The syntax used in the function is as follows:
 
 	this.{service}.{function}.subscribe({elements} =>
 	  {elements}.forEach({element} =>{
-	    addItem(element values)
+	    addItem({element}[values])
 	  });
 	);
 
@@ -530,10 +531,10 @@ export class MapComponent implements OnInit {
 	2) the function: ".filter()" is executed on the global JavascriptMap:
 		 "selectedItems".
 
-		 This JavascriptMap contains all the items that are have
-		 been selected.
+		 This JavascriptMap contains all the items that have been selected by the
+		 user.
 
-		 The filter function is used to check whether the id (From
+		 The filter function is used to check whether the id (from
 		 the item that is being selected) is already in the list assigned to the
 		 global variable: "selectedItems".
 
@@ -551,11 +552,6 @@ export class MapComponent implements OnInit {
 
 	3) The dateRange (The start and end date in the DTG picker) global
  	   variable is changed to the dateRangeTotal of the selected item.
-
- 	4) Since the selected item is now the activeItem, the overlays
- 		 (the information popups) will be filled with the information of
- 	   the item that is currently active (The item that was selected), using the
- 	   function setStaticOverlays().
 
 	*/
 	selectItem(item: Item): void {
@@ -578,7 +574,7 @@ export class MapComponent implements OnInit {
 	/*
 	Here we create a function called: "getInitalItemData()"
 
-	This function is called in the function: "selectItem()", if the item has not
+	This function is called in the function: "selectItem()" IF the item has not
 	been selected yet. The item from which the data has to be retrieved is then
 	passed as parameter in this function.
 
@@ -589,7 +585,7 @@ export class MapComponent implements OnInit {
 	These functions trigger a function in the service related to the item which
 	is passed in the function: "getInitalItemData()".
 
-	The data obtained from the function which was triggered in the service, will
+	The data obtained, from the function which was triggered in the service, will
 	then be passed as parameter in the function: "loadItemData()". The function
 	loadItemData() will then assign the returned data to the item which was
 	selected in the function: "selectItem()"
@@ -626,12 +622,12 @@ export class MapComponent implements OnInit {
 	3) getItemDataByAmount()
 	4) getItemDataByCountry()
 
-	Each of these functions obtain data from the MongoDB datastore and pass the
+	Each of the functions above obtain data from the MongoDB datastore and pass the
 	returned data to the function "loadItemData()" as parameter.
 
-	The function then does the following:
+	This function then does the following:
 	1) Assign the activeItem to a variable called: "item". This is done so we
-		 only need to use the variable item instead of code: "this.activeItem".
+		 only need to use the variable "item" instead of syntax: "this.activeItem".
 
 	2) Check wether the data passed as parameter is not empty. If the data is empty
 	   the function will return because there is no data to be loaded.
@@ -642,8 +638,8 @@ export class MapComponent implements OnInit {
 
 	5) Set the value of the datetimeList belonging to the item to an empty list.
 
-	6) Execute a forEach loop on the ItemList, the foreach loop does the following
-		 for all the rows in the list of data:
+	6) Execute a forEach loop on the ItemList which does the following
+		 for all the rows in the list of data (so for each datapoint):
 
 		 6.1) Obtain the value of the coordinates and add each coordinate to
 		      the coordinateList belonging to the item.
@@ -658,7 +654,7 @@ export class MapComponent implements OnInit {
 		 the variable: "startCoordinate".
 
 	8) Assign the last value of the coordinateList (the value at index length
-		 of the datalist passed as parameter - 1) to the variable endCoordinate.
+		 of the datalist - 1) to the variable endCoordinate.
 
 	9) Create a list containing the first item in the datetimeList and the last
 		 item of the datetimeList, created in step 6.3, and assign it to the
@@ -730,10 +726,10 @@ export class MapComponent implements OnInit {
 			 A nested function is a function inside another function.
 
     2) We assign the Cesium Map (Viewer) instance to a variable called:”viewer”.
-			 We do this so we can simply write viewer instead of this.map.
+			 We do this so we can simply use viewer instead of the syntax: "this.map".
 
     3) We create an empty list called:”lineLayer” to which we are going to add
-		   all the datapoints and entities after the have been created.
+		   all the datapoints and entities after they have been created.
 
     4) We assign the value of the dateRangeSelected selected to the variable
 		   called: "layerGroupSelector". We do this because the keys (which can be
@@ -744,13 +740,13 @@ export class MapComponent implements OnInit {
 			 and remove specific layerGroups later.
 
     5) A check is performed to see whether a layerGroup with that key
-		   (the dateRangeSelected value) already exists in the JavascriptMap:
+		   (the dateRangeSelected value) does not exist in the JavascriptMap:
 			 "layerGroups" to make sure we do not add the same datapoints twice.
 
-       If this is the case ( so the layerGroupSelector already exists) the
+       If this is NOT the case (so the layerGroupSelector already exists) the
 			 selected item's layerGroup will become the activeLayerGroup.
 
-       If this is NOT the case the following steps will be executed:
+       If this is the case the following steps will be executed:
 
     6) We obtain and transform the start date of the visualized route into a
 		   valid format which is understandable for the Cesium Viewer clock
@@ -767,7 +763,7 @@ export class MapComponent implements OnInit {
 		   route. We do this because we need the result of this to determine when
 			 the animation is finished.
 
-    10) We set the settings of the Cesium Viewer Clock (Animation tool) to
+    10) We set the Cesium Viewer Clock (Animation tool) to
 		    contain the following settings:
         I. Set the start time of the clock to the start date of the route.
 
@@ -836,8 +832,8 @@ export class MapComponent implements OnInit {
 				We assign the result (the returned property) of the function:
 				”generateDataPoints()” to a variable called: “position”.
 
-    13) Create an new entity (which represents the Yellow line / Crane). We set
-		    the following values for the entity:
+    13) Create an new entity (which represents the Yellow line on the map).
+				We set the following values for the entity:
 
         I. We set the name of the entity to the name of the item which is
 				   visualized (e.g. Agnetha)
@@ -1175,16 +1171,19 @@ export class MapComponent implements OnInit {
 	If the function is triggered the following happens:
 
 	1) A check is performed to see if the item that is being deleted is the
-	   item that is currently active. If this is the case the following happens:
-	   1) If there is an animation running, the animation is cleared.
-	   2) The next value(If there is any) in the list of selectedItems becomes the
+	   item that is currently active.
+
+		 If this is the case the following happens:
+
+		 1) The next value(If there is any) in the list of selectedItems becomes the
 	      activeItem.
+
 	   If the item that is being deleted is not the activeItem, nothing happens
 
 	2) A forEach loop is called on the list containing the layerGroups belonging
 	   to the item that is being deleted. All layers from the layerGroup in the
 	   list of layerGroups are then removed from the map using the build-in
-	   OpenLayers function:".removeLayer()". In this function the layer to remove
+	   Cesium function:".remove()". In this function the layer to remove
 	   is passed.
 
 	3) The list of layerGroups belonging to the item that is being removed is
@@ -1197,15 +1196,8 @@ export class MapComponent implements OnInit {
 	   needs to be removed is passed.
 
 	   The function:".splice()", than removes the item from the list.
-
-	5) A check if performed to find out whether the item that was removed was the
-	   last item in the list.
-
-	   If this is the case all overlays (information popups) will be toggled off.
-
-	   If this is NOT the case the overlays will be placed in the position of the
-	   new activeItem which was set in step 1.
 	*/
+
 	removeItem(item: Item): void {
 
 		// Here we check if the itemId of the item to remove is the same as the
@@ -1255,10 +1247,6 @@ export class MapComponent implements OnInit {
 	2) A Start date
 	3) An End date
 
-	This function triggers the function: "getTransmissionsDTG" in the CraneService
-	which will then perform an API call to the Flask-API to obtain all the data
-	between the given timeframe from the MongoDB datastore.
-
 	All the data between the start and end date will be returned and passed in the
 	the function: "loadItemData()".
 
@@ -1266,6 +1254,16 @@ export class MapComponent implements OnInit {
 	which in our case can be a tracker or a trail, as input. Depending on the
 	itemType, the corresponding function is triggered.The switch/case can be
 	extended in case you want to add the functionality for other Dataset types.
+
+	IF the item's type is equal to tracker the following will happen:
+	This function triggers the function: "getTransmissionsDTG" in the CraneService
+	which will then perform an API call to the Flask-API to obtain all the data
+	between the given timeframe from the MongoDB datastore.
+
+	IF the item's type is equal to trail the following will happen:
+	This function triggers the function: "getSignalsDTG" in the TrailService
+	which will then perform an API call to the Flask-API to obtain all the data
+	between the given timeframe from the MongoDB datastore.
 	*/
 	getItemDataByDTG(item: Item, dtg_s, dtg_e): void {
 
@@ -1287,7 +1285,7 @@ export class MapComponent implements OnInit {
 			// In case the item.type is equal to 'trail', the following code is
 			// executed.
 			case 'trail':
-				// Here we trigger the function: "getSignalDTG" in the CraneService
+				// Here we trigger the function: "getSignalDTG" in the TrailService
 				// we pass the itemId, Start Date and End Data as parameters and subscribe
 				// the result to a variable called: "signals" which is then passed
 				// in the function: "loadItemData()"
@@ -1304,7 +1302,7 @@ export class MapComponent implements OnInit {
 
 	/*
 	Here we create a function called: "getDTGEvent()" which
-	takes an itemId and the the emitted event (noted as $event) as input parameters.
+	takes an itemId and the emitted event (noted as $event) as input parameters.
 
 	The function will be assigned to the DatePickerComponent which is defined in
 	the HTML page of the MapComponent.
@@ -1339,11 +1337,8 @@ export class MapComponent implements OnInit {
 	/*
 	Here we create a function called: "removeLayerGroup()".
 
-	This function is triggered when the red button next to a selectedLayerGroup
+	This function is triggered when the red button next to a selected LayerGroup
 	is clicked.
-
-	This function first clears the running animation, which will only happen if
-	an animation is running.
 
 	Then the function will remove each layer in the layerGroup from the map.
 
@@ -1351,10 +1346,13 @@ export class MapComponent implements OnInit {
 	from the JavaScriptMap called: "layerGroups".
 
   Finally a check is performed to see if the layerGroup that is removed was
-  the last layerGroup in layerGroups JavaScriptMap. If this is the case, the
-  function: removeItem() is called since we want to remove the item which does
-  not have any selectedLayerGroups. If this is NOT the case the next layerGroup
-  in the layerGroups JavaScriptMap will become the active layerGroup.
+  the last layerGroup in layerGroups JavaScriptMap.
+
+	- If this is the case, the function: removeItem() is called since we want to
+		remove the item which does not have any selectedLayerGroups.
+
+	- If this is NOT the case the next layerGroup in the layerGroups JavaScriptMap
+		will become the active layerGroup.
 
 	*/
 	removeLayerGroup(layerGroupKey: string): void {
@@ -1408,7 +1406,7 @@ export class MapComponent implements OnInit {
 	related to the amount selection (which is defined in the HTML page).
 
 	This function contains a switch/case. The switch case takes the itemType,
-	which in our case can be a tracker as input. Depending on the
+	which in our case can be a tracker or trails as input. Depending on the
 	itemType, the corresponding function is triggered.
 
 	These functions trigger a function in the service related to the item which
