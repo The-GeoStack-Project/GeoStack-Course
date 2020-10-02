@@ -64,10 +64,10 @@ def import_data():
     load_data(pd.read_json('~/Geostack/datasets/JSON/Crane_JSON/Frida-SW.json'),"Frida","sw")
     load_data(pd.read_json('~/Geostack/datasets/JSON/Crane_JSON/Cajsa-SW.json'),"Cajsa","sw")
 
-    load_data(pd.read_json('~/Geostack/datasets/JSON/Crane_JSON/Nena-GE.json'),"Nena","ge")
-    load_data(pd.read_json('~/Geostack/datasets/JSON/Crane_JSON/Lotta-GE.json'),"Lotta","ge")
+    #load_data(pd.read_json('~/Geostack/datasets/JSON/Crane_JSON/Nena-GE.json'),"Nena","ge")
+    #load_data(pd.read_json('~/Geostack/datasets/JSON/Crane_JSON/Lotta-GE.json'),"Lotta","ge")
 
-    #load_data(pd.read_json('~/Geostack/datasets/JSON/Crane_JSON/Lita-LT.json'),"Lita","lt")
+    load_data(pd.read_json('~/Geostack/datasets/JSON/Crane_JSON/Lita-LT.json'),"Lita","lt")
     print("Finished import")
 
     CraneModel.Transmission.create_index(("tracker"))
