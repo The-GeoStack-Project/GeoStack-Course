@@ -3,7 +3,7 @@ Welcome to the 10-day GeoStack Course!
 
 **Folder Overview**
 - Building-the-VM-from-scratch-using-the-manuals: contains the folders with the cookbooks and programming manuals and the subfolders for the course software.
-- 
+- Building-the-VM-using-the-installation-scripts: the installations scripts to build the GeoStack quickly on an Ubuntu Linux Virtual Machine.
 - Course-Datasets: contains the folder structure to download datasets.
 
 
