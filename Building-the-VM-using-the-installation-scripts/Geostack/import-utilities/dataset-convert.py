@@ -107,8 +107,8 @@ filter_transform_CSV('20200103_Dataset_LT_TrackerID_16121_Crane_Lita.csv','Lita-
 filter_transform_CSV('20181003_Dataset_SV_TrackerID_9381_ColorCode_RRW-BuGBk_Crane_Frida.csv','Frida-SW.json',"sw")
 filter_transform_CSV('20181003_Dataset_SV_TrackerID_9407_ColorCode_RRW-BuGY_Crane_Agnetha.csv','Agnetha-SW.json',"sw")
 filter_transform_CSV('20181003_Dataset_SV_TrackerID_9472_ColorCode_RRW-BuGR_Crane_Cajsa.csv','Cajsa-SW.json',"sw")
-filter_transform_CSV('20191103_Dataset_DE_GPS_Crane_181528_iCora_Crane_15_BuBuBr-WYW_Lotta.csv','Lotta-GE.json',"ge")
-filter_transform_CSV('20180928_Dataset_DE_GPS_Crane_181527_iCora_Crane_13_BuBuBr-YBuBk.csv','Nena-GE.json',"ge")
+#filter_transform_CSV('20191103_Dataset_DE_GPS_Crane_181528_iCora_Crane_15_BuBuBr-WYW_Lotta.csv','Lotta-GE.json',"ge")
+#filter_transform_CSV('20180928_Dataset_DE_GPS_Crane_181527_iCora_Crane_13_BuBuBr-YBuBk.csv','Nena-GE.json',"ge")
 
 # Create the Shapefile directory
 os.system('mkdir -p /home/geostack/Geostack/datasets/SHP')
