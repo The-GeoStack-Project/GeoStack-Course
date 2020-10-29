@@ -57,7 +57,7 @@ sudo apt install make cmake g++ libboost-dev libboost-system-dev libboost-filesy
 cd osm2pgsql && mkdir build
 
 # Enter the build directory, build the osm2pgsql modules and install the modules.
-cd build && cmake .. && make && sudo make install
+cd build && cmake .. -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql && make && sudo make install
 
 
 echo "-------------->>>> Installing Java for OpenSeaMap renderer <<<<--------------"
