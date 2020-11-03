@@ -73,13 +73,20 @@ wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
 # Add the atom repo to the repo list.
 sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
 
-# Update the local package database and install Atom.
-sudo apt-get update && sudo apt-get install atom
+# Update the local package database and install Atom depending on the OS.
+if [ `lsb_release -cs` == "groovy" ]
+then
+    sudo apt-get update && sudo apt-get install atom-beta
+else
+    
+    sudo apt-get update && sudo apt-get install atom
+fi
+
 
 echo "-------------->>>> Adding new shortcuts <<<<--------------"
 sleep 2
 # Add new shortcuts to favorite sidebar
-gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop','org.gnome.Terminal.desktop', 'libreoffice-writer.desktop','atom.desktop','yelp.desktop', 'org.gnome.Software.desktop']"
+gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop','org.gnome.Terminal.desktop', 'libreoffice-writer.desktop','atom.desktop','atom-beta.desktop','yelp.desktop', 'org.gnome.Software.desktop']"
 
 echo "-------------->>>> Installing Docker <<<<--------------"
 sleep 2
