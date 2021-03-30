@@ -323,7 +323,7 @@ export class MapComponent implements OnInit {
     this.getMapProviders()
 
     // Here we assign the Cesium ION Token to the Cesium instance.
-    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiNjRmNmUyNS1hNTE1LTRkNGItOGE0Mi0yMzM0ODVkZjU4MjYiLCJpZCI6MjgxMTgsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1OTA2NjE2MTh9.3MM9tuFDdgQFM6e_-kw5ZIXreBP5cdb83YsDBTgRYBQ';
+    Cesium.Ion.defaultAccessToken = '';
 
     // Here we create a new Cesium Map instance (Viewer). We pass the id ('map')
     // of the div element in the HTML layout in which the Viewer will be added.
