@@ -10,7 +10,7 @@ sleep 2
 # A for loop which loops through all the shortcuts on the desktop and then
 # sets the shortcut metadata to trusted. This has to be done for the Shortcuts
 # to be executable.
-for i in ~/Desktop/*.desktop; do    gio set "$i" "metadata::trusted" yes ;done
+for i in ~/Desktop/*.desktop; do    gio set "$i" "metadata::trusted" true ;done
 
 echo "-------------->>>> Restarting nautilus <<<<--------------"
 sleep 2
